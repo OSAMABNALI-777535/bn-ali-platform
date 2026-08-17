@@ -1,1799 +1,1581 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>BN ALI | منصتك الرقمية</title>
-
-  <meta
-    name="description"
-    content="BN ALI - منصة رقمية عربية عالمية للتجارة والإعلانات والمتاجر والخدمات والذكاء الاصطناعي"
-  >
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --black: #0b0b0d;
-      --dark: #151518;
-      --gold: #d8a83e;
-      --gold-light: #f0c866;
-      --white: #ffffff;
-      --bg: #f5f6f8;
-      --text: #17181c;
-      --muted: #777b84;
-      --border: #e6e7eb;
-      --card: #ffffff;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding-bottom: 76px;
-    }
-
-    button,
-    input {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    header {
-      background: var(--black);
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid #29292d;
-    }
-
-    .header-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 14px 16px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: linear-gradient(
-        135deg,
-        var(--gold),
-        var(--gold-light)
-      );
-
-      color: var(--black);
-      font-size: 15px;
-      font-weight: 900;
-    }
-
-    .brand-name {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: .5px;
-    }
-
-    .brand-subtitle {
-      display: block;
-      color: #a8a8ae;
-      font-size: 9px;
-      margin-top: -2px;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .icon-button {
-      width: 40px;
-      height: 40px;
-      border-radius: 11px;
-
-      border: 1px solid #34343a;
-      background: #19191d;
-      color: white;
-
-      font-size: 18px;
-    }
-
-    .language-button {
-      background: transparent;
-      color: white;
-
-      border: 1px solid #34343a;
-      border-radius: 11px;
-
-      padding: 9px 10px;
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .login-button {
-      background: var(--gold);
-      color: var(--black);
-
-      border: 0;
-      border-radius: 11px;
-
-      padding: 10px 13px;
-
-      font-weight: 800;
-      font-size: 12px;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero {
-      background:
-        radial-gradient(
-          circle at 20% 10%,
-          rgba(216,168,62,.20),
-          transparent 32%
-        ),
-        linear-gradient(
-          145deg,
-          #0b0b0d,
-          #19191d
-        );
-
-      color: white;
-      padding: 35px 16px 38px;
-    }
-
-    .hero-inner {
-      max-width: 1100px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-block;
-
-      border: 1px solid rgba(216,168,62,.45);
-      background: rgba(216,168,62,.08);
-
-      color: var(--gold-light);
-
-      padding: 6px 12px;
-      border-radius: 50px;
-
-      font-size: 11px;
-      margin-bottom: 14px;
-    }
-
-    .hero h1 {
-      font-size: 30px;
-      line-height: 1.25;
-      margin-bottom: 10px;
-    }
-
-    .hero h1 strong {
-      color: var(--gold-light);
-    }
-
-    .hero-description {
-      color: #c7c7cc;
-      font-size: 13px;
-      max-width: 600px;
-      margin: auto auto 23px;
-    }
-
-    /* =========================
-       SEARCH
-    ========================== */
-
-    .search-box {
-      max-width: 700px;
-      margin: auto;
-
-      display: flex;
-      align-items: center;
-
-      background: white;
-      border-radius: 15px;
-      padding: 5px;
-
-      box-shadow: 0 15px 40px rgba(0,0,0,.22);
-    }
-
-    .search-icon {
-      padding: 0 10px;
-      color: #777;
-      font-size: 18px;
-    }
-
-    .search-box input {
-      flex: 1;
-
-      border: 0;
-      outline: 0;
-
-      padding: 13px 4px;
-
-      color: #222;
-      font-size: 14px;
-
-      min-width: 0;
-    }
-
-    .search-button {
-      border: 0;
-
-      background: var(--black);
-      color: white;
-
-      border-radius: 11px;
-
-      padding: 12px 17px;
-
-      font-weight: 700;
-    }
-
-    /* =========================
-       MAIN
-    ========================== */
-
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 18px 14px 35px;
-    }
-
-    section {
-      margin-bottom: 30px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 13px;
-    }
-
-    .section-title {
-      font-size: 19px;
-      font-weight: 900;
-    }
-
-    .section-link {
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 700;
-      background: none;
-      border: 0;
-    }
-
-    /* =========================
-       CATEGORIES
-    ========================== */
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 9px;
-    }
-
-    .category {
-      background: var(--card);
-
-      border: 1px solid var(--border);
-      border-radius: 15px;
-
-      padding: 14px 5px;
-
-      text-align: center;
-
-      transition: .2s;
-    }
-
-    .category:active {
-      transform: scale(.97);
-    }
-
-    .category-icon {
-      width: 42px;
-      height: 42px;
-
-      margin: auto auto 7px;
-
-      border-radius: 13px;
-
-      background: #f4f1e8;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 22px;
-    }
-
-    .category-name {
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    /* =========================
-       FEATURE CARDS
-    ========================== */
-
-    .features {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .feature {
-      position: relative;
-      overflow: hidden;
-
-      border-radius: 20px;
-
-      padding: 20px;
-
-      color: white;
-
-      min-height: 145px;
-    }
-
-    .feature-market {
-      background:
-        linear-gradient(
-          135deg,
-          #101114,
-          #24262b
-        );
-    }
-
-    .feature-classified {
-      background:
-        linear-gradient(
-          135deg,
-          #151515,
-          #3b3020
-        );
-    }
-
-    .feature-store {
-      background:
-        linear-gradient(
-          135deg,
-          #202124,
-          #111214
-        );
-    }
-
-    .feature-icon {
-      font-size: 32px;
-      margin-bottom: 5px;
-    }
-
-    .feature h3 {
-      font-size: 19px;
-      margin-bottom: 4px;
-    }
-
-    .feature p {
-      color: #c9c9cd;
-      font-size: 12px;
-      max-width: 270px;
-    }
-
-    .feature-button {
-      margin-top: 13px;
-
-      border: 0;
-      border-radius: 9px;
-
-      padding: 8px 13px;
-
-      background: white;
-      color: #111;
-
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    /* =========================
-       PRODUCTS
-    ========================== */
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .product {
-      background: white;
-
-      border: 1px solid var(--border);
-      border-radius: 16px;
-
-      overflow: hidden;
-    }
-
-    .product-image {
-      height: 125px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        linear-gradient(
-          135deg,
-          #eeeeef,
-          #dadce0
-        );
-
-      font-size: 48px;
-    }
-
-    .product-content {
-      padding: 12px;
-    }
-
-    .product-title {
-      font-size: 13px;
-      font-weight: 800;
-
-      margin-bottom: 5px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .product-price {
-      font-size: 13px;
-      font-weight: 900;
-      color: var(--text);
-
-      margin-bottom: 4px;
-    }
-
-    .product-location {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    /* =========================
-       AI
-    ========================== */
-
-    .ai-section {
-      position: relative;
-      overflow: hidden;
-
-      border-radius: 23px;
-
-      padding: 27px 20px;
-
-      color: white;
-
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(216,168,62,.20),
-          transparent 35%
-        ),
-        linear-gradient(
-          135deg,
-          #09090b,
-          #202126
-        );
-    }
-
-    .ai-label {
-      display: inline-block;
-
-      color: var(--gold-light);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      margin-bottom: 8px;
-    }
-
-    .ai-section h2 {
-      font-size: 24px;
-      margin-bottom: 7px;
-    }
-
-    .ai-section p {
-      color: #c5c5ca;
-      font-size: 12px;
-
-      max-width: 500px;
-
-      margin-bottom: 18px;
-    }
-
-    .ai-button {
-      background: var(--gold);
-      color: #111;
-
-      border: 0;
-      border-radius: 11px;
-
-      padding: 12px 19px;
-
-      font-weight: 900;
-    }
-
-    /* =========================
-       GLOBAL
-    ========================== */
-
-    .global {
-      background: white;
-
-      border: 1px solid var(--border);
-      border-radius: 20px;
-
-      padding: 20px;
-
-      text-align: center;
-    }
-
-    .global-icon {
-      font-size: 35px;
-      margin-bottom: 6px;
-    }
-
-    .global h2 {
-      font-size: 19px;
-      margin-bottom: 5px;
-    }
-
-    .global p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 15px;
-    }
-
-    .countries {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 7px;
-    }
-
-    .country {
-      background: #f4f5f7;
-      border-radius: 50px;
-      padding: 7px 11px;
-      font-size: 10px;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer {
-      background: var(--black);
-      color: white;
-
-      padding: 30px 18px 95px;
-
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-size: 24px;
-      font-weight: 900;
-      margin-bottom: 7px;
-    }
-
-    .footer-text {
-      color: #999;
-      font-size: 11px;
-    }
-
-    /* =========================
-       BOTTOM NAV
-    ========================== */
-
-    .bottom-nav {
-      position: fixed;
-
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      height: 68px;
-
-      background: rgba(255,255,255,.97);
-
-      border-top: 1px solid var(--border);
-
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-
-      z-index: 200;
-
-      box-shadow: 0 -5px 20px rgba(0,0,0,.06);
-    }
-
-    .nav-item {
-      border: 0;
-      background: transparent;
-
-      color: #777;
-
-      font-size: 9px;
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-
-      gap: 2px;
-    }
-
-    .nav-icon {
-      font-size: 21px;
-    }
-
-    .nav-item.active {
-      color: var(--gold);
-      font-weight: 800;
-    }
-
-    /* =========================
-       LANGUAGE DIRECTION
-    ========================== */
-
-    body.english {
-      direction: ltr;
-    }
-
-    body.english .hero-inner,
-    body.english .global,
-    body.english footer {
-      text-align: center;
-    }
-
-    body.english .section-header {
-      flex-direction: row;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (min-width: 600px) {
-
-      .hero {
-        padding: 55px 20px;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .categories {
-        grid-template-columns: repeat(8, 1fr);
-      }
-
-      .features {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .products {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .product-image {
-        height: 170px;
-      }
-    }
-
-    @media (min-width: 900px) {
-
-      .header-inner {
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-
-      main {
-        padding-top: 30px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BN ALI | المنصة الرقمية</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+:root{
+--black:#0b0b0d;
+--dark:#15161a;
+--gold:#d8a83e;
+--gold2:#f0c866;
+--bg:#f5f6f8;
+--white:#fff;
+--text:#17181c;
+--muted:#777b84;
+--border:#e4e5e9;
+--green:#24a148;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial,Tahoma,sans-serif;
+background:var(--bg);
+color:var(--text);
+padding-bottom:75px;
+}
+
+button,
+input{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+
+/* HEADER */
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+background:var(--black);
+color:white;
+box-shadow:0 2px 15px #0004;
+}
+
+.header{
+max-width:1200px;
+margin:auto;
+padding:12px 15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:9px;
+}
+
+.logo-box{
+width:42px;
+height:42px;
+border-radius:12px;
+background:linear-gradient(135deg,var(--gold),var(--gold2));
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+color:#111;
+}
+
+.logo-name{
+font-size:19px;
+font-weight:900;
+}
+
+.logo-sub{
+display:block;
+font-size:9px;
+color:#aaa;
+}
+
+.header-actions{
+display:flex;
+gap:7px;
+}
+
+.header-btn{
+border:1px solid #3a3b40;
+background:#191a1e;
+color:white;
+border-radius:10px;
+padding:9px 11px;
+font-size:11px;
+}
+
+
+/* HERO */
+
+.hero{
+background:
+radial-gradient(circle at 15% 10%,#d8a83e22,transparent 30%),
+linear-gradient(145deg,#09090b,#24262b);
+color:white;
+padding:38px 15px 42px;
+}
+
+.hero-inner{
+max-width:1100px;
+margin:auto;
+text-align:center;
+}
+
+.hero h1{
+font-size:32px;
+margin-bottom:9px;
+}
+
+.hero p{
+font-size:13px;
+color:#c8c8cc;
+margin-bottom:23px;
+line-height:1.7;
+}
+
+.search{
+max-width:720px;
+margin:auto;
+background:white;
+padding:5px;
+border-radius:15px;
+display:flex;
+}
+
+.search input{
+flex:1;
+border:0;
+outline:0;
+padding:13px;
+font-size:13px;
+min-width:0;
+}
+
+.search button{
+border:0;
+background:var(--black);
+color:white;
+border-radius:11px;
+padding:0 20px;
+font-weight:bold;
+}
+
+
+/* MAIN */
+
+main{
+max-width:1200px;
+margin:auto;
+padding:22px 14px 35px;
+}
+
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:23px 0 13px;
+}
+
+.section-title h2{
+font-size:20px;
+}
+
+.section-title span{
+font-size:11px;
+color:var(--gold);
+font-weight:bold;
+}
+
+
+/* SERVICES */
+
+.services{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.service{
+background:white;
+border:1px solid var(--border);
+border-radius:16px;
+padding:18px 10px;
+text-align:center;
+transition:.2s;
+box-shadow:0 2px 10px #00000008;
+}
+
+.service:hover{
+transform:translateY(-2px);
+}
+
+.service-icon{
+font-size:29px;
+margin-bottom:8px;
+}
+
+.service h3{
+font-size:13px;
+margin-bottom:4px;
+}
+
+.service p{
+font-size:10px;
+color:var(--muted);
+line-height:1.5;
+}
+
+
+/* QUICK ACCESS */
+
+.quick{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding-bottom:5px;
+scrollbar-width:none;
+}
+
+.quick::-webkit-scrollbar{
+display:none;
+}
+
+.quick-item{
+flex:0 0 auto;
+background:white;
+border:1px solid var(--border);
+border-radius:12px;
+padding:11px 15px;
+font-size:11px;
+font-weight:bold;
+}
+
+
+/* AI */
+
+.ai{
+margin-top:27px;
+background:
+radial-gradient(circle at 80% 20%,#d8a83e25,transparent 35%),
+linear-gradient(135deg,#101114,#292b30);
+border-radius:22px;
+padding:27px 20px;
+color:white;
+text-align:center;
+}
+
+.ai-icon{
+font-size:40px;
+margin-bottom:8px;
+}
+
+.ai h2{
+font-size:24px;
+margin-bottom:8px;
+}
+
+.ai p{
+color:#c6c6ca;
+font-size:11px;
+line-height:1.7;
+margin-bottom:17px;
+}
+
+.ai button{
+border:0;
+background:var(--gold);
+color:#111;
+font-weight:900;
+border-radius:11px;
+padding:12px 25px;
+}
+
+
+/* NEWS */
+
+.news{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+}
+
+.news-card{
+background:white;
+border:1px solid var(--border);
+border-radius:15px;
+padding:15px;
+}
+
+.news-icon{
+font-size:25px;
+margin-bottom:8px;
+}
+
+.news-card h3{
+font-size:13px;
+margin-bottom:5px;
+}
+
+.news-card p{
+font-size:10px;
+color:var(--muted);
+line-height:1.6;
+}
+
+
+/* FOOTER */
+
+footer{
+margin-top:30px;
+background:#111216;
+color:white;
+padding:30px 15px;
+}
+
+.footer-inner{
+max-width:1100px;
+margin:auto;
+text-align:center;
+}
+
+.footer-logo{
+font-size:22px;
+font-weight:900;
+margin-bottom:7px;
+}
+
+.footer-text{
+font-size:10px;
+color:#aaa;
+line-height:1.8;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:16px;
+margin:18px 0;
+}
+
+.footer-links button{
+background:none;
+border:0;
+color:#bbb;
+font-size:10px;
+}
+
+
+/* BOTTOM NAV */
+
+nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:69px;
+background:white;
+border-top:1px solid var(--border);
+display:grid;
+grid-template-columns:repeat(5,1fr);
+z-index:2000;
+box-shadow:0 -3px 15px #0000000a;
+}
+
+nav button{
+border:0;
+background:transparent;
+color:#73767d;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:2px;
+font-size:9px;
+}
+
+nav button.active{
+color:var(--gold);
+font-weight:bold;
+}
+
+.nav-icon{
+font-size:20px;
+}
+
+
+/* MODAL */
+
+.modal{
+position:fixed;
+inset:0;
+background:#0008;
+z-index:5000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+background:white;
+width:100%;
+max-width:480px;
+border-radius:20px;
+padding:23px;
+text-align:center;
+position:relative;
+max-height:90vh;
+overflow:auto;
+}
+
+.modal-close{
+position:absolute;
+top:10px;
+left:10px;
+border:0;
+background:#f0f0f0;
+width:30px;
+height:30px;
+border-radius:50%;
+font-size:18px;
+}
+
+.modal-icon{
+font-size:45px;
+margin-bottom:10px;
+}
+
+.modal-box h2{
+font-size:21px;
+margin-bottom:8px;
+}
+
+.modal-box p{
+font-size:12px;
+color:var(--muted);
+line-height:1.8;
+margin-bottom:18px;
+}
+
+.modal-input{
+width:100%;
+padding:12px;
+border:1px solid var(--border);
+border-radius:10px;
+outline:0;
+margin-bottom:10px;
+}
+
+.modal-primary{
+width:100%;
+border:0;
+background:var(--black);
+color:white;
+padding:12px;
+border-radius:10px;
+font-weight:bold;
+}
+
+
+/* DESKTOP */
+
+@media(min-width:650px){
+
+.services{
+grid-template-columns:repeat(4,1fr);
+}
+
+.news{
+grid-template-columns:repeat(3,1fr);
+}
+
+nav{
+position:static;
+height:auto;
+max-width:700px;
+margin:20px auto;
+border:0;
+box-shadow:none;
+border-radius:15px;
+display:flex;
+justify-content:center;
+gap:30px;
+}
+
+nav button{
+padding:8px 15px;
+}
+
+body{
+padding-bottom:0;
+}
+
+}
+
+
+</style>
 </head>
+
 
 <body>
 
-<!-- =========================
-     HEADER
-========================== -->
+
+<!-- HEADER -->
 
 <header>
 
-  <div class="header-inner">
+<div class="header">
 
-    <div class="brand">
+<div class="logo">
 
-      <div class="brand-logo">
-        BN
-      </div>
+<div class="logo-box">
+BN
+</div>
 
-      <div>
-        <div class="brand-name" data-ar="BN ALI" data-en="BN ALI">
-          BN ALI
-        </div>
+<div>
+<div class="logo-name">BN ALI</div>
 
-        <span
-          class="brand-subtitle"
-          data-ar="منصتك الرقمية"
-          data-en="Your Digital Platform"
-        >
-          منصتك الرقمية
-        </span>
-      </div>
+<span
+class="logo-sub"
+data-ar="منصة رقمية شاملة"
+data-en="Global Digital Platform">
+منصة رقمية شاملة
+</span>
 
-    </div>
+</div>
 
-    <div class="header-actions">
+</div>
 
-      <button
-        class="icon-button"
-        aria-label="Notifications"
-      >
-        🔔
-      </button>
 
-      <button
-        class="language-button"
-        onclick="toggleLanguage()"
-        id="languageButton"
-      >
-        English
-      </button>
+<div class="header-actions">
 
-      <button
-        class="login-button"
-        id="loginButton"
-        data-ar="دخول"
-        data-en="Login"
-      >
-        دخول
-      </button>
+<button
+class="header-btn"
+onclick="toggleLanguage()"
+id="languageButton">
+English
+</button>
 
-    </div>
+<button
+class="header-btn"
+onclick="openModal('account')"
+data-ar="دخول"
+data-en="Login">
+دخول
+</button>
 
-  </div>
+</div>
+
+</div>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================== -->
+
+<!-- HERO -->
 
 <section class="hero">
 
-  <div class="hero-inner">
+<div class="hero-inner">
 
-    <span
-      class="hero-badge"
-      data-ar="🌍 منصة عربية بطموح عالمي"
-      data-en="🌍 An Arabic Platform with Global Ambition"
-    >
-      🌍 منصة عربية بطموح عالمي
-    </span>
+<h1
+data-ar="مرحبًا بك في BN ALI"
+data-en="Welcome to BN ALI">
+مرحبًا بك في BN ALI
+</h1>
 
-    <h1>
-      <span
-        data-ar="مرحبًا بك في"
-        data-en="Welcome to"
-      >
-        مرحبًا بك في
-      </span>
-
-      <strong> BN ALI </strong>
-    </h1>
-
-    <p
-      class="hero-description"
-      data-ar="منصة رقمية متكاملة تجمع التجارة، الإعلانات، المتاجر، الخدمات، والذكاء الاصطناعي في مكان واحد."
-      data-en="An integrated digital platform bringing together commerce, classifieds, stores, services, and artificial intelligence in one place."
-    >
-      منصة رقمية متكاملة تجمع التجارة،
-      الإعلانات، المتاجر، الخدمات،
-      والذكاء الاصطناعي في مكان واحد.
-    </p>
+<p
+data-ar="منصة رقمية تجمع التجارة والإعلانات والمتاجر والخدمات والاستثمار والذكاء الاصطناعي في مكان واحد."
+data-en="A digital platform combining commerce, classifieds, stores, services, investment and artificial intelligence in one place.">
+منصة رقمية تجمع التجارة والإعلانات والمتاجر والخدمات والاستثمار والذكاء الاصطناعي في مكان واحد.
+</p>
 
 
-    <div class="search-box">
+<div class="search">
 
-      <span class="search-icon">
-        🔎
-      </span>
+<input
+id="mainSearch"
+type="search"
+data-placeholder-ar="ماذا تبحث عنه؟"
+data-placeholder-en="What are you looking for?"
+placeholder="ماذا تبحث عنه؟">
 
-      <input
-        type="search"
-        id="searchInput"
-        data-placeholder-ar="ماذا تبحث عنه؟"
-        data-placeholder-en="What are you looking for?"
-        placeholder="ماذا تبحث عنه؟"
-      >
+<button
+onclick="mainSearch()"
+data-ar="بحث"
+data-en="Search">
+بحث
+</button>
 
-      <button
-        class="search-button"
-        id="searchButton"
-        onclick="searchBNALI()"
-        data-ar="بحث"
-        data-en="Search"
-      >
-        بحث
-      </button>
+</div>
 
-    </div>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- =========================
-     MAIN
-========================== -->
 
 <main>
 
 
-  <!-- CATEGORIES -->
-
-  <section>
-
-    <div class="section-header">
-
-      <h2
-        class="section-title"
-        data-ar="الأقسام الرئيسية"
-        data-en="Main Categories"
-      >
-        الأقسام الرئيسية
-      </h2>
-
-      <button
-        class="section-link"
-        onclick="showMessage('all')"
-        data-ar="عرض الكل"
-        data-en="View All"
-      >
-        عرض الكل
-      </button>
-
-    </div>
-
-
-    <div class="categories">
-
-      <button class="category" onclick="showMessage('market')">
-        <div class="category-icon">🛒</div>
-
-        <div
-          class="category-name"
-          data-ar="السوق"
-          data-en="Marketplace"
-        >
-          السوق
-        </div>
-      </button>
+<!-- QUICK -->
 
+<div class="section-title">
 
-      <button class="category" onclick="showMessage('classifieds')">
-        <div class="category-icon">📢</div>
+<h2
+data-ar="الوصول السريع"
+data-en="Quick Access">
+الوصول السريع
+</h2>
 
-        <div
-          class="category-name"
-          data-ar="الإعلانات"
-          data-en="Classifieds"
-        >
-          الإعلانات
-        </div>
-      </button>
+<span
+data-ar="BN ALI"
+data-en="BN ALI">
+BN ALI
+</span>
 
+</div>
 
-      <button class="category" onclick="showMessage('stores')">
-        <div class="category-icon">🏪</div>
 
-        <div
-          class="category-name"
-          data-ar="المتاجر"
-          data-en="Stores"
-        >
-          المتاجر
-        </div>
-      </button>
+<div class="quick">
 
+<button
+class="quick-item"
+onclick="openMarket()"
+data-ar="🛒 السوق"
+data-en="🛒 Marketplace">
+🛒 السوق
+</button>
 
-      <button class="category" onclick="showMessage('cars')">
-        <div class="category-icon">🚗</div>
+<button
+class="quick-item"
+onclick="openModal('classifieds')"
+data-ar="📢 الإعلانات"
+data-en="📢 Classifieds">
+📢 الإعلانات
+</button>
 
-        <div
-          class="category-name"
-          data-ar="السيارات"
-          data-en="Cars"
-        >
-          السيارات
-        </div>
-      </button>
+<button
+class="quick-item"
+onclick="openModal('stores')"
+data-ar="🏪 المتاجر"
+data-en="🏪 Stores">
+🏪 المتاجر
+</button>
 
+<button
+class="quick-item"
+onclick="openModal('services')"
+data-ar="🔧 الخدمات"
+data-en="🔧 Services">
+🔧 الخدمات
+</button>
 
-      <button class="category" onclick="showMessage('realestate')">
-        <div class="category-icon">🏠</div>
+<button
+class="quick-item"
+onclick="openModal('investment')"
+data-ar="💰 الاستثمار"
+data-en="💰 Investment">
+💰 الاستثمار
+</button>
 
-        <div
-          class="category-name"
-          data-ar="العقارات"
-          data-en="Real Estate"
-        >
-          العقارات
-        </div>
-      </button>
+</div>
 
 
-      <button class="category" onclick="showMessage('jobs')">
-        <div class="category-icon">💼</div>
 
-        <div
-          class="category-name"
-          data-ar="الوظائف"
-          data-en="Jobs"
-        >
-          الوظائف
-        </div>
-      </button>
+<!-- SERVICES -->
 
+<div class="section-title">
 
-      <button class="category" onclick="showMessage('services')">
-        <div class="category-icon">🔧</div>
+<h2
+data-ar="خدمات BN ALI"
+data-en="BN ALI Services">
+خدمات BN ALI
+</h2>
 
-        <div
-          class="category-name"
-          data-ar="الخدمات"
-          data-en="Services"
-        >
-          الخدمات
-        </div>
-      </button>
-
-
-      <button class="category" onclick="showMessage('ai')">
-        <div class="category-icon">🤖</div>
+<span
+data-ar="الكل"
+data-en="All">
+الكل
+</span>
 
-        <div
-          class="category-name"
-          data-ar="BN ALI AI"
-          data-en="BN ALI AI"
-        >
-          BN ALI AI
-        </div>
-      </button>
+</div>
 
-    </div>
 
-  </section>
+<div class="services">
 
 
-  <!-- MAIN SERVICES -->
+<button
+class="service"
+onclick="openMarket()">
 
-  <section>
+<div class="service-icon">
+🛒
+</div>
 
-    <div class="section-header">
-
-      <h2
-        class="section-title"
-        data-ar="عالم BN ALI"
-        data-en="The BN ALI World"
-      >
-        عالم BN ALI
-      </h2>
-
-    </div>
-
-
-    <div class="features">
-
-
-      <div class="feature feature-market">
-
-        <div class="feature-icon">
-          🛒
-        </div>
+<h3
+data-ar="السوق"
+data-en="Marketplace">
+السوق
+</h3>
 
-        <h3
-          data-ar="سوق BN ALI"
-          data-en="BN ALI Marketplace"
-        >
-          سوق BN ALI
-        </h3>
+<p
+data-ar="شراء وبيع المنتجات"
+data-en="Buy and sell products">
+شراء وبيع المنتجات
+</p>
 
-        <p
-          data-ar="اكتشف المنتجات والعروض وابدأ تجارتك داخل المنصة."
-          data-en="Discover products and offers and start your business inside the platform."
-        >
-          اكتشف المنتجات والعروض
-          وابدأ تجارتك داخل المنصة.
-        </p>
+</button>
 
-        <button
-          class="feature-button"
-          onclick="showMessage('market')"
-          data-ar="استكشف السوق"
-          data-en="Explore Marketplace"
-        >
-          استكشف السوق
-        </button>
 
-      </div>
+<button
+class="service"
+onclick="openModal('classifieds')">
 
+<div class="service-icon">
+📢
+</div>
 
-      <div class="feature feature-classified">
+<h3
+data-ar="الإعلانات المبوبة"
+data-en="Classifieds">
+الإعلانات المبوبة
+</h3>
 
-        <div class="feature-icon">
-          📢
-        </div>
+<p
+data-ar="إعلانات للبيع والشراء والخدمات"
+data-en="Buy, sell and service listings">
+إعلانات للبيع والشراء والخدمات
+</p>
 
-        <h3
-          data-ar="الإعلانات المبوبة"
-          data-en="Classifieds"
-        >
-          الإعلانات المبوبة
-        </h3>
+</button>
 
-        <p
-          data-ar="سيارات، عقارات، وظائف، خدمات وكل ما تريد عرضه."
-          data-en="Cars, real estate, jobs, services, and everything you want to list."
-        >
-          سيارات، عقارات، وظائف،
-          خدمات وكل ما تريد عرضه.
-        </p>
 
-        <button
-          class="feature-button"
-          onclick="showMessage('classifieds')"
-          data-ar="تصفح الإعلانات"
-          data-en="Browse Classifieds"
-        >
-          تصفح الإعلانات
-        </button>
+<button
+class="service"
+onclick="openModal('stores')">
 
-      </div>
+<div class="service-icon">
+🏪
+</div>
 
+<h3
+data-ar="المتاجر"
+data-en="Stores">
+المتاجر
+</h3>
 
-      <div class="feature feature-store">
+<p
+data-ar="أنشئ متجرك الإلكتروني"
+data-en="Create your online store">
+أنشئ متجرك الإلكتروني
+</p>
 
-        <div class="feature-icon">
-          🏪
-        </div>
+</button>
 
-        <h3
-          data-ar="متاجر BN ALI"
-          data-en="BN ALI Stores"
-        >
-          متاجر BN ALI
-        </h3>
 
-        <p
-          data-ar="أنشئ متجرك الإلكتروني واعرض منتجاتك للعملاء."
-          data-en="Create your online store and showcase your products to customers."
-        >
-          أنشئ متجرك الإلكتروني
-          واعرض منتجاتك للعملاء.
-        </p>
+<button
+class="service"
+onclick="openModal('services')">
 
-        <button
-          class="feature-button"
-          onclick="showMessage('stores')"
-          data-ar="إنشاء متجر"
-          data-en="Create Store"
-        >
-          إنشاء متجر
-        </button>
+<div class="service-icon">
+🔧
+</div>
 
-      </div>
+<h3
+data-ar="الخدمات"
+data-en="Services">
+الخدمات
+</h3>
 
-    </div>
+<p
+data-ar="اعثر على مقدمي الخدمات"
+data-en="Find service providers">
+اعثر على مقدمي الخدمات
+</p>
 
-  </section>
+</button>
 
 
-  <!-- PRODUCTS -->
+<button
+class="service"
+onclick="openModal('investment')">
 
-  <section>
+<div class="service-icon">
+💰
+</div>
 
-    <div class="section-header">
+<h3
+data-ar="الاستثمار"
+data-en="Investment">
+الاستثمار
+</h3>
 
-      <h2
-        class="section-title"
-        data-ar="أحدث المنتجات"
-        data-en="Latest Products"
-      >
-        أحدث المنتجات
-      </h2>
+<p
+data-ar="فرص ومشاريع استثمارية"
+data-en="Investment opportunities">
+فرص ومشاريع استثمارية
+</p>
 
-      <button
-        class="section-link"
-        onclick="showMessage('products')"
-        data-ar="المزيد"
-        data-en="More"
-      >
-        المزيد
-      </button>
+</button>
 
-    </div>
 
+<button
+class="service"
+onclick="openModal('trading')">
 
-    <div class="products">
+<div class="service-icon">
+📈
+</div>
 
+<h3
+data-ar="التداول"
+data-en="Trading">
+التداول
+</h3>
 
-      <div class="product">
+<p
+data-ar="منصة تداول مستقبلية"
+data-en="Future trading platform">
+منصة تداول مستقبلية
+</p>
 
-        <div class="product-image">
-          📱
-        </div>
-
-        <div class="product-content">
+</button>
 
-          <div
-            class="product-title"
-            data-ar="هاتف ذكي"
-            data-en="Smartphone"
-          >
-            هاتف ذكي
-          </div>
 
-          <div
-            class="product-price"
-            data-ar="السعر عند البائع"
-            data-en="Price from seller"
-          >
-            السعر عند البائع
-          </div>
+<button
+class="service"
+onclick="openAI()">
 
-          <div
-            class="product-location"
-            data-ar="📍 صنعاء، اليمن"
-            data-en="📍 Sana'a, Yemen"
-          >
-            📍 صنعاء، اليمن
-          </div>
+<div class="service-icon">
+🤖
+</div>
 
-        </div>
+<h3
+data-ar="BN ALI AI"
+data-en="BN ALI AI">
+BN ALI AI
+</h3>
 
-      </div>
+<p
+data-ar="أنشئ أفكارك وتطبيقاتك بالذكاء الاصطناعي"
+data-en="Build ideas and apps with AI">
+أنشئ أفكارك وتطبيقاتك بالذكاء الاصطناعي
+</p>
 
+</button>
 
-      <div class="product">
 
-        <div class="product-image">
-          💻
-        </div>
-
-        <div class="product-content">
+<button
+class="service"
+onclick="openModal('account')">
 
-          <div
-            class="product-title"
-            data-ar="كمبيوتر محمول"
-            data-en="Laptop"
-          >
-            كمبيوتر محمول
-          </div>
+<div class="service-icon">
+👤
+</div>
 
-          <div
-            class="product-price"
-            data-ar="السعر عند البائع"
-            data-en="Price from seller"
-          >
-            السعر عند البائع
-          </div>
+<h3
+data-ar="حسابي"
+data-en="My Account">
+حسابي
+</h3>
 
-          <div
-            class="product-location"
-            data-ar="📍 اليمن"
-            data-en="📍 Yemen"
-          >
-            📍 اليمن
-          </div>
+<p
+data-ar="إدارة الحساب والطلبات"
+data-en="Manage account and orders">
+إدارة الحساب والطلبات
+</p>
 
-        </div>
+</button>
 
-      </div>
+</div>
 
 
-      <div class="product">
 
-        <div class="product-image">
-          🚗
-        </div>
+<!-- AI -->
 
-        <div class="product-content">
+<section class="ai">
 
-          <div
-            class="product-title"
-            data-ar="سيارة للبيع"
-            data-en="Car for Sale"
-          >
-            سيارة للبيع
-          </div>
-
-          <div
-            class="product-price"
-            data-ar="السعر عند البائع"
-            data-en="Price from seller"
-          >
-            السعر عند البائع
-          </div>
+<div class="ai-icon">
+🤖
+</div>
 
-          <div
-            class="product-location"
-            data-ar="📍 صنعاء، اليمن"
-            data-en="📍 Sana'a, Yemen"
-          >
-            📍 صنعاء، اليمن
-          </div>
+<h2>
+BN ALI AI
+</h2>
 
-        </div>
+<p
+data-ar="نظام الذكاء الاصطناعي في BN ALI سيكون قادرًا على مساعدتك في إنشاء الأفكار والمواقع والتطبيقات والمشاريع الرقمية."
+data-en="BN ALI AI will help you create ideas, websites, applications and digital projects.">
+نظام الذكاء الاصطناعي في BN ALI سيكون قادرًا على مساعدتك في إنشاء الأفكار والمواقع والتطبيقات والمشاريع الرقمية.
+</p>
 
-      </div>
+<button
+onclick="openAI()"
+data-ar="ابدأ مع BN ALI AI"
+data-en="Start with BN ALI AI">
+ابدأ مع BN ALI AI
+</button>
 
+</section>
 
-      <div class="product">
 
-        <div class="product-image">
-          🏠
-        </div>
 
-        <div class="product-content">
+<!-- NEWS -->
 
-          <div
-            class="product-title"
-            data-ar="عقار للبيع"
-            data-en="Property for Sale"
-          >
-            عقار للبيع
-          </div>
+<div class="section-title">
 
-          <div
-            class="product-price"
-            data-ar="السعر عند البائع"
-            data-en="Price from seller"
-          >
-            السعر عند البائع
-          </div>
+<h2
+data-ar="منظومة BN ALI"
+data-en="BN ALI Ecosystem">
+منظومة BN ALI
+</h2>
 
-          <div
-            class="product-location"
-            data-ar="📍 اليمن"
-            data-en="📍 Yemen"
-          >
-            📍 اليمن
-          </div>
+</div>
 
-        </div>
 
-      </div>
+<div class="news">
 
-    </div>
 
-  </section>
+<div class="news-card">
 
+<div class="news-icon">
+🌍
+</div>
 
-  <!-- AI -->
+<h3
+data-ar="منصة عالمية"
+data-en="Global Platform">
+منصة عالمية
+</h3>
 
-  <section>
+<p
+data-ar="الهدف هو بناء منظومة رقمية قابلة للتوسع من اليمن إلى الأسواق العالمية."
+data-en="The goal is to build a scalable digital ecosystem from Yemen to global markets.">
+الهدف هو بناء منظومة رقمية قابلة للتوسع من اليمن إلى الأسواق العالمية.
+</p>
 
-    <div class="ai-section">
+</div>
 
-      <div
-        class="ai-label"
-        data-ar="✨ BN ALI AI"
-        data-en="✨ BN ALI AI"
-      >
-        ✨ BN ALI AI
-      </div>
 
-      <h2
-        data-ar="حوّل فكرتك إلى تطبيق"
-        data-en="Turn Your Idea Into an App"
-      >
-        حوّل فكرتك إلى تطبيق
-      </h2>
+<div class="news-card">
 
-      <p
-        data-ar="مساعد ذكاء اصطناعي مستقبلي يساعدك على إنشاء التطبيقات والمشاريع الرقمية وتطويرها."
-        data-en="A future AI assistant that helps you create and develop apps and digital projects."
-      >
-        مساعد ذكاء اصطناعي مستقبلي
-        يساعدك على إنشاء التطبيقات
-        والمشاريع الرقمية وتطويرها.
-      </p>
+<div class="news-icon">
+🏬
+</div>
 
-      <button
-        class="ai-button"
-        onclick="showMessage('ai')"
-        data-ar="ابدأ مع BN ALI AI"
-        data-en="Start with BN ALI AI"
-      >
-        ابدأ مع BN ALI AI
-      </button>
+<h3
+data-ar="تجارة إلكترونية"
+data-en="E-Commerce">
+تجارة إلكترونية
+</h3>
 
-    </div>
+<p
+data-ar="ربط البائعين والمتاجر والمشترين في منظومة واحدة."
+data-en="Connect sellers, stores and buyers in one ecosystem.">
+ربط البائعين والمتاجر والمشترين في منظومة واحدة.
+</p>
 
-  </section>
+</div>
 
 
-  <!-- GLOBAL -->
+<div class="news-card">
 
-  <section>
+<div class="news-icon">
+🧠
+</div>
 
-    <div class="global">
+<h3
+data-ar="ذكاء اصطناعي"
+data-en="Artificial Intelligence">
+ذكاء اصطناعي
+</h3>
 
-      <div class="global-icon">
-        🌍
-      </div>
+<p
+data-ar="تطوير أدوات ذكاء اصطناعي تساعد المستخدمين على بناء منتجات رقمية."
+data-en="AI tools that help users build digital products.">
+تطوير أدوات ذكاء اصطناعي تساعد المستخدمين على بناء منتجات رقمية.
+</p>
 
-      <h2
-        data-ar="BN ALI نحو العالم"
-        data-en="BN ALI Goes Global"
-      >
-        BN ALI نحو العالم
-      </h2>
+</div>
 
-      <p
-        data-ar="نبدأ من اليمن ونطمح لبناء منصة رقمية عربية عالمية."
-        data-en="Starting from Yemen, our ambition is to build a global Arabic digital platform."
-      >
-        نبدأ من اليمن ونطمح لبناء
-        منصة رقمية عربية عالمية.
-      </p>
+</div>
 
-
-      <div class="countries">
-
-        <span class="country">🇾🇪 اليمن</span>
-        <span class="country">🇸🇦 السعودية</span>
-        <span class="country">🇦🇪 الإمارات</span>
-        <span class="country">🇪🇬 مصر</span>
-        <span class="country">🌍 العالم</span>
-
-      </div>
-
-    </div>
-
-  </section>
 
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================== -->
+
+<!-- FOOTER -->
 
 <footer>
 
-  <div class="footer-logo">
-    BN ALI
-  </div>
+<div class="footer-inner">
 
-  <div
-    class="footer-text"
-    data-ar="منصتك الرقمية الشاملة"
-    data-en="Your Complete Digital Platform"
-  >
-    منصتك الرقمية الشاملة
-  </div>
+<div class="footer-logo">
+BN ALI
+</div>
 
-  <div
-    class="footer-text"
-    style="margin-top:10px;"
-    data-ar="© 2026 BN ALI. جميع الحقوق محفوظة."
-    data-en="© 2026 BN ALI. All rights reserved."
-  >
-    © 2026 BN ALI. جميع الحقوق محفوظة.
-  </div>
+<div
+class="footer-text"
+data-ar="منصة رقمية عربية طموحة تبدأ من اليمن وتتوسع نحو العالم."
+data-en="An ambitious Arab digital platform starting from Yemen and expanding globally.">
+منصة رقمية عربية طموحة تبدأ من اليمن وتتوسع نحو العالم.
+</div>
+
+
+<div class="footer-links">
+
+<button
+onclick="openModal('about')"
+data-ar="عن BN ALI"
+data-en="About BN ALI">
+عن BN ALI
+</button>
+
+<button
+onclick="openModal('contact')"
+data-ar="تواصل معنا"
+data-en="Contact Us">
+تواصل معنا
+</button>
+
+<button
+onclick="openModal('privacy')"
+data-ar="الخصوصية"
+data-en="Privacy">
+الخصوصية
+</button>
+
+</div>
+
+<div
+class="footer-text">
+© 2026 BN ALI
+</div>
+
+</div>
 
 </footer>
 
 
-<!-- =========================
-     BOTTOM NAVIGATION
-========================== -->
 
-<nav class="bottom-nav">
+<!-- BOTTOM NAV -->
 
-  <button
-    class="nav-item active"
-    onclick="goHome()"
-  >
-    <span class="nav-icon">⌂</span>
+<nav>
 
-    <span
-      data-ar="الرئيسية"
-      data-en="Home"
-    >
-      الرئيسية
-    </span>
+<button
+class="active"
+onclick="goTop()">
 
-  </button>
+<span class="nav-icon">⌂</span>
+
+<span
+data-ar="الرئيسية"
+data-en="Home">
+الرئيسية
+</span>
+
+</button>
 
 
-  <button
-    class="nav-item"
-    onclick="showMessage('market')"
-  >
-    <span class="nav-icon">🛒</span>
+<button
+onclick="openMarket()">
 
-    <span
-      data-ar="السوق"
-      data-en="Market"
-    >
-      السوق
-    </span>
+<span class="nav-icon">🛒</span>
 
-  </button>
+<span
+data-ar="السوق"
+data-en="Market">
+السوق
+</span>
+
+</button>
 
 
-  <button
-    class="nav-item"
-    onclick="showMessage('classifieds')"
-  >
-    <span class="nav-icon">📢</span>
+<button
+onclick="openModal('classifieds')">
 
-    <span
-      data-ar="الإعلانات"
-      data-en="Classifieds"
-    >
-      الإعلانات
-    <a href="marketplace.html">
-  <span>🛒</span>السوق
-</a>
+<span class="nav-icon">📢</span>
 
-  </button>
+<span
+data-ar="الإعلانات"
+data-en="Classifieds">
+الإعلانات
+</span>
+
+</button>
 
 
-  <button
-    class="nav-item"
-    onclick="showMessage('stores')"
-  >
-    <span class="nav-icon">🏪</span>
+<button
+onclick="openModal('stores')">
 
-    <span
-      data-ar="المتاجر"
-      data-en="Stores"
-    >
-      المتاجر
-    </span>
+<span class="nav-icon">🏪</span>
 
-  </button>
+<span
+data-ar="المتاجر"
+data-en="Stores">
+المتاجر
+</span>
+
+</button>
 
 
-  <button
-    class="nav-item"
-    onclick="showMessage('account')"
-  >
-    <span class="nav-icon">👤</span>
+<button
+onclick="openModal('account')">
 
-    <span
-      data-ar="حسابي"
-      data-en="Account"
-    >
-      حسابي
-    </span>
+<span class="nav-icon">👤</span>
 
-  </button>
+<span
+data-ar="حسابي"
+data-en="Account">
+حسابي
+</span>
+
+</button>
 
 </nav>
 
 
-<!-- =========================
-     JAVASCRIPT
-========================== -->
+
+<!-- MODAL -->
+
+<div
+class="modal"
+id="modal"
+onclick="closeModalOutside(event)">
+
+<div class="modal-box">
+
+<button
+class="modal-close"
+onclick="closeModal()">
+×
+</button>
+
+<div
+class="modal-icon"
+id="modalIcon">
+🚀
+</div>
+
+<h2 id="modalTitle">
+BN ALI
+</h2>
+
+<p id="modalText">
+</p>
+
+<div id="modalExtra"></div>
+
+</div>
+
+</div>
+
+
 
 <script>
 
-  /*
-    BN ALI LANGUAGE SYSTEM
 
-    العربية = ar
-    English = en
-  */
+/* LANGUAGE */
 
-  let currentLanguage =
-    localStorage.getItem("bnali-language") || "ar";
+let language =
+localStorage.getItem("bnali-language") || "ar";
 
 
-  function applyLanguage() {
+function applyLanguage(){
 
-    const isEnglish =
-      currentLanguage === "en";
+const english =
+language === "en";
 
+document.documentElement.lang =
+english ? "en" : "ar";
 
-    document.documentElement.lang =
-      isEnglish ? "en" : "ar";
+document.documentElement.dir =
+english ? "ltr" : "rtl";
 
 
-    document.documentElement.dir =
-      isEnglish ? "ltr" : "rtl";
+document
+.querySelectorAll("[data-ar][data-en]")
+.forEach(function(el){
 
+el.textContent =
+english
+? el.getAttribute("data-en")
+: el.getAttribute("data-ar");
 
-    document.body.classList.toggle(
-      "english",
-      isEnglish
-    );
+});
 
 
-    /*
-      تغيير جميع النصوص
-    */
+const input =
+document.getElementById("mainSearch");
 
-    document
-      .querySelectorAll("[data-ar][data-en]")
-      .forEach(function(element) {
+input.placeholder =
+english
+? input.getAttribute("data-placeholder-en")
+: input.getAttribute("data-placeholder-ar");
 
-        element.textContent =
-          isEnglish
-            ? element.getAttribute("data-en")
-            : element.getAttribute("data-ar");
 
-      });
+document.getElementById("languageButton")
+.textContent =
+english ? "العربية" : "English";
 
 
-    /*
-      تغيير placeholder البحث
-    */
+document.title =
+english
+? "BN ALI | Digital Platform"
+: "BN ALI | المنصة الرقمية";
 
-    const searchInput =
-      document.getElementById("searchInput");
+}
 
 
-    searchInput.placeholder =
-      isEnglish
-        ? searchInput.getAttribute(
-            "data-placeholder-en"
-          )
-        : searchInput.getAttribute(
-            "data-placeholder-ar"
-          );
+function toggleLanguage(){
 
+language =
+language === "ar"
+? "en"
+: "ar";
 
-    /*
-      زر اللغة
-    */
+localStorage.setItem(
+"bnali-language",
+language
+);
 
-    const languageButton =
-      document.getElementById(
-        "languageButton"
-      );
+applyLanguage();
 
+}
 
-    languageButton.textContent =
-      isEnglish
-        ? "العربية"
-        : "English";
 
+/* MARKET */
 
-    /*
-      عنوان الصفحة
-    */
+function openMarket(){
 
-    document.title =
-      isEnglish
-        ? "BN ALI | Your Digital Platform"
-        : "BN ALI | منصتك الرقمية";
+window.location.href =
+"marketplace.html";
 
-  }
+}
 
 
-  function toggleLanguage() {
+/* HOME */
 
-    currentLanguage =
-      currentLanguage === "ar"
-        ? "en"
-        : "ar";
+function goTop(){
 
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
-    localStorage.setItem(
-      "bnali-language",
-      currentLanguage
-    );
+}
 
 
-    applyLanguage();
+/* SEARCH */
 
-  }
+function mainSearch(){
 
+const input =
+document.getElementById("mainSearch");
 
-  function showMessage(type) {
+const value =
+input.value.trim();
 
-    const messages = {
+if(!value){
 
-      ar: {
-        market:
-          "سوق BN ALI\n\nصفحة السوق الحقيقية سنبنيها في المرحلة التالية.",
+openMarket();
 
-        classifieds:
-          "الإعلانات المبوبة\n\nنظام الإعلانات سنبنيه في المرحلة التالية.",
+return;
 
-        stores:
-          "متاجر BN ALI\n\nنظام المتاجر سنبنيه في المرحلة التالية.",
+}
 
-        cars:
-          "قسم السيارات\n\nسيتم تطويره داخل السوق والإعلانات.",
+window.location.href =
+"marketplace.html";
 
-        realestate:
-          "قسم العقارات\n\nسيتم تطويره داخل السوق والإعلانات.",
+}
 
-        jobs:
-          "قسم الوظائف\n\nسيتم تطويره ضمن خدمات BN ALI.",
 
-        services:
-          "قسم الخدمات\n\nسيتم تطويره ضمن خدمات BN ALI.",
+/* AI */
 
-        ai:
-          "BN ALI AI\n\nنظام الذكاء الاصطناعي سيكون من الأنظمة الأساسية للمنصة.",
+function openAI(){
 
-        products:
-          "المنتجات\n\nسيتم تطوير سوق المنتجات في المرحلة التالية.",
+openModal("ai");
 
-        all:
-          "أقسام BN ALI\n\nسنضيف الصفحات والأنظمة الحقيقية تدريجيًا.",
+}
 
-        account:
-          "حسابي\n\nنظام المستخدمين وتسجيل الدخول سيأتي بعد بناء قاعدة البيانات."
-      },
 
-      en: {
-        market:
-          "BN ALI Marketplace\n\nThe real marketplace will be built in the next phase.",
+/* MODALS */
 
-        classifieds:
-          "Classifieds\n\nThe classified ads system will be built in the next phase.",
+const content = {
 
-        stores:
-          "BN ALI Stores\n\nThe store system will be built in the next phase.",
+ar:{
 
-        cars:
-          "Cars\n\nThis section will be developed inside the marketplace and classifieds.",
+classifieds:{
+icon:"📢",
+title:"الإعلانات المبوبة",
+text:"قسم الإعلانات المبوبة في BN ALI مخصص للبيع والشراء والإعلانات والخدمات. هذه هي الواجهة الأولية، وسيتم ربطها لاحقًا بقاعدة البيانات ونظام المستخدمين."
+},
 
-        realestate:
-          "Real Estate\n\nThis section will be developed inside the marketplace and classifieds.",
+stores:{
+icon:"🏪",
+title:"متاجر BN ALI",
+text:"سيتمكن أصحاب الأعمال من إنشاء متاجرهم وإضافة المنتجات وإدارة الطلبات والعملاء."
+},
+
+services:{
+icon:"🔧",
+title:"الخدمات",
+text:"منظومة تجمع مقدمي الخدمات والعملاء في مكان واحد."
+},
+
+investment:{
+icon:"💰",
+title:"الاستثمار",
+text:"سيتم تطوير قسم الاستثمار ليضم المشاريع والفرص الاستثمارية مع مراعاة الأنظمة والقوانين المعمول بها."
+},
+
+trading:{
+icon:"📈",
+title:"التداول",
+text:"سيتم بناء نظام التداول كمنظومة مستقلة وآمنة، مع الالتزام بالمتطلبات التنظيمية والقانونية اللازمة قبل تشغيل أي تداول حقيقي."
+},
+
+ai:{
+icon:"🤖",
+title:"BN ALI AI",
+text:"هنا سيكون مركز الذكاء الاصطناعي الذي يساعد المستخدم على إنشاء الأفكار والمواقع والتطبيقات والمشاريع الرقمية.",
+extra:true
+},
 
-        jobs:
-          "Jobs\n\nThis section will be developed as part of BN ALI services.",
+account:{
+icon:"👤",
+title:"حساب BN ALI",
+text:"من هنا سيتمكن المستخدم من تسجيل الدخول وإدارة ملفه وطلباته ومشترياته ومتاجره وإعلاناته."
+},
 
-        services:
-          "Services\n\nThe services system will be developed as part of BN ALI.",
+about:{
+icon:"🌍",
+title:"عن BN ALI",
+text:"BN ALI مشروع منصة رقمية عربية تبدأ من اليمن وتهدف إلى بناء منظومة عالمية للتجارة والخدمات والتقنية والذكاء الاصطناعي."
+},
 
-        ai:
-          "BN ALI AI\n\nThe AI system will become one of the core systems of the platform.",
+contact:{
+icon:"📩",
+title:"تواصل معنا",
+text:"سيتم إضافة نظام التواصل والدعم الفني في المرحلة القادمة."
+},
 
-        products:
-          "Products\n\nThe product marketplace will be developed in the next phase.",
+privacy:{
+icon:"🔐",
+title:"الخصوصية",
+text:"سيتم إعداد سياسة الخصوصية وشروط الاستخدام قبل إطلاق الأنظمة التي تتعامل مع بيانات المستخدمين."
+}
 
-        all:
-          "BN ALI Categories\n\nReal pages and systems will be added gradually.",
+},
 
-        account:
-          "My Account\n\nUser accounts and login will be added after building the database."
-      }
+en:{
 
-    };
+classifieds:{
+icon:"📢",
+title:"Classifieds",
+text:"The BN ALI classifieds section will support buying, selling, listings and services. This is the initial interface and will later connect to the database and user system."
+},
 
+stores:{
+icon:"🏪",
+title:"BN ALI Stores",
+text:"Businesses will be able to create stores, add products, manage orders and customers."
+},
 
-    alert(
-      messages[currentLanguage][type] ||
-      messages[currentLanguage].all
-    );
+services:{
+icon:"🔧",
+title:"Services",
+text:"A platform connecting service providers with customers."
+},
 
-  }
+investment:{
+icon:"💰",
+title:"Investment",
+text:"The investment section will be developed for projects and opportunities while complying with applicable laws and regulations."
+},
 
+trading:{
+icon:"📈",
+title:"Trading",
+text:"The trading system will be developed as a secure independent system and will require appropriate legal and regulatory compliance before real trading."
+},
 
-  function searchBNALI() {
+ai:{
+icon:"🤖",
+title:"BN ALI AI",
+text:"The AI center will help users create ideas, websites, applications and digital projects.",
+extra:true
+},
 
-    const input =
-      document.getElementById(
-        "searchInput"
-      );
+account:{
+icon:"👤",
+title:"BN ALI Account",
+text:"Users will eventually be able to sign in and manage their profile, orders, purchases, stores and listings."
+},
 
+about:{
+icon:"🌍",
+title:"About BN ALI",
+text:"BN ALI is an Arab digital platform project starting from Yemen with the goal of building a global ecosystem for commerce, services, technology and AI."
+},
 
-    const value =
-      input.value.trim();
+contact:{
+icon:"📩",
+title:"Contact Us",
+text:"A contact and support system will be added in the next stage."
+},
 
+privacy:{
+icon:"🔐",
+title:"Privacy",
+text:"Privacy policies and terms will be prepared before launching systems that handle user data."
+}
 
-    if (value === "") {
+}
 
-      alert(
-        currentLanguage === "en"
-          ? "Please enter what you want to search for."
-          : "اكتب ما تريد البحث عنه أولاً."
-      );
+};
 
 
-      input.focus();
+function openModal(type){
 
-      return;
+const data =
+content[language][type];
 
-    }
+document.getElementById("modalIcon")
+.textContent =
+data.icon;
 
+document.getElementById("modalTitle")
+.textContent =
+data.title;
 
-    alert(
+document.getElementById("modalText")
+.textContent =
+data.text;
 
-      currentLanguage === "en"
 
-        ? "BN ALI Search\n\nSearching for:\n" + value +
-          "\n\nThe real search engine will be connected in a later phase."
+const extra =
+document.getElementById("modalExtra");
 
-        : "بحث BN ALI\n\nالبحث عن:\n" + value +
-          "\n\nسيتم ربط محرك البحث الحقيقي في مرحلة لاحقة."
+extra.innerHTML="";
 
-    );
 
-  }
+if(data.extra){
 
+const input =
+document.createElement("input");
 
-  function goHome() {
+input.className =
+"modal-input";
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+input.placeholder =
+language === "ar"
+?
+"اكتب فكرة التطبيق الذي تريد إنشاءه..."
+:
+"Describe the app you want to create...";
 
-  }
 
+const button =
+document.createElement("button");
 
-  /*
-    تشغيل اللغة عند فتح الموقع
-  */
+button.className =
+"modal-primary";
 
-  applyLanguage();
+button.textContent =
+language === "ar"
+?
+"إنشاء بالذكاء الاصطناعي"
+:
+"Generate with AI";
+
+
+button.onclick =
+function(){
+
+alert(
+language === "ar"
+?
+"سيتم ربط BN ALI AI الحقيقي بعد إضافة خدمة الذكاء الاصطناعي وقاعدة البيانات."
+:
+"The real BN ALI AI service will be connected after adding the AI service and database."
+);
+
+};
+
+
+extra.appendChild(input);
+extra.appendChild(button);
+
+}
+
+
+document
+.getElementById("modal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList.remove("show");
+
+}
+
+
+function closeModalOutside(event){
+
+if(event.target.id === "modal"){
+
+closeModal();
+
+}
+
+}
+
+
+/* INITIALIZE */
+
+applyLanguage();
+
+
+/* ESC KEY */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Escape"){
+
+closeModal();
+
+}
+
+});
+
 
 </script>
 
