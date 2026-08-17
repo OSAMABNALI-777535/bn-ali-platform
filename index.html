@@ -1,12 +1,1302 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BN ALI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BN ALI | منصتك الرقمية</title>
+
+  <meta name="description" content="BN ALI - منصة رقمية عربية للتجارة والإعلانات والمتاجر والخدمات والذكاء الاصطناعي">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0b0b0d;
+      --dark: #151518;
+      --gold: #d8a83e;
+      --gold-light: #f0c866;
+      --white: #ffffff;
+      --bg: #f5f6f8;
+      --text: #17181c;
+      --muted: #777b84;
+      --border: #e6e7eb;
+      --card: #ffffff;
+      --green: #19a974;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Arial,
+        "Tahoma",
+        sans-serif;
+
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 76px;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      background: var(--black);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #29292d;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold-light)
+      );
+
+      color: var(--black);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: .5px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: #a8a8ae;
+      font-size: 9px;
+      margin-top: -2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+
+      border: 1px solid #34343a;
+      background: #19191d;
+      color: white;
+
+      font-size: 18px;
+    }
+
+    .login-button {
+      background: var(--gold);
+      color: var(--black);
+
+      border: 0;
+      border-radius: 11px;
+
+      padding: 10px 13px;
+
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+      background:
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(216,168,62,.20),
+          transparent 32%
+        ),
+        linear-gradient(
+          145deg,
+          #0b0b0d,
+          #19191d
+        );
+
+      color: white;
+      padding: 35px 16px 38px;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+
+      border: 1px solid rgba(216,168,62,.45);
+      background: rgba(216,168,62,.08);
+
+      color: var(--gold-light);
+
+      padding: 6px 12px;
+      border-radius: 50px;
+
+      font-size: 11px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 strong {
+      color: var(--gold-light);
+    }
+
+    .hero-description {
+      color: #c7c7cc;
+      font-size: 13px;
+      max-width: 600px;
+      margin: auto auto 23px;
+    }
+
+    /* =========================
+       SEARCH
+    ========================== */
+
+    .search-box {
+      max-width: 700px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+
+      background: white;
+      border-radius: 15px;
+      padding: 5px;
+
+      box-shadow: 0 15px 40px rgba(0,0,0,.22);
+    }
+
+    .search-icon {
+      padding: 0 10px;
+      color: #777;
+      font-size: 18px;
+    }
+
+    .search-box input {
+      flex: 1;
+
+      border: 0;
+      outline: 0;
+
+      padding: 13px 4px;
+
+      color: #222;
+      font-size: 14px;
+
+      min-width: 0;
+    }
+
+    .search-button {
+      border: 0;
+
+      background: var(--black);
+      color: white;
+
+      border-radius: 11px;
+
+      padding: 12px 17px;
+
+      font-weight: 700;
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 14px 35px;
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 13px;
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .section-link {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      background: none;
+      border: 0;
+    }
+
+    /* =========================
+       CATEGORIES
+    ========================== */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .category {
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 15px;
+
+      padding: 14px 5px;
+
+      text-align: center;
+
+      transition: .2s;
+    }
+
+    .category:active {
+      transform: scale(.97);
+    }
+
+    .category-icon {
+      width: 42px;
+      height: 42px;
+
+      margin: auto auto 7px;
+
+      border-radius: 13px;
+
+      background: #f4f1e8;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 22px;
+    }
+
+    .category-name {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       FEATURE CARDS
+    ========================== */
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .feature {
+      position: relative;
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      padding: 20px;
+
+      color: white;
+
+      min-height: 145px;
+    }
+
+    .feature-market {
+      background:
+        linear-gradient(
+          135deg,
+          #101114,
+          #24262b
+        );
+    }
+
+    .feature-classified {
+      background:
+        linear-gradient(
+          135deg,
+          #151515,
+          #3b3020
+        );
+    }
+
+    .feature-store {
+      background:
+        linear-gradient(
+          135deg,
+          #202124,
+          #111214
+        );
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    .feature h3 {
+      font-size: 19px;
+      margin-bottom: 4px;
+    }
+
+    .feature p {
+      color: #c9c9cd;
+      font-size: 12px;
+      max-width: 270px;
+    }
+
+    .feature-button {
+      margin-top: 13px;
+
+      border: 0;
+      border-radius: 9px;
+
+      padding: 8px 13px;
+
+      background: white;
+      color: #111;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================== */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .product {
+      background: white;
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      overflow: hidden;
+    }
+
+    .product-image {
+      height: 125px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #eeeeef,
+          #dadce0
+        );
+
+      font-size: 48px;
+    }
+
+    .product-content {
+      padding: 12px;
+    }
+
+    .product-title {
+      font-size: 13px;
+      font-weight: 800;
+
+      margin-bottom: 5px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-price {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--text);
+
+      margin-bottom: 4px;
+    }
+
+    .product-location {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       AI
+    ========================== */
+
+    .ai-section {
+      position: relative;
+      overflow: hidden;
+
+      border-radius: 23px;
+
+      padding: 27px 20px;
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(216,168,62,.20),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #09090b,
+          #202126
+        );
+    }
+
+    .ai-label {
+      display: inline-block;
+
+      color: var(--gold-light);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      margin-bottom: 8px;
+    }
+
+    .ai-section h2 {
+      font-size: 24px;
+      margin-bottom: 7px;
+    }
+
+    .ai-section p {
+      color: #c5c5ca;
+      font-size: 12px;
+
+      max-width: 500px;
+
+      margin-bottom: 18px;
+    }
+
+    .ai-button {
+      background: var(--gold);
+      color: #111;
+
+      border: 0;
+      border-radius: 11px;
+
+      padding: 12px 19px;
+
+      font-weight: 900;
+    }
+
+    /* =========================
+       GLOBAL SECTION
+    ========================== */
+
+    .global {
+      background: white;
+
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      padding: 20px;
+
+      text-align: center;
+    }
+
+    .global-icon {
+      font-size: 35px;
+      margin-bottom: 6px;
+    }
+
+    .global h2 {
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+
+    .global p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .countries {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .country {
+      background: #f4f5f7;
+      border-radius: 50px;
+      padding: 7px 11px;
+      font-size: 10px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      background: var(--black);
+      color: white;
+
+      padding: 30px 18px 95px;
+
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 7px;
+    }
+
+    .footer-text {
+      color: #999;
+      font-size: 11px;
+    }
+
+    /* =========================
+       BOTTOM NAV
+    ========================== */
+
+    .bottom-nav {
+      position: fixed;
+
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      height: 68px;
+
+      background: rgba(255,255,255,.97);
+
+      border-top: 1px solid var(--border);
+
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+
+      z-index: 200;
+
+      box-shadow: 0 -5px 20px rgba(0,0,0,.06);
+    }
+
+    .nav-item {
+      border: 0;
+      background: transparent;
+
+      color: #777;
+
+      font-size: 9px;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 2px;
+    }
+
+    .nav-icon {
+      font-size: 21px;
+    }
+
+    .nav-item.active {
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (min-width: 600px) {
+
+      .hero {
+        padding: 55px 20px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(8, 1fr);
+      }
+
+      .features {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .product-image {
+        height: 170px;
+      }
+    }
+
+    @media (min-width: 900px) {
+
+      .header-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      main {
+        padding-top: 30px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<h1>مرحباً بك في BN ALI</h1>
-<p>الموقع يعمل بنجاح.</p>
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="brand">
+
+      <div class="brand-logo">
+        BN
+      </div>
+
+      <div>
+        <div class="brand-name">
+          BN ALI
+        </div>
+
+        <span class="brand-subtitle">
+          منصتك الرقمية
+        </span>
+      </div>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button class="icon-button" aria-label="الإشعارات">
+        🔔
+      </button>
+
+      <button class="login-button">
+        دخول
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <span class="hero-badge">
+      🌍 منصة عربية بطموح عالمي
+    </span>
+
+    <h1>
+      مرحبًا بك في
+      <strong>BN ALI</strong>
+    </h1>
+
+    <p class="hero-description">
+      منصة رقمية متكاملة تجمع التجارة،
+      الإعلانات، المتاجر، الخدمات،
+      والذكاء الاصطناعي في مكان واحد.
+    </p>
+
+
+    <div class="search-box">
+
+      <span class="search-icon">
+        🔎
+      </span>
+
+      <input
+        type="search"
+        placeholder="ماذا تبحث عنه؟"
+        id="searchInput"
+      >
+
+      <button
+        class="search-button"
+        onclick="searchBNALI()"
+      >
+        بحث
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN
+========================== -->
+
+<main>
+
+
+  <!-- CATEGORIES -->
+
+  <section>
+
+    <div class="section-header">
+
+      <h2 class="section-title">
+        الأقسام الرئيسية
+      </h2>
+
+      <button class="section-link">
+        عرض الكل
+      </button>
+
+    </div>
+
+
+    <div class="categories">
+
+      <button class="category">
+        <div class="category-icon">🛒</div>
+        <div class="category-name">السوق</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">📢</div>
+        <div class="category-name">الإعلانات</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">🏪</div>
+        <div class="category-name">المتاجر</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">🚗</div>
+        <div class="category-name">السيارات</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">🏠</div>
+        <div class="category-name">العقارات</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">💼</div>
+        <div class="category-name">الوظائف</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">🔧</div>
+        <div class="category-name">الخدمات</div>
+      </button>
+
+      <button class="category">
+        <div class="category-icon">🤖</div>
+        <div class="category-name">BN ALI AI</div>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN SERVICES -->
+
+  <section>
+
+    <div class="section-header">
+
+      <h2 class="section-title">
+        عالم BN ALI
+      </h2>
+
+    </div>
+
+
+    <div class="features">
+
+
+      <div class="feature feature-market">
+
+        <div class="feature-icon">
+          🛒
+        </div>
+
+        <h3>
+          سوق BN ALI
+        </h3>
+
+        <p>
+          اكتشف المنتجات والعروض
+          وابدأ تجارتك داخل المنصة.
+        </p>
+
+        <button
+          class="feature-button"
+          onclick="showMessage('سوق BN ALI')"
+        >
+          استكشف السوق
+        </button>
+
+      </div>
+
+
+      <div class="feature feature-classified">
+
+        <div class="feature-icon">
+          📢
+        </div>
+
+        <h3>
+          الإعلانات المبوبة
+        </h3>
+
+        <p>
+          سيارات، عقارات، وظائف،
+          خدمات وكل ما تريد عرضه.
+        </p>
+
+        <button
+          class="feature-button"
+          onclick="showMessage('الإعلانات المبوبة')"
+        >
+          تصفح الإعلانات
+        </button>
+
+      </div>
+
+
+      <div class="feature feature-store">
+
+        <div class="feature-icon">
+          🏪
+        </div>
+
+        <h3>
+          متاجر BN ALI
+        </h3>
+
+        <p>
+          أنشئ متجرك الإلكتروني
+          واعرض منتجاتك للعملاء.
+        </p>
+
+        <button
+          class="feature-button"
+          onclick="showMessage('متاجر BN ALI')"
+        >
+          إنشاء متجر
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUCTS -->
+
+  <section>
+
+    <div class="section-header">
+
+      <h2 class="section-title">
+        أحدث المنتجات
+      </h2>
+
+      <button class="section-link">
+        المزيد
+      </button>
+
+    </div>
+
+
+    <div class="products">
+
+
+      <div class="product">
+
+        <div class="product-image">
+          📱
+        </div>
+
+        <div class="product-content">
+
+          <div class="product-title">
+            هاتف ذكي
+          </div>
+
+          <div class="product-price">
+            السعر عند البائع
+          </div>
+
+          <div class="product-location">
+            📍 صنعاء، اليمن
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          💻
+        </div>
+
+        <div class="product-content">
+
+          <div class="product-title">
+            كمبيوتر محمول
+          </div>
+
+          <div class="product-price">
+            السعر عند البائع
+          </div>
+
+          <div class="product-location">
+            📍 اليمن
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🚗
+        </div>
+
+        <div class="product-content">
+
+          <div class="product-title">
+            سيارة للبيع
+          </div>
+
+          <div class="product-price">
+            السعر عند البائع
+          </div>
+
+          <div class="product-location">
+            📍 صنعاء، اليمن
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🏠
+        </div>
+
+        <div class="product-content">
+
+          <div class="product-title">
+            عقار للبيع
+          </div>
+
+          <div class="product-price">
+            السعر عند البائع
+          </div>
+
+          <div class="product-location">
+            📍 اليمن
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- AI -->
+
+  <section>
+
+    <div class="ai-section">
+
+      <div class="ai-label">
+        ✨ BN ALI AI
+      </div>
+
+      <h2>
+        حوّل فكرتك إلى تطبيق
+      </h2>
+
+      <p>
+        مساعد ذكاء اصطناعي مستقبلي
+        يساعدك على إنشاء التطبيقات
+        والمشاريع الرقمية وتطويرها.
+      </p>
+
+      <button
+        class="ai-button"
+        onclick="showMessage('BN ALI AI')"
+      >
+        ابدأ مع BN ALI AI
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- GLOBAL -->
+
+  <section>
+
+    <div class="global">
+
+      <div class="global-icon">
+        🌍
+      </div>
+
+      <h2>
+        BN ALI نحو العالم
+      </h2>
+
+      <p>
+        نبدأ من اليمن ونطمح لبناء
+        منصة رقمية عربية عالمية.
+      </p>
+
+
+      <div class="countries">
+
+        <span class="country">🇾🇪 اليمن</span>
+        <span class="country">🇸🇦 السعودية</span>
+        <span class="country">🇦🇪 الإمارات</span>
+        <span class="country">🇪🇬 مصر</span>
+        <span class="country">🌍 العالم</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+  <div class="footer-logo">
+    BN ALI
+  </div>
+
+  <div class="footer-text">
+    منصتك الرقمية الشاملة
+  </div>
+
+  <div class="footer-text" style="margin-top:10px;">
+    © 2026 BN ALI. جميع الحقوق محفوظة.
+  </div>
+
+</footer>
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================== -->
+
+<nav class="bottom-nav">
+
+  <button
+    class="nav-item active"
+    onclick="goHome()"
+  >
+    <span class="nav-icon">⌂</span>
+    الرئيسية
+  </button>
+
+
+  <button
+    class="nav-item"
+    onclick="showMessage('السوق')"
+  >
+    <span class="nav-icon">🛒</span>
+    السوق
+  </button>
+
+
+  <button
+    class="nav-item"
+    onclick="showMessage('الإعلانات')"
+  >
+    <span class="nav-icon">📢</span>
+    الإعلانات
+  </button>
+
+
+  <button
+    class="nav-item"
+    onclick="showMessage('المتاجر')"
+  >
+    <span class="nav-icon">🏪</span>
+    المتاجر
+  </button>
+
+
+  <button
+    class="nav-item"
+    onclick="showMessage('حسابي')"
+  >
+    <span class="nav-icon">👤</span>
+    حسابي
+  </button>
+
+</nav>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+  function showMessage(name) {
+
+    alert(
+      "مرحبًا بك في " +
+      name +
+      "\n\nهذه الميزة سنبنيها في المرحلة التالية من BN ALI."
+    );
+
+  }
+
+
+  function searchBNALI() {
+
+    const input =
+      document.getElementById("searchInput");
+
+    const value =
+      input.value.trim();
+
+    if (value === "") {
+
+      alert("اكتب ما تريد البحث عنه أولاً.");
+
+      input.focus();
+
+      return;
+    }
+
+    alert(
+      "بحث BN ALI عن:\n\n" +
+      value +
+      "\n\nمحرك البحث الحقيقي سنربطه في المرحلة القادمة."
+    );
+
+  }
+
+
+  function goHome() {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+</script>
+
 </body>
 </html>
