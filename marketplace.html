@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>BN ALI | السوق</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0b0b0d;
+      --dark: #17181c;
+      --gold: #d8a83e;
+      --gold-light: #f0c866;
+      --bg: #f5f6f8;
+      --white: #ffffff;
+      --text: #17181c;
+      --muted: #777b84;
+      --border: #e5e6ea;
+    }
+
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-bottom: 75px;
+    }
+
+    button,
+    input,
+    select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* HEADER */
+
+    header {
+      background: var(--black);
+      color: white;
+
+      position: sticky;
+      top: 0;
+
+      z-index: 100;
+
+      border-bottom: 1px solid #29292d;
+    }
+
+    .header {
+      max-width: 1200px;
+      margin: auto;
+
+      padding: 14px 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .logo-box {
+      width: 40px;
+      height: 40px;
+
+      border-radius: 11px;
+
+      background: linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold-light)
+      );
+
+      color: #111;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 900;
+    }
+
+    .logo-name {
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .logo-sub {
+      display: block;
+      color: #999;
+      font-size: 9px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .language {
+      background: transparent;
+      color: white;
+
+      border: 1px solid #38383d;
+      border-radius: 10px;
+
+      padding: 9px 11px;
+
+      font-size: 11px;
+    }
+
+    .back {
+      background: #19191d;
+      color: white;
+
+      border: 1px solid #38383d;
+      border-radius: 10px;
+
+      padding: 9px 12px;
+
+      font-size: 12px;
+    }
+
+    /* HERO */
+
+    .hero {
+      background:
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(216,168,62,.18),
+          transparent 32%
+        ),
+        linear-gradient(
+          145deg,
+          #0b0b0d,
+          #202126
+        );
+
+      color: white;
+
+      padding: 30px 16px;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .hero p {
+      color: #c5c5ca;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    /* SEARCH */
+
+    .search {
+      background: white;
+
+      border-radius: 14px;
+
+      padding: 5px;
+
+      display: flex;
+
+      max-width: 700px;
+    }
+
+    .search input {
+      flex: 1;
+
+      border: 0;
+      outline: 0;
+
+      padding: 12px;
+
+      min-width: 0;
+
+      font-size: 13px;
+    }
+
+    .search button {
+      border: 0;
+
+      background: var(--black);
+      color: white;
+
+      border-radius: 10px;
+
+      padding: 0 18px;
+
+      font-weight: 700;
+    }
+
+    /* MAIN */
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+
+      padding: 20px 14px 35px;
+    }
+
+    /* CATEGORY */
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 19px;
+    }
+
+    .section-header span {
+      color: var(--gold);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .categories {
+      display: flex;
+
+      overflow-x: auto;
+
+      gap: 8px;
+
+      padding-bottom: 5px;
+
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category {
+      flex: 0 0 auto;
+
+      min-width: 85px;
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      padding: 11px 8px;
+
+      text-align: center;
+    }
+
+    .category-icon {
+      font-size: 23px;
+      margin-bottom: 4px;
+    }
+
+    .category-name {
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .category.active {
+      background: var(--black);
+      color: white;
+
+      border-color: var(--black);
+    }
+
+    /* FILTERS */
+
+    .filters {
+      margin-top: 22px;
+
+      display: flex;
+      gap: 8px;
+
+      overflow-x: auto;
+
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter {
+      flex: 0 0 auto;
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      padding: 9px 12px;
+
+      font-size: 10px;
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      margin-top: 18px;
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 10px;
+    }
+
+    .product {
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      transition: .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-2px);
+    }
+
+    .product-image {
+      height: 135px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #eeeeef,
+          #d9dade
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 50px;
+
+      position: relative;
+    }
+
+    .favorite {
+      position: absolute;
+
+      top: 8px;
+      right: 8px;
+
+      width: 31px;
+      height: 31px;
+
+      border-radius: 50%;
+
+      border: 0;
+
+      background: rgba(255,255,255,.9);
+
+      font-size: 16px;
+    }
+
+    .product-content {
+      padding: 12px;
+    }
+
+    .product-title {
+      font-size: 13px;
+
+      font-weight: 800;
+
+      margin-bottom: 5px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    .price {
+      font-size: 13px;
+
+      font-weight: 900;
+
+      margin-bottom: 5px;
+    }
+
+    .location {
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    .seller {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      margin-top: 3px;
+    }
+
+    /* ADD PRODUCT */
+
+    .add-product {
+      margin-top: 25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #111216,
+          #292b30
+        );
+
+      color: white;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      text-align: center;
+    }
+
+    .add-product h2 {
+      font-size: 20px;
+
+      margin-bottom: 6px;
+    }
+
+    .add-product p {
+      color: #bbb;
+
+      font-size: 11px;
+
+      margin-bottom: 15px;
+    }
+
+    .add-button {
+      border: 0;
+
+      background: var(--gold);
+
+      color: #111;
+
+      border-radius: 10px;
+
+      padding: 11px 20px;
+
+      font-weight: 900;
+    }
+
+    /* BOTTOM NAV */
+
+    nav {
+      position: fixed;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      height: 68px;
+
+      background: white;
+
+      border-top: 1px solid var(--border);
+
+      display: grid;
+
+      grid-template-columns: repeat(5,1fr);
+
+      z-index: 200;
+    }
+
+    nav button {
+      border: 0;
+
+      background: transparent;
+
+      color: #777;
+
+      font-size: 9px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 2px;
+    }
+
+    nav .icon {
+      font-size: 20px;
+    }
+
+    nav .active {
+      color: var(--gold);
+
+      font-weight: 800;
+    }
+
+    /* ENGLISH */
+
+    body.english {
+      direction: ltr;
+    }
+
+    /* DESKTOP */
+
+    @media (min-width: 650px) {
+
+      .products {
+        grid-template-columns: repeat(4,1fr);
+      }
+
+      .product-image {
+        height: 175px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="header">
+
+    <div class="logo">
+
+      <div class="logo-box">
+        BN
+      </div>
+
+      <div>
+
+        <div class="logo-name">
+          BN ALI
+        </div>
+
+        <span
+          class="logo-sub"
+          data-ar="السوق"
+          data-en="Marketplace"
+        >
+          السوق
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="header-actions">
+
+      <button
+        class="back"
+        onclick="goHome()"
+        data-ar="الرئيسية"
+        data-en="Home"
+      >
+        الرئيسية
+      </button>
+
+      <button
+        class="language"
+        id="languageButton"
+        onclick="toggleLanguage()"
+      >
+        English
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <h1
+      data-ar="🛒 سوق BN ALI"
+      data-en="🛒 BN ALI Marketplace"
+    >
+      🛒 سوق BN ALI
+    </h1>
+
+    <p
+      data-ar="اكتشف المنتجات والخدمات والعروض من البائعين."
+      data-en="Discover products, services, and offers from sellers."
+    >
+      اكتشف المنتجات والخدمات والعروض من البائعين.
+    </p>
+
+
+    <div class="search">
+
+      <input
+        id="marketSearch"
+        type="search"
+
+        data-placeholder-ar="ابحث عن منتج أو خدمة..."
+        data-placeholder-en="Search for a product or service..."
+
+        placeholder="ابحث عن منتج أو خدمة..."
+      >
+
+      <button
+        onclick="searchProducts()"
+        data-ar="بحث"
+        data-en="Search"
+      >
+        بحث
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MAIN -->
+
+<main>
+
+
+  <!-- CATEGORIES -->
+
+  <div class="section-header">
+
+    <h2
+      data-ar="التصنيفات"
+      data-en="Categories"
+    >
+      التصنيفات
+    </h2>
+
+    <span
+      data-ar="المزيد"
+      data-en="More"
+    >
+      المزيد
+    </span>
+
+  </div>
+
+
+  <div class="categories">
+
+
+    <button
+      class="category active"
+      onclick="filterCategory('all', this)"
+    >
+
+      <div class="category-icon">
+        🌐
+      </div>
+
+      <div
+        class="category-name"
+        data-ar="الكل"
+        data-en="All"
+      >
+        الكل
+      </div>
+
+    </button>
+
+
+    <button
+      class="category"
+      onclick="filterCategory('electronics', this)"
+    >
+
+      <div class="category-icon">
+        📱
+      </div>
+
+      <div
+        class="category-name"
+        data-ar="إلكترونيات"
+        data-en="Electronics"
+      >
+        إلكترونيات
+      </div>
+
+    </button>
+
+
+    <button
+      class="category"
+      onclick="filterCategory('cars', this)"
+    >
+
+      <div class="category-icon">
+        🚗
+      </div>
+
+      <div
+        class="category-name"
+        data-ar="سيارات"
+        data-en="Cars"
+      >
+        سيارات
+      </div>
+
+    </button>
+
+
+    <button
+      class="category"
+      onclick="filterCategory('realestate', this)"
+    >
+
+      <div class="category-icon">
+        🏠
+      </div>
+
+      <div
+        class="category-name"
+        data-ar="عقارات"
+        data-en="Real Estate"
+      >
+        عقارات
+      </div>
+
+    </button>
+
+
+    <button
+      class="category"
+      onclick="filterCategory('fashion', this)"
+    >
+
+      <div class="category-icon">
+        👕
+      </div>
+
+      <div
+        class="category-name"
+        data-ar="ملابس"
+        data-en="Fashion"
+      >
+        ملابس
+      </div>
+
+    </button>
+
+
+    <button
+      class="category"
+      onclick="filterCategory('home', this)"
+    >
+
+      <div class="category-icon">
+        🛋️
+      </div>
+
+      <div
+        class="category-name"
+        data-ar="منزل"
+        data-en="Home"
+      >
+        منزل
+      </div>
+
+    </button>
+
+  </div>
+
+
+  <!-- FILTERS -->
+
+  <div class="filters">
+
+    <button
+      class="filter"
+      data-ar="💰 السعر"
+      data-en="💰 Price"
+    >
+      💰 السعر
+    </button>
+
+    <button
+      class="filter"
+      data-ar="📍 الموقع"
+      data-en="📍 Location"
+    >
+      📍 الموقع
+    </button>
+
+    <button
+      class="filter"
+      data-ar="🆕 الأحدث"
+      data-en="🆕 Latest"
+    >
+      🆕 الأحدث
+    </button>
+
+    <button
+      class="filter"
+      data-ar="⭐ الأعلى تقييمًا"
+      data-en="⭐ Top Rated"
+    >
+      ⭐ الأعلى تقييمًا
+    </button>
+
+  </div>
+
+
+  <!-- PRODUCTS -->
+
+  <div class="section-header" style="margin-top:25px;">
+
+    <h2
+      data-ar="منتجات مقترحة"
+      data-en="Recommended Products"
+    >
+      منتجات مقترحة
+    </h2>
+
+    <span
+      id="productCount"
+    >
+      8
+    </span>
+
+  </div>
+
+
+  <div class="products" id="products">
+
+
+    <!-- PRODUCT 1 -->
+
+    <div
+      class="product"
+      data-category="electronics"
+      data-name-ar="هاتف ذكي جديد"
+      data-name-en="New Smartphone"
+    >
+
+      <div class="product-image">
+
+        📱
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="هاتف ذكي جديد"
+          data-en="New Smartphone"
+        >
+          هاتف ذكي جديد
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 صنعاء، اليمن"
+          data-en="📍 Sana'a, Yemen"
+        >
+          📍 صنعاء، اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: متجر إلكترونيات"
+          data-en="Seller: Electronics Store"
+        >
+          البائع: متجر إلكترونيات
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 2 -->
+
+    <div
+      class="product"
+      data-category="cars"
+      data-name-ar="سيارة للبيع"
+      data-name-en="Car for Sale"
+    >
+
+      <div class="product-image">
+
+        🚗
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="سيارة للبيع"
+          data-en="Car for Sale"
+        >
+          سيارة للبيع
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 صنعاء، اليمن"
+          data-en="📍 Sana'a, Yemen"
+        >
+          📍 صنعاء، اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: معرض سيارات"
+          data-en="Seller: Car Dealer"
+        >
+          البائع: معرض سيارات
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 3 -->
+
+    <div
+      class="product"
+      data-category="electronics"
+      data-name-ar="كمبيوتر محمول"
+      data-name-en="Laptop"
+    >
+
+      <div class="product-image">
+
+        💻
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="كمبيوتر محمول"
+          data-en="Laptop"
+        >
+          كمبيوتر محمول
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 اليمن"
+          data-en="📍 Yemen"
+        >
+          📍 اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: متجر التقنية"
+          data-en="Seller: Tech Store"
+        >
+          البائع: متجر التقنية
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 4 -->
+
+    <div
+      class="product"
+      data-category="realestate"
+      data-name-ar="منزل للبيع"
+      data-name-en="House for Sale"
+    >
+
+      <div class="product-image">
+
+        🏠
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="منزل للبيع"
+          data-en="House for Sale"
+        >
+          منزل للبيع
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 صنعاء، اليمن"
+          data-en="📍 Sana'a, Yemen"
+        >
+          📍 صنعاء، اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: مكتب عقارات"
+          data-en="Seller: Real Estate Office"
+        >
+          البائع: مكتب عقارات
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 5 -->
+
+    <div
+      class="product"
+      data-category="fashion"
+      data-name-ar="ملابس رجالية"
+      data-name-en="Men's Clothing"
+    >
+
+      <div class="product-image">
+
+        👕
+        
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="ملابس رجالية"
+          data-en="Men's Clothing"
+        >
+          ملابس رجالية
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 صنعاء، اليمن"
+          data-en="📍 Sana'a, Yemen"
+        >
+          📍 صنعاء، اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: متجر ملابس"
+          data-en="Seller: Fashion Store"
+        >
+          البائع: متجر ملابس
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 6 -->
+
+    <div
+      class="product"
+      data-category="home"
+      data-name-ar="أثاث منزلي"
+      data-name-en="Home Furniture"
+    >
+
+      <div class="product-image">
+
+        🛋️
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="أثاث منزلي"
+          data-en="Home Furniture"
+        >
+          أثاث منزلي
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 اليمن"
+          data-en="📍 Yemen"
+        >
+          📍 اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: معرض أثاث"
+          data-en="Seller: Furniture Store"
+        >
+          البائع: معرض أثاث
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 7 -->
+
+    <div
+      class="product"
+      data-category="electronics"
+      data-name-ar="سماعات لاسلكية"
+      data-name-en="Wireless Headphones"
+    >
+
+      <div class="product-image">
+
+        🎧
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="سماعات لاسلكية"
+          data-en="Wireless Headphones"
+        >
+          سماعات لاسلكية
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 صنعاء، اليمن"
+          data-en="📍 Sana'a, Yemen"
+        >
+          📍 صنعاء، اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: متجر التقنية"
+          data-en="Seller: Tech Store"
+        >
+          البائع: متجر التقنية
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT 8 -->
+
+    <div
+      class="product"
+      data-category="cars"
+      data-name-ar="دراجة للبيع"
+      data-name-en="Bike for Sale"
+    >
+
+      <div class="product-image">
+
+        🏍️
+
+        <button
+          class="favorite"
+          onclick="favoriteProduct(this)"
+        >
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-content">
+
+        <div
+          class="product-title"
+          data-ar="دراجة للبيع"
+          data-en="Bike for Sale"
+        >
+          دراجة للبيع
+        </div>
+
+        <div
+          class="price"
+          data-ar="السعر عند البائع"
+          data-en="Price from seller"
+        >
+          السعر عند البائع
+        </div>
+
+        <div
+          class="location"
+          data-ar="📍 اليمن"
+          data-en="📍 Yemen"
+        >
+          📍 اليمن
+        </div>
+
+        <div
+          class="seller"
+          data-ar="البائع: بائع مستقل"
+          data-en="Seller: Independent Seller"
+        >
+          البائع: بائع مستقل
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ADD PRODUCT -->
+
+  <section class="add-product">
+
+    <h2
+      data-ar="هل تريد بيع شيء؟"
+      data-en="Want to sell something?"
+    >
+      هل تريد بيع شيء؟
+    </h2>
+
+    <p
+      data-ar="أضف منتجاتك إلى سوق BN ALI وابدأ تجارتك."
+      data-en="Add your products to BN ALI Marketplace and start selling."
+    >
+      أضف منتجاتك إلى سوق BN ALI وابدأ تجارتك.
+    </p>
+
+    <button
+      class="add-button"
+      onclick="addProduct()"
+      data-ar="➕ إضافة منتج"
+      data-en="➕ Add Product"
+    >
+      ➕ إضافة منتج
+    </button>
+
+  </section>
+
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav>
+
+  <button
+    onclick="goHome()"
+  >
+
+    <span class="icon">
+      ⌂
+    </span>
+
+    <span
+      data-ar="الرئيسية"
+      data-en="Home"
+    >
+      الرئيسية
+    </span>
+
+  </button>
+
+
+  <button
+    class="active"
+  >
+
+    <span class="icon">
+      🛒
+    </span>
+
+    <span
+      data-ar="السوق"
+      data-en="Market"
+    >
+      السوق
+    </span>
+
+  </button>
+
+
+  <button
+    onclick="alertMessage('classifieds')"
+  >
+
+    <span class="icon">
+      📢
+    </span>
+
+    <span
+      data-ar="الإعلانات"
+      data-en="Classifieds"
+    >
+      الإعلانات
+    </span>
+
+  </button>
+
+
+  <button
+    onclick="alertMessage('stores')"
+  >
+
+    <span class="icon">
+      🏪
+    </span>
+
+    <span
+      data-ar="المتاجر"
+      data-en="Stores"
+    >
+      المتاجر
+    </span>
+
+  </button>
+
+
+  <button
+    onclick="alertMessage('account')"
+  >
+
+    <span class="icon">
+      👤
+    </span>
+
+    <span
+      data-ar="حسابي"
+      data-en="Account"
+    >
+      حسابي
+    </span>
+
+  </button>
+
+</nav>
+
+
+<script>
+
+  /* LANGUAGE */
+
+  let language =
+    localStorage.getItem("bnali-language") || "ar";
+
+
+  function applyLanguage() {
+
+    const english =
+      language === "en";
+
+
+    document.documentElement.lang =
+      english ? "en" : "ar";
+
+
+    document.documentElement.dir =
+      english ? "ltr" : "rtl";
+
+
+    document.body.classList.toggle(
+      "english",
+      english
+    );
+
+
+    document
+      .querySelectorAll(
+        "[data-ar][data-en]"
+      )
+      .forEach(function(element) {
+
+        element.textContent =
+          english
+            ? element.getAttribute("data-en")
+            : element.getAttribute("data-ar");
+
+      });
+
+
+    const input =
+      document.getElementById(
+        "marketSearch"
+      );
+
+
+    input.placeholder =
+      english
+        ? input.getAttribute(
+            "data-placeholder-en"
+          )
+        : input.getAttribute(
+            "data-placeholder-ar"
+          );
+
+
+    document.getElementById(
+      "languageButton"
+    ).textContent =
+      english
+        ? "العربية"
+        : "English";
+
+
+    document.title =
+      english
+        ? "BN ALI | Marketplace"
+        : "BN ALI | السوق";
+
+  }
+
+
+  function toggleLanguage() {
+
+    language =
+      language === "ar"
+        ? "en"
+        : "ar";
+
+
+    localStorage.setItem(
+      "bnali-language",
+      language
+    );
+
+
+    applyLanguage();
+
+  }
+
+
+  /* HOME */
+
+  function goHome() {
+
+    window.location.href =
+      "index.html";
+
+  }
+
+
+  /* CATEGORY FILTER */
+
+  function filterCategory(
+    category,
+    button
+  ) {
+
+    document
+      .querySelectorAll(
+        ".category"
+      )
+      .forEach(function(item) {
+
+        item.classList.remove(
+          "active"
+        );
+
+      });
+
+
+    button.classList.add(
+      "active"
+    );
+
+
+    const products =
+      document.querySelectorAll(
+        ".product"
+      );
+
+
+    let visible = 0;
+
+
+    products.forEach(function(product) {
+
+      if (
+        category === "all" ||
+        product.dataset.category === category
+      ) {
+
+        product.style.display =
+          "block";
+
+        visible++;
+
+      } else {
+
+        product.style.display =
+          "none";
+
+      }
+
+    });
+
+
+    document.getElementById(
+      "productCount"
+    ).textContent = visible;
+
+  }
+
+
+  /* SEARCH */
+
+  function searchProducts() {
+
+    const input =
+      document.getElementById(
+        "marketSearch"
+      );
+
+
+    const search =
+      input.value
+        .trim()
+        .toLowerCase();
+
+
+    const products =
+      document.querySelectorAll(
+        ".product"
+      );
+
+
+    let visible = 0;
+
+
+    products.forEach(function(product) {
+
+      const ar =
+        product.dataset.nameAr
+          .toLowerCase();
+
+
+      const en =
+        product.dataset.nameEn
+          .toLowerCase();
+
+
+      if (
+        search === "" ||
+        ar.includes(search) ||
+        en.includes(search)
+      ) {
+
+        product.style.display =
+          "block";
+
+        visible++;
+
+      } else {
+
+        product.style.display =
+          "none";
+
+      }
+
+    });
+
+
+    document.getElementById(
+      "productCount"
+    ).textContent = visible;
+
+  }
+
+
+  /* FAVORITE */
+
+  function favoriteProduct(button) {
+
+    if (
+      button.textContent === "♡"
+    ) {
+
+      button.textContent = "♥";
+
+    } else {
+
+      button.textContent = "♡";
+
+    }
+
+  }
+
+
+  /* ADD PRODUCT */
+
+  function addProduct() {
+
+    alert(
+
+      language === "en"
+
+        ? "The seller system is coming next.\n\nYou will be able to create an account and add your own products."
+
+        : "نظام البائعين قادم في المرحلة التالية.\n\nسيتمكن المستخدم من إنشاء حساب وإضافة منتجاته الخاصة."
+
+    );
+
+  }
+
+
+  /* OTHER NAV */
+
+  function alertMessage(type) {
+
+    const messages = {
+
+      ar: {
+        classifieds:
+          "الإعلانات المبوبة ستكون القسم التالي الذي سنبنيه.",
+
+        stores:
+          "نظام المتاجر سيكون مرحلة مستقلة بعد السوق.",
+
+        account:
+          "نظام الحسابات وقاعدة البيانات سنبنيه بعد تجهيز هيكل المنصة."
+      },
+
+      en: {
+        classifieds:
+          "Classifieds will be the next section we build.",
+
+        stores:
+          "The store system will be built after the marketplace.",
+
+        account:
+          "Accounts and the database will be built after the platform structure is ready."
+      }
+
+    };
+
+
+    alert(
+      messages[language][type]
+    );
+
+  }
+
+
+  /* START */
+
+  applyLanguage();
+
+</script>
+
+</body>
+
+</html>
