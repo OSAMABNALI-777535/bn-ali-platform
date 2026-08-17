@@ -6,7 +6,10 @@
 
   <title>BN ALI | منصتك الرقمية</title>
 
-  <meta name="description" content="BN ALI - منصة رقمية عربية للتجارة والإعلانات والمتاجر والخدمات والذكاء الاصطناعي">
+  <meta
+    name="description"
+    content="BN ALI - منصة رقمية عربية عالمية للتجارة والإعلانات والمتاجر والخدمات والذكاء الاصطناعي"
+  >
 
   <style>
     * {
@@ -26,7 +29,6 @@
       --muted: #777b84;
       --border: #e6e7eb;
       --card: #ffffff;
-      --green: #19a974;
     }
 
     html {
@@ -34,11 +36,7 @@
     }
 
     body {
-      font-family:
-        Arial,
-        "Tahoma",
-        sans-serif;
-
+      font-family: Arial, Tahoma, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -133,6 +131,19 @@
       color: white;
 
       font-size: 18px;
+    }
+
+    .language-button {
+      background: transparent;
+      color: white;
+
+      border: 1px solid #34343a;
+      border-radius: 11px;
+
+      padding: 9px 10px;
+
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .login-button {
@@ -552,7 +563,7 @@
     }
 
     /* =========================
-       GLOBAL SECTION
+       GLOBAL
     ========================== */
 
     .global {
@@ -672,6 +683,24 @@
     }
 
     /* =========================
+       LANGUAGE DIRECTION
+    ========================== */
+
+    body.english {
+      direction: ltr;
+    }
+
+    body.english .hero-inner,
+    body.english .global,
+    body.english footer {
+      text-align: center;
+    }
+
+    body.english .section-header {
+      flex-direction: row;
+    }
+
+    /* =========================
        RESPONSIVE
     ========================== */
 
@@ -733,11 +762,15 @@
       </div>
 
       <div>
-        <div class="brand-name">
+        <div class="brand-name" data-ar="BN ALI" data-en="BN ALI">
           BN ALI
         </div>
 
-        <span class="brand-subtitle">
+        <span
+          class="brand-subtitle"
+          data-ar="منصتك الرقمية"
+          data-en="Your Digital Platform"
+        >
           منصتك الرقمية
         </span>
       </div>
@@ -746,11 +779,27 @@
 
     <div class="header-actions">
 
-      <button class="icon-button" aria-label="الإشعارات">
+      <button
+        class="icon-button"
+        aria-label="Notifications"
+      >
         🔔
       </button>
 
-      <button class="login-button">
+      <button
+        class="language-button"
+        onclick="toggleLanguage()"
+        id="languageButton"
+      >
+        English
+      </button>
+
+      <button
+        class="login-button"
+        id="loginButton"
+        data-ar="دخول"
+        data-en="Login"
+      >
         دخول
       </button>
 
@@ -769,16 +818,30 @@
 
   <div class="hero-inner">
 
-    <span class="hero-badge">
+    <span
+      class="hero-badge"
+      data-ar="🌍 منصة عربية بطموح عالمي"
+      data-en="🌍 An Arabic Platform with Global Ambition"
+    >
       🌍 منصة عربية بطموح عالمي
     </span>
 
     <h1>
-      مرحبًا بك في
-      <strong>BN ALI</strong>
+      <span
+        data-ar="مرحبًا بك في"
+        data-en="Welcome to"
+      >
+        مرحبًا بك في
+      </span>
+
+      <strong> BN ALI </strong>
     </h1>
 
-    <p class="hero-description">
+    <p
+      class="hero-description"
+      data-ar="منصة رقمية متكاملة تجمع التجارة، الإعلانات، المتاجر، الخدمات، والذكاء الاصطناعي في مكان واحد."
+      data-en="An integrated digital platform bringing together commerce, classifieds, stores, services, and artificial intelligence in one place."
+    >
       منصة رقمية متكاملة تجمع التجارة،
       الإعلانات، المتاجر، الخدمات،
       والذكاء الاصطناعي في مكان واحد.
@@ -793,13 +856,18 @@
 
       <input
         type="search"
-        placeholder="ماذا تبحث عنه؟"
         id="searchInput"
+        data-placeholder-ar="ماذا تبحث عنه؟"
+        data-placeholder-en="What are you looking for?"
+        placeholder="ماذا تبحث عنه؟"
       >
 
       <button
         class="search-button"
+        id="searchButton"
         onclick="searchBNALI()"
+        data-ar="بحث"
+        data-en="Search"
       >
         بحث
       </button>
@@ -824,11 +892,20 @@
 
     <div class="section-header">
 
-      <h2 class="section-title">
+      <h2
+        class="section-title"
+        data-ar="الأقسام الرئيسية"
+        data-en="Main Categories"
+      >
         الأقسام الرئيسية
       </h2>
 
-      <button class="section-link">
+      <button
+        class="section-link"
+        onclick="showMessage('all')"
+        data-ar="عرض الكل"
+        data-en="View All"
+      >
         عرض الكل
       </button>
 
@@ -837,44 +914,107 @@
 
     <div class="categories">
 
-      <button class="category">
+      <button class="category" onclick="showMessage('market')">
         <div class="category-icon">🛒</div>
-        <div class="category-name">السوق</div>
+
+        <div
+          class="category-name"
+          data-ar="السوق"
+          data-en="Marketplace"
+        >
+          السوق
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('classifieds')">
         <div class="category-icon">📢</div>
-        <div class="category-name">الإعلانات</div>
+
+        <div
+          class="category-name"
+          data-ar="الإعلانات"
+          data-en="Classifieds"
+        >
+          الإعلانات
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('stores')">
         <div class="category-icon">🏪</div>
-        <div class="category-name">المتاجر</div>
+
+        <div
+          class="category-name"
+          data-ar="المتاجر"
+          data-en="Stores"
+        >
+          المتاجر
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('cars')">
         <div class="category-icon">🚗</div>
-        <div class="category-name">السيارات</div>
+
+        <div
+          class="category-name"
+          data-ar="السيارات"
+          data-en="Cars"
+        >
+          السيارات
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('realestate')">
         <div class="category-icon">🏠</div>
-        <div class="category-name">العقارات</div>
+
+        <div
+          class="category-name"
+          data-ar="العقارات"
+          data-en="Real Estate"
+        >
+          العقارات
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('jobs')">
         <div class="category-icon">💼</div>
-        <div class="category-name">الوظائف</div>
+
+        <div
+          class="category-name"
+          data-ar="الوظائف"
+          data-en="Jobs"
+        >
+          الوظائف
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('services')">
         <div class="category-icon">🔧</div>
-        <div class="category-name">الخدمات</div>
+
+        <div
+          class="category-name"
+          data-ar="الخدمات"
+          data-en="Services"
+        >
+          الخدمات
+        </div>
       </button>
 
-      <button class="category">
+
+      <button class="category" onclick="showMessage('ai')">
         <div class="category-icon">🤖</div>
-        <div class="category-name">BN ALI AI</div>
+
+        <div
+          class="category-name"
+          data-ar="BN ALI AI"
+          data-en="BN ALI AI"
+        >
+          BN ALI AI
+        </div>
       </button>
 
     </div>
@@ -888,7 +1028,11 @@
 
     <div class="section-header">
 
-      <h2 class="section-title">
+      <h2
+        class="section-title"
+        data-ar="عالم BN ALI"
+        data-en="The BN ALI World"
+      >
         عالم BN ALI
       </h2>
 
@@ -904,18 +1048,26 @@
           🛒
         </div>
 
-        <h3>
+        <h3
+          data-ar="سوق BN ALI"
+          data-en="BN ALI Marketplace"
+        >
           سوق BN ALI
         </h3>
 
-        <p>
+        <p
+          data-ar="اكتشف المنتجات والعروض وابدأ تجارتك داخل المنصة."
+          data-en="Discover products and offers and start your business inside the platform."
+        >
           اكتشف المنتجات والعروض
           وابدأ تجارتك داخل المنصة.
         </p>
 
         <button
           class="feature-button"
-          onclick="showMessage('سوق BN ALI')"
+          onclick="showMessage('market')"
+          data-ar="استكشف السوق"
+          data-en="Explore Marketplace"
         >
           استكشف السوق
         </button>
@@ -929,18 +1081,26 @@
           📢
         </div>
 
-        <h3>
+        <h3
+          data-ar="الإعلانات المبوبة"
+          data-en="Classifieds"
+        >
           الإعلانات المبوبة
         </h3>
 
-        <p>
+        <p
+          data-ar="سيارات، عقارات، وظائف، خدمات وكل ما تريد عرضه."
+          data-en="Cars, real estate, jobs, services, and everything you want to list."
+        >
           سيارات، عقارات، وظائف،
           خدمات وكل ما تريد عرضه.
         </p>
 
         <button
           class="feature-button"
-          onclick="showMessage('الإعلانات المبوبة')"
+          onclick="showMessage('classifieds')"
+          data-ar="تصفح الإعلانات"
+          data-en="Browse Classifieds"
         >
           تصفح الإعلانات
         </button>
@@ -954,18 +1114,26 @@
           🏪
         </div>
 
-        <h3>
+        <h3
+          data-ar="متاجر BN ALI"
+          data-en="BN ALI Stores"
+        >
           متاجر BN ALI
         </h3>
 
-        <p>
+        <p
+          data-ar="أنشئ متجرك الإلكتروني واعرض منتجاتك للعملاء."
+          data-en="Create your online store and showcase your products to customers."
+        >
           أنشئ متجرك الإلكتروني
           واعرض منتجاتك للعملاء.
         </p>
 
         <button
           class="feature-button"
-          onclick="showMessage('متاجر BN ALI')"
+          onclick="showMessage('stores')"
+          data-ar="إنشاء متجر"
+          data-en="Create Store"
         >
           إنشاء متجر
         </button>
@@ -983,11 +1151,20 @@
 
     <div class="section-header">
 
-      <h2 class="section-title">
+      <h2
+        class="section-title"
+        data-ar="أحدث المنتجات"
+        data-en="Latest Products"
+      >
         أحدث المنتجات
       </h2>
 
-      <button class="section-link">
+      <button
+        class="section-link"
+        onclick="showMessage('products')"
+        data-ar="المزيد"
+        data-en="More"
+      >
         المزيد
       </button>
 
@@ -1005,15 +1182,27 @@
 
         <div class="product-content">
 
-          <div class="product-title">
+          <div
+            class="product-title"
+            data-ar="هاتف ذكي"
+            data-en="Smartphone"
+          >
             هاتف ذكي
           </div>
 
-          <div class="product-price">
+          <div
+            class="product-price"
+            data-ar="السعر عند البائع"
+            data-en="Price from seller"
+          >
             السعر عند البائع
           </div>
 
-          <div class="product-location">
+          <div
+            class="product-location"
+            data-ar="📍 صنعاء، اليمن"
+            data-en="📍 Sana'a, Yemen"
+          >
             📍 صنعاء، اليمن
           </div>
 
@@ -1030,15 +1219,27 @@
 
         <div class="product-content">
 
-          <div class="product-title">
+          <div
+            class="product-title"
+            data-ar="كمبيوتر محمول"
+            data-en="Laptop"
+          >
             كمبيوتر محمول
           </div>
 
-          <div class="product-price">
+          <div
+            class="product-price"
+            data-ar="السعر عند البائع"
+            data-en="Price from seller"
+          >
             السعر عند البائع
           </div>
 
-          <div class="product-location">
+          <div
+            class="product-location"
+            data-ar="📍 اليمن"
+            data-en="📍 Yemen"
+          >
             📍 اليمن
           </div>
 
@@ -1055,15 +1256,27 @@
 
         <div class="product-content">
 
-          <div class="product-title">
+          <div
+            class="product-title"
+            data-ar="سيارة للبيع"
+            data-en="Car for Sale"
+          >
             سيارة للبيع
           </div>
 
-          <div class="product-price">
+          <div
+            class="product-price"
+            data-ar="السعر عند البائع"
+            data-en="Price from seller"
+          >
             السعر عند البائع
           </div>
 
-          <div class="product-location">
+          <div
+            class="product-location"
+            data-ar="📍 صنعاء، اليمن"
+            data-en="📍 Sana'a, Yemen"
+          >
             📍 صنعاء، اليمن
           </div>
 
@@ -1080,15 +1293,27 @@
 
         <div class="product-content">
 
-          <div class="product-title">
+          <div
+            class="product-title"
+            data-ar="عقار للبيع"
+            data-en="Property for Sale"
+          >
             عقار للبيع
           </div>
 
-          <div class="product-price">
+          <div
+            class="product-price"
+            data-ar="السعر عند البائع"
+            data-en="Price from seller"
+          >
             السعر عند البائع
           </div>
 
-          <div class="product-location">
+          <div
+            class="product-location"
+            data-ar="📍 اليمن"
+            data-en="📍 Yemen"
+          >
             📍 اليمن
           </div>
 
@@ -1107,15 +1332,25 @@
 
     <div class="ai-section">
 
-      <div class="ai-label">
+      <div
+        class="ai-label"
+        data-ar="✨ BN ALI AI"
+        data-en="✨ BN ALI AI"
+      >
         ✨ BN ALI AI
       </div>
 
-      <h2>
+      <h2
+        data-ar="حوّل فكرتك إلى تطبيق"
+        data-en="Turn Your Idea Into an App"
+      >
         حوّل فكرتك إلى تطبيق
       </h2>
 
-      <p>
+      <p
+        data-ar="مساعد ذكاء اصطناعي مستقبلي يساعدك على إنشاء التطبيقات والمشاريع الرقمية وتطويرها."
+        data-en="A future AI assistant that helps you create and develop apps and digital projects."
+      >
         مساعد ذكاء اصطناعي مستقبلي
         يساعدك على إنشاء التطبيقات
         والمشاريع الرقمية وتطويرها.
@@ -1123,7 +1358,9 @@
 
       <button
         class="ai-button"
-        onclick="showMessage('BN ALI AI')"
+        onclick="showMessage('ai')"
+        data-ar="ابدأ مع BN ALI AI"
+        data-en="Start with BN ALI AI"
       >
         ابدأ مع BN ALI AI
       </button>
@@ -1143,11 +1380,17 @@
         🌍
       </div>
 
-      <h2>
+      <h2
+        data-ar="BN ALI نحو العالم"
+        data-en="BN ALI Goes Global"
+      >
         BN ALI نحو العالم
       </h2>
 
-      <p>
+      <p
+        data-ar="نبدأ من اليمن ونطمح لبناء منصة رقمية عربية عالمية."
+        data-en="Starting from Yemen, our ambition is to build a global Arabic digital platform."
+      >
         نبدأ من اليمن ونطمح لبناء
         منصة رقمية عربية عالمية.
       </p>
@@ -1180,11 +1423,20 @@
     BN ALI
   </div>
 
-  <div class="footer-text">
+  <div
+    class="footer-text"
+    data-ar="منصتك الرقمية الشاملة"
+    data-en="Your Complete Digital Platform"
+  >
     منصتك الرقمية الشاملة
   </div>
 
-  <div class="footer-text" style="margin-top:10px;">
+  <div
+    class="footer-text"
+    style="margin-top:10px;"
+    data-ar="© 2026 BN ALI. جميع الحقوق محفوظة."
+    data-en="© 2026 BN ALI. All rights reserved."
+  >
     © 2026 BN ALI. جميع الحقوق محفوظة.
   </div>
 
@@ -1202,43 +1454,78 @@
     onclick="goHome()"
   >
     <span class="nav-icon">⌂</span>
-    الرئيسية
+
+    <span
+      data-ar="الرئيسية"
+      data-en="Home"
+    >
+      الرئيسية
+    </span>
+
   </button>
 
 
   <button
     class="nav-item"
-    onclick="showMessage('السوق')"
+    onclick="showMessage('market')"
   >
     <span class="nav-icon">🛒</span>
-    السوق
+
+    <span
+      data-ar="السوق"
+      data-en="Market"
+    >
+      السوق
+    </span>
+
   </button>
 
 
   <button
     class="nav-item"
-    onclick="showMessage('الإعلانات')"
+    onclick="showMessage('classifieds')"
   >
     <span class="nav-icon">📢</span>
-    الإعلانات
+
+    <span
+      data-ar="الإعلانات"
+      data-en="Classifieds"
+    >
+      الإعلانات
+    </span>
+
   </button>
 
 
   <button
     class="nav-item"
-    onclick="showMessage('المتاجر')"
+    onclick="showMessage('stores')"
   >
     <span class="nav-icon">🏪</span>
-    المتاجر
+
+    <span
+      data-ar="المتاجر"
+      data-en="Stores"
+    >
+      المتاجر
+    </span>
+
   </button>
 
 
   <button
     class="nav-item"
-    onclick="showMessage('حسابي')"
+    onclick="showMessage('account')"
   >
     <span class="nav-icon">👤</span>
-    حسابي
+
+    <span
+      data-ar="حسابي"
+      data-en="Account"
+    >
+      حسابي
+    </span>
+
   </button>
 
 </nav>
@@ -1250,12 +1537,198 @@
 
 <script>
 
-  function showMessage(name) {
+  /*
+    BN ALI LANGUAGE SYSTEM
+
+    العربية = ar
+    English = en
+  */
+
+  let currentLanguage =
+    localStorage.getItem("bnali-language") || "ar";
+
+
+  function applyLanguage() {
+
+    const isEnglish =
+      currentLanguage === "en";
+
+
+    document.documentElement.lang =
+      isEnglish ? "en" : "ar";
+
+
+    document.documentElement.dir =
+      isEnglish ? "ltr" : "rtl";
+
+
+    document.body.classList.toggle(
+      "english",
+      isEnglish
+    );
+
+
+    /*
+      تغيير جميع النصوص
+    */
+
+    document
+      .querySelectorAll("[data-ar][data-en]")
+      .forEach(function(element) {
+
+        element.textContent =
+          isEnglish
+            ? element.getAttribute("data-en")
+            : element.getAttribute("data-ar");
+
+      });
+
+
+    /*
+      تغيير placeholder البحث
+    */
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+
+    searchInput.placeholder =
+      isEnglish
+        ? searchInput.getAttribute(
+            "data-placeholder-en"
+          )
+        : searchInput.getAttribute(
+            "data-placeholder-ar"
+          );
+
+
+    /*
+      زر اللغة
+    */
+
+    const languageButton =
+      document.getElementById(
+        "languageButton"
+      );
+
+
+    languageButton.textContent =
+      isEnglish
+        ? "العربية"
+        : "English";
+
+
+    /*
+      عنوان الصفحة
+    */
+
+    document.title =
+      isEnglish
+        ? "BN ALI | Your Digital Platform"
+        : "BN ALI | منصتك الرقمية";
+
+  }
+
+
+  function toggleLanguage() {
+
+    currentLanguage =
+      currentLanguage === "ar"
+        ? "en"
+        : "ar";
+
+
+    localStorage.setItem(
+      "bnali-language",
+      currentLanguage
+    );
+
+
+    applyLanguage();
+
+  }
+
+
+  function showMessage(type) {
+
+    const messages = {
+
+      ar: {
+        market:
+          "سوق BN ALI\n\nصفحة السوق الحقيقية سنبنيها في المرحلة التالية.",
+
+        classifieds:
+          "الإعلانات المبوبة\n\nنظام الإعلانات سنبنيه في المرحلة التالية.",
+
+        stores:
+          "متاجر BN ALI\n\nنظام المتاجر سنبنيه في المرحلة التالية.",
+
+        cars:
+          "قسم السيارات\n\nسيتم تطويره داخل السوق والإعلانات.",
+
+        realestate:
+          "قسم العقارات\n\nسيتم تطويره داخل السوق والإعلانات.",
+
+        jobs:
+          "قسم الوظائف\n\nسيتم تطويره ضمن خدمات BN ALI.",
+
+        services:
+          "قسم الخدمات\n\nسيتم تطويره ضمن خدمات BN ALI.",
+
+        ai:
+          "BN ALI AI\n\nنظام الذكاء الاصطناعي سيكون من الأنظمة الأساسية للمنصة.",
+
+        products:
+          "المنتجات\n\nسيتم تطوير سوق المنتجات في المرحلة التالية.",
+
+        all:
+          "أقسام BN ALI\n\nسنضيف الصفحات والأنظمة الحقيقية تدريجيًا.",
+
+        account:
+          "حسابي\n\nنظام المستخدمين وتسجيل الدخول سيأتي بعد بناء قاعدة البيانات."
+      },
+
+      en: {
+        market:
+          "BN ALI Marketplace\n\nThe real marketplace will be built in the next phase.",
+
+        classifieds:
+          "Classifieds\n\nThe classified ads system will be built in the next phase.",
+
+        stores:
+          "BN ALI Stores\n\nThe store system will be built in the next phase.",
+
+        cars:
+          "Cars\n\nThis section will be developed inside the marketplace and classifieds.",
+
+        realestate:
+          "Real Estate\n\nThis section will be developed inside the marketplace and classifieds.",
+
+        jobs:
+          "Jobs\n\nThis section will be developed as part of BN ALI services.",
+
+        services:
+          "Services\n\nThe services system will be developed as part of BN ALI.",
+
+        ai:
+          "BN ALI AI\n\nThe AI system will become one of the core systems of the platform.",
+
+        products:
+          "Products\n\nThe product marketplace will be developed in the next phase.",
+
+        all:
+          "BN ALI Categories\n\nReal pages and systems will be added gradually.",
+
+        account:
+          "My Account\n\nUser accounts and login will be added after building the database."
+      }
+
+    };
+
 
     alert(
-      "مرحبًا بك في " +
-      name +
-      "\n\nهذه الميزة سنبنيها في المرحلة التالية من BN ALI."
+      messages[currentLanguage][type] ||
+      messages[currentLanguage].all
     );
 
   }
@@ -1264,24 +1737,41 @@
   function searchBNALI() {
 
     const input =
-      document.getElementById("searchInput");
+      document.getElementById(
+        "searchInput"
+      );
+
 
     const value =
       input.value.trim();
 
+
     if (value === "") {
 
-      alert("اكتب ما تريد البحث عنه أولاً.");
+      alert(
+        currentLanguage === "en"
+          ? "Please enter what you want to search for."
+          : "اكتب ما تريد البحث عنه أولاً."
+      );
+
 
       input.focus();
 
       return;
+
     }
 
+
     alert(
-      "بحث BN ALI عن:\n\n" +
-      value +
-      "\n\nمحرك البحث الحقيقي سنربطه في المرحلة القادمة."
+
+      currentLanguage === "en"
+
+        ? "BN ALI Search\n\nSearching for:\n" + value +
+          "\n\nThe real search engine will be connected in a later phase."
+
+        : "بحث BN ALI\n\nالبحث عن:\n" + value +
+          "\n\nسيتم ربط محرك البحث الحقيقي في مرحلة لاحقة."
+
     );
 
   }
@@ -1295,6 +1785,13 @@
     });
 
   }
+
+
+  /*
+    تشغيل اللغة عند فتح الموقع
+  */
+
+  applyLanguage();
 
 </script>
 
