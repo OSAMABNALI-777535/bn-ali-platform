@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BN ALI | المنصة الرقمية</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
@@ -14,32 +15,14 @@
   padding:0;
 }
 
-:root{
-  --black:#0b0b0d;
-  --dark:#17181c;
-  --gold:#d8a83e;
-  --gold2:#f0c866;
-  --bg:#f5f6f8;
-  --white:#fff;
-  --text:#17181c;
-  --muted:#777b84;
-  --border:#e4e5e9;
-  --danger:#c62828;
-  --success:#16803c;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  font-family:Arial,Tahoma,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  padding-bottom:75px;
+  font-family:Arial,sans-serif;
+  background:#f5f6f8;
+  color:#171717;
+  min-height:100vh;
 }
 
-button,input{
+button,input,textarea,select{
   font-family:inherit;
 }
 
@@ -47,26 +30,18 @@ button{
   cursor:pointer;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-/* HEADER */
-
 header{
+  background:#111;
+  color:#fff;
+  padding:15px;
   position:sticky;
   top:0;
-  z-index:1000;
-  background:var(--black);
-  color:white;
-  box-shadow:0 2px 15px #0004;
+  z-index:100;
 }
 
 .header{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
-  padding:12px 15px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -74,350 +49,278 @@ header{
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.logo-box{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  color:#111;
-}
-
-.logo-name{
-  font-size:19px;
-  font-weight:900;
-}
-
-.logo-sub{
-  display:block;
-  font-size:9px;
-  color:#aaa;
+  font-size:25px;
+  font-weight:bold;
+  letter-spacing:1px;
 }
 
 .header-actions{
   display:flex;
+  align-items:center;
   gap:7px;
 }
 
-.header-btn{
-  border:1px solid #3a3b40;
-  background:#191a1e;
-  color:white;
+.btn{
+  border:none;
   border-radius:10px;
-  padding:9px 11px;
-  font-size:11px;
+  padding:10px 14px;
+  font-weight:bold;
 }
 
-/* HERO */
+.btn-dark{
+  background:#111;
+  color:#fff;
+}
+
+.btn-light{
+  background:#fff;
+  color:#111;
+}
+
+.btn-danger{
+  background:#dc2626;
+  color:#fff;
+}
+
+.btn-green{
+  background:#16a34a;
+  color:#fff;
+}
+
+.lang-btn{
+  border:1px solid #555;
+  background:transparent;
+  color:#fff;
+  border-radius:9px;
+  padding:8px 11px;
+}
 
 .hero{
-  background:
-    radial-gradient(circle at 15% 10%,#d8a83e22,transparent 30%),
-    linear-gradient(145deg,#09090b,#24262b);
-  color:white;
-  padding:38px 15px 42px;
-}
-
-.hero-inner{
-  max-width:1100px;
-  margin:auto;
+  background:linear-gradient(135deg,#111,#292929);
+  color:#fff;
+  padding:42px 18px;
   text-align:center;
 }
 
 .hero h1{
   font-size:32px;
-  margin-bottom:9px;
+  margin-bottom:10px;
 }
 
 .hero p{
-  font-size:13px;
-  color:#c8c8cc;
-  margin-bottom:23px;
-  line-height:1.7;
+  color:#ccc;
+  margin-bottom:25px;
 }
 
 .search{
-  max-width:720px;
+  max-width:700px;
   margin:auto;
-  background:white;
-  padding:5px;
-  border-radius:15px;
   display:flex;
+  background:#fff;
+  border-radius:14px;
+  padding:6px;
 }
 
 .search input{
   flex:1;
-  border:0;
-  outline:0;
-  padding:13px;
-  font-size:13px;
+  border:none;
+  outline:none;
+  padding:14px;
+  font-size:15px;
   min-width:0;
 }
 
 .search button{
-  border:0;
-  background:var(--black);
-  color:white;
-  border-radius:11px;
+  border:none;
+  background:#111;
+  color:#fff;
+  border-radius:10px;
   padding:0 20px;
-  font-weight:bold;
 }
 
-/* MAIN */
-
 main{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
-  padding:22px 14px 35px;
+  padding:20px 15px 100px;
 }
 
 .section-title{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  margin:23px 0 13px;
+  align-items:center;
+  margin:25px 0 15px;
 }
 
 .section-title h2{
-  font-size:20px;
+  font-size:21px;
 }
 
 .section-title span{
-  font-size:11px;
-  color:var(--gold);
-  font-weight:bold;
+  color:#777;
+  font-size:13px;
 }
 
-/* QUICK */
-
-.quick{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:5px;
-  scrollbar-width:none;
-}
-
-.quick::-webkit-scrollbar{
-  display:none;
-}
-
-.quick-item{
-  flex:0 0 auto;
-  background:white;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:11px 15px;
-  font-size:11px;
-  font-weight:bold;
-}
-
-/* SERVICES */
-
-.services{
+.categories{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:10px;
 }
 
-.service{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px 10px;
+.category{
+  background:#fff;
+  border-radius:14px;
+  padding:18px 8px;
   text-align:center;
+  box-shadow:0 2px 10px #0000000b;
+  border:2px solid transparent;
   transition:.2s;
-  box-shadow:0 2px 10px #00000008;
 }
 
-.service:hover{
+.category:hover,
+.category.active{
+  border-color:#111;
   transform:translateY(-2px);
 }
 
-.service-icon{
-  font-size:29px;
+.category .icon{
+  font-size:28px;
   margin-bottom:8px;
 }
 
-.service h3{
+.category p{
   font-size:13px;
-  margin-bottom:4px;
 }
 
-.service p{
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.5;
+.market-tools{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
 }
 
-/* AI */
+.market-tools select{
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:10px;
+  padding:11px;
+  outline:none;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  background:#fff;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 2px 10px #0000000b;
+}
+
+.product-image{
+  height:170px;
+  background:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:55px;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:14px;
+}
+
+.card-content h3{
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.description{
+  color:#666;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+
+.price{
+  font-weight:bold;
+  margin-bottom:6px;
+  font-size:17px;
+}
+
+.location{
+  color:#888;
+  font-size:12px;
+}
+
+.category-label{
+  display:inline-block;
+  background:#f0f0f0;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:11px;
+  margin-top:8px;
+}
+
+.owner-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.owner-actions button{
+  flex:1;
+  padding:9px;
+  border:none;
+  border-radius:8px;
+}
+
+.edit-btn{
+  background:#eee;
+}
+
+.delete-btn{
+  background:#fee2e2;
+  color:#b91c1c;
+}
 
 .ai{
-  margin-top:27px;
-  background:
-    radial-gradient(circle at 80% 20%,#d8a83e25,transparent 35%),
-    linear-gradient(135deg,#101114,#292b30);
-  border-radius:22px;
-  padding:27px 20px;
-  color:white;
+  margin-top:30px;
+  background:linear-gradient(135deg,#151515,#333);
+  color:#fff;
+  border-radius:20px;
+  padding:28px 20px;
   text-align:center;
-}
-
-.ai-icon{
-  font-size:40px;
-  margin-bottom:8px;
 }
 
 .ai h2{
   font-size:24px;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .ai p{
-  color:#c6c6ca;
-  font-size:11px;
-  line-height:1.7;
-  margin-bottom:17px;
+  color:#ccc;
+  margin-bottom:20px;
 }
-
-.ai button{
-  border:0;
-  background:var(--gold);
-  color:#111;
-  font-weight:900;
-  border-radius:11px;
-  padding:12px 25px;
-}
-
-/* NEWS */
-
-.news{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:10px;
-}
-
-.news-card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:15px;
-}
-
-.news-icon{
-  font-size:25px;
-  margin-bottom:8px;
-}
-
-.news-card h3{
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-.news-card p{
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-/* FOOTER */
-
-footer{
-  margin-top:30px;
-  background:#111216;
-  color:white;
-  padding:30px 15px;
-}
-
-.footer-inner{
-  max-width:1100px;
-  margin:auto;
-  text-align:center;
-}
-
-.footer-logo{
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:7px;
-}
-
-.footer-text{
-  font-size:10px;
-  color:#aaa;
-  line-height:1.8;
-}
-
-.footer-links{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:16px;
-  margin:18px 0;
-}
-
-.footer-links button{
-  background:none;
-  border:0;
-  color:#bbb;
-  font-size:10px;
-}
-
-/* BOTTOM NAV */
-
-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:69px;
-  background:white;
-  border-top:1px solid var(--border);
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  z-index:2000;
-  box-shadow:0 -3px 15px #0000000a;
-}
-
-nav button{
-  border:0;
-  background:transparent;
-  color:#73767d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:2px;
-  font-size:9px;
-}
-
-nav button.active{
-  color:var(--gold);
-  font-weight:bold;
-}
-
-.nav-icon{
-  font-size:20px;
-}
-
-/* MODAL */
 
 .modal{
   position:fixed;
   inset:0;
   background:#0008;
-  z-index:5000;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  padding:15px;
+  z-index:500;
 }
 
 .modal.show{
@@ -425,1661 +328,1891 @@ nav button.active{
 }
 
 .modal-box{
-  background:white;
   width:100%;
-  max-width:480px;
-  border-radius:20px;
-  padding:23px;
-  text-align:center;
-  position:relative;
+  max-width:520px;
   max-height:90vh;
   overflow:auto;
-}
-
-.modal-close{
-  position:absolute;
-  top:10px;
-  left:10px;
-  border:0;
-  background:#f0f0f0;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  font-size:18px;
-}
-
-.modal-icon{
-  font-size:40px;
-  margin-bottom:8px;
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
 }
 
 .modal-box h2{
-  font-size:21px;
-  margin-bottom:8px;
+  margin-bottom:18px;
 }
 
-.modal-box p{
+.form-group{
+  margin-bottom:13px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:6px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+  background:#fff;
+}
+
+.form-group textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.form-actions{
+  display:flex;
+  gap:8px;
+  margin-top:18px;
+}
+
+.form-actions button{
+  flex:1;
+}
+
+.close-btn{
+  background:#eee;
+  color:#111;
+}
+
+.auth-message{
+  background:#fef3c7;
+  color:#92400e;
+  padding:10px;
+  border-radius:9px;
+  font-size:13px;
+  margin-bottom:12px;
+  display:none;
+}
+
+.user-info{
+  display:none;
+  align-items:center;
+  gap:7px;
+}
+
+.user-email{
   font-size:12px;
-  color:var(--muted);
-  line-height:1.8;
-  margin-bottom:16px;
+  color:#ddd;
+  max-width:140px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.modal-input{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
+.empty{
+  background:#fff;
+  border-radius:15px;
+  padding:35px 15px;
+  text-align:center;
+  color:#777;
+  grid-column:1/-1;
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
+
+.toast{
+  position:fixed;
+  bottom:75px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:12px 18px;
   border-radius:10px;
-  outline:0;
-  margin-bottom:10px;
+  display:none;
+  z-index:1000;
+  max-width:90%;
+  text-align:center;
 }
 
-.modal-primary{
-  width:100%;
-  border:0;
-  background:var(--black);
-  color:white;
-  padding:12px;
-  border-radius:10px;
-  font-weight:bold;
-  margin-bottom:9px;
+nav{
+  position:fixed;
+  bottom:0;
+  right:0;
+  left:0;
+  background:#fff;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  padding:8px 4px;
+  z-index:200;
 }
 
-.modal-secondary{
-  width:100%;
-  border:1px solid var(--border);
-  background:white;
-  color:var(--text);
-  padding:11px;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-.modal-message{
-  min-height:20px;
-  margin:8px 0 10px;
+nav a{
+  color:#555;
+  text-decoration:none;
+  text-align:center;
   font-size:11px;
 }
 
-.success{
-  color:var(--success);
+nav span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
 }
 
-.error{
-  color:var(--danger);
-}
-
-.account-status{
-  background:#f5f6f8;
-  border-radius:12px;
-  padding:13px;
-  margin-bottom:12px;
-  font-size:12px;
-}
-
-/* DESKTOP */
-
-@media(min-width:650px){
-
-  .services{
+@media(min-width:700px){
+  .cards{
     grid-template-columns:repeat(4,1fr);
   }
 
-  .news{
-    grid-template-columns:repeat(3,1fr);
+  .categories{
+    grid-template-columns:repeat(8,1fr);
+  }
+}
+
+@media(max-width:500px){
+  .logo{
+    font-size:21px;
   }
 
-  nav{
-    position:static;
-    height:auto;
-    max-width:700px;
-    margin:20px auto;
-    border:0;
-    box-shadow:none;
-    border-radius:15px;
-    display:flex;
-    justify-content:center;
-    gap:30px;
+  .hero h1{
+    font-size:27px;
   }
 
-  nav button{
-    padding:8px 15px;
+  .user-email{
+    display:none;
   }
 
-  body{
-    padding-bottom:0;
+  .header-actions .btn{
+    padding:8px 10px;
+    font-size:12px;
   }
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
+  <div class="header">
 
-<div class="header">
+    <div class="logo">BN ALI</div>
 
-<div class="logo">
+    <div class="header-actions">
 
-<div class="logo-box">
-BN
-</div>
+      <button class="lang-btn" id="languageBtn">
+        English
+      </button>
 
-<div>
-<div class="logo-name">BN ALI</div>
+      <div class="user-info" id="userInfo">
+        <span class="user-email" id="userEmail"></span>
+        <button class="btn btn-light" id="logoutBtn">
+          تسجيل الخروج
+        </button>
+      </div>
 
-<span
-class="logo-sub"
-data-ar="منصة رقمية شاملة"
-data-en="Global Digital Platform">
-منصة رقمية شاملة
-</span>
+      <button class="btn btn-light" id="loginBtn">
+        تسجيل الدخول
+      </button>
 
-</div>
+    </div>
 
-</div>
-
-<div class="header-actions">
-
-<button
-class="header-btn"
-onclick="toggleLanguage()"
-id="languageButton">
-English
-</button>
-
-<button
-class="header-btn"
-onclick="openAccountModal()"
-id="accountButton"
-data-ar="دخول"
-data-en="Login">
-دخول
-</button>
-
-</div>
-
-</div>
-
+  </div>
 </header>
 
 
 <section class="hero">
 
-<div class="hero-inner">
+  <h1 id="heroTitle">
+    مرحبًا بك في BN ALI
+  </h1>
 
-<h1
-data-ar="مرحبًا بك في BN ALI"
-data-en="Welcome to BN ALI">
-مرحبًا بك في BN ALI
-</h1>
+  <p id="heroDescription">
+    منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي
+  </p>
 
-<p
-data-ar="منصة رقمية تجمع التجارة والإعلانات والمتاجر والخدمات والاستثمار والذكاء الاصطناعي في مكان واحد."
-data-en="A digital platform combining commerce, classifieds, stores, services, investment and artificial intelligence in one place.">
-منصة رقمية تجمع التجارة والإعلانات والمتاجر والخدمات والاستثمار والذكاء الاصطناعي في مكان واحد.
-</p>
+  <div class="search">
 
-<div class="search">
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="ماذا تبحث عنه؟"
+    >
 
-<input
-id="mainSearch"
-type="search"
-data-placeholder-ar="ماذا تبحث عنه؟"
-data-placeholder-en="What are you looking for?"
-placeholder="ماذا تبحث عنه؟">
+    <button id="searchBtn">
+      بحث
+    </button>
 
-<button
-onclick="mainSearch()"
-data-ar="بحث"
-data-en="Search">
-بحث
-</button>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
 <main>
 
-<div class="section-title">
+  <div class="section-title">
 
-<h2
-data-ar="الوصول السريع"
-data-en="Quick Access">
-الوصول السريع
-</h2>
+    <h2 id="categoriesTitle">
+      الأقسام الرئيسية
+    </h2>
 
-<span>BN ALI</span>
+    <button
+      class="btn btn-green"
+      id="addProductBtn"
+    >
+      + إضافة منتج
+    </button>
 
-</div>
-
-
-<div class="quick">
-
-<button
-class="quick-item"
-onclick="openMarket()"
-data-ar="🛒 السوق"
-data-en="🛒 Marketplace">
-🛒 السوق
-</button>
-
-<button
-class="quick-item"
-onclick="openModal('classifieds')"
-data-ar="📢 الإعلانات"
-data-en="📢 Classifieds">
-📢 الإعلانات
-</button>
-
-<button
-class="quick-item"
-onclick="openModal('stores')"
-data-ar="🏪 المتاجر"
-data-en="🏪 Stores">
-🏪 المتاجر
-</button>
-
-<button
-class="quick-item"
-onclick="openModal('services')"
-data-ar="🔧 الخدمات"
-data-en="🔧 Services">
-🔧 الخدمات
-</button>
-
-<button
-class="quick-item"
-onclick="openModal('investment')"
-data-ar="💰 الاستثمار"
-data-en="💰 Investment">
-💰 الاستثمار
-</button>
-
-</div>
+  </div>
 
 
-<div class="section-title">
+  <div class="categories">
 
-<h2
-data-ar="خدمات BN ALI"
-data-en="BN ALI Services">
-خدمات BN ALI
-</h2>
+    <div class="category active" data-category="all">
+      <div class="icon">🌐</div>
+      <p>الكل</p>
+    </div>
 
-<span
-data-ar="الكل"
-data-en="All">
-الكل
-</span>
+    <div class="category" data-category="cars">
+      <div class="icon">🚗</div>
+      <p>سيارات</p>
+    </div>
 
-</div>
+    <div class="category" data-category="realestate">
+      <div class="icon">🏠</div>
+      <p>عقارات</p>
+    </div>
 
+    <div class="category" data-category="electronics">
+      <div class="icon">📱</div>
+      <p>إلكترونيات</p>
+    </div>
 
-<div class="services">
+    <div class="category" data-category="stores">
+      <div class="icon">🛍️</div>
+      <p>متاجر</p>
+    </div>
 
-<button class="service" onclick="openMarket()">
-<div class="service-icon">🛒</div>
-<h3 data-ar="السوق" data-en="Marketplace">السوق</h3>
-<p data-ar="شراء وبيع المنتجات" data-en="Buy and sell products">
-شراء وبيع المنتجات
-</p>
-</button>
+    <div class="category" data-category="jobs">
+      <div class="icon">💼</div>
+      <p>وظائف</p>
+    </div>
 
+    <div class="category" data-category="services">
+      <div class="icon">🔧</div>
+      <p>خدمات</p>
+    </div>
 
-<button class="service" onclick="openModal('classifieds')">
-<div class="service-icon">📢</div>
-<h3 data-ar="الإعلانات المبوبة" data-en="Classifieds">
-الإعلانات المبوبة
-</h3>
-<p
-data-ar="إعلانات للبيع والشراء والخدمات"
-data-en="Buy, sell and service listings">
-إعلانات للبيع والشراء والخدمات
-</p>
-</button>
+    <div class="category" data-category="clothes">
+      <div class="icon">👕</div>
+      <p>ملابس</p>
+    </div>
 
-
-<button class="service" onclick="openModal('stores')">
-<div class="service-icon">🏪</div>
-<h3 data-ar="المتاجر" data-en="Stores">المتاجر</h3>
-<p data-ar="أنشئ متجرك الإلكتروني" data-en="Create your online store">
-أنشئ متجرك الإلكتروني
-</p>
-</button>
+  </div>
 
 
-<button class="service" onclick="openModal('services')">
-<div class="service-icon">🔧</div>
-<h3 data-ar="الخدمات" data-en="Services">الخدمات</h3>
-<p data-ar="اعثر على مقدمي الخدمات" data-en="Find service providers">
-اعثر على مقدمي الخدمات
-</p>
-</button>
+  <div class="section-title">
+
+    <h2>
+      <span id="marketTitle">
+        سوق BN ALI
+      </span>
+    </h2>
+
+    <span id="productCount">
+      المنتجات
+    </span>
+
+  </div>
 
 
-<button class="service" onclick="openModal('investment')">
-<div class="service-icon">💰</div>
-<h3 data-ar="الاستثمار" data-en="Investment">الاستثمار</h3>
-<p data-ar="فرص ومشاريع استثمارية" data-en="Investment opportunities">
-فرص ومشاريع استثمارية
-</p>
-</button>
+  <div class="market-tools">
+
+    <select id="sortSelect">
+
+      <option value="newest">
+        الأحدث
+      </option>
+
+      <option value="low">
+        السعر: من الأقل
+      </option>
+
+      <option value="high">
+        السعر: من الأعلى
+      </option>
+
+    </select>
+
+  </div>
 
 
-<button class="service" onclick="openModal('trading')">
-<div class="service-icon">📈</div>
-<h3 data-ar="التداول" data-en="Trading">التداول</h3>
-<p data-ar="منصة تداول مستقبلية" data-en="Future trading platform">
-منصة تداول مستقبلية
-</p>
-</button>
+  <div class="cards" id="productsContainer">
+
+    <div class="loading">
+      جاري تحميل المنتجات...
+    </div>
+
+  </div>
 
 
-<button class="service" onclick="openAI()">
-<div class="service-icon">🤖</div>
-<h3>BN ALI AI</h3>
-<p
-data-ar="أنشئ أفكارك وتطبيقاتك بالذكاء الاصطناعي"
-data-en="Build ideas and apps with AI">
-أنشئ أفكارك وتطبيقاتك بالذكاء الاصطناعي
-</p>
-</button>
+  <section class="ai">
 
+    <h2>
+      🤖 BN ALI AI
+    </h2>
 
-<button class="service" onclick="openAccountModal()">
-<div class="service-icon">👤</div>
-<h3 data-ar="حسابي" data-en="My Account">حسابي</h3>
-<p
-data-ar="إدارة الحساب والطلبات"
-data-en="Manage account and orders">
-إدارة الحساب والطلبات
-</p>
-</button>
+    <p id="aiText">
+      أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي
+    </p>
 
-</div>
+    <button class="btn btn-light" id="aiBtn">
+      ابدأ الآن
+    </button>
 
-
-<section class="ai">
-
-<div class="ai-icon">🤖</div>
-
-<h2>BN ALI AI</h2>
-
-<p
-data-ar="نظام الذكاء الاصطناعي في BN ALI سيكون قادرًا على مساعدتك في إنشاء الأفكار والمواقع والتطبيقات والمشاريع الرقمية."
-data-en="BN ALI AI will help you create ideas, websites, applications and digital projects.">
-نظام الذكاء الاصطناعي في BN ALI سيكون قادرًا على مساعدتك في إنشاء الأفكار والمواقع والتطبيقات والمشاريع الرقمية.
-</p>
-
-<button
-onclick="openAI()"
-data-ar="ابدأ مع BN ALI AI"
-data-en="Start with BN ALI AI">
-ابدأ مع BN ALI AI
-</button>
-
-</section>
-
-
-<div class="section-title">
-
-<h2
-data-ar="منظومة BN ALI"
-data-en="BN ALI Ecosystem">
-منظومة BN ALI
-</h2>
-
-</div>
-
-
-<div class="news">
-
-<div class="news-card">
-<div class="news-icon">🌍</div>
-<h3 data-ar="منصة عالمية" data-en="Global Platform">
-منصة عالمية
-</h3>
-<p
-data-ar="الهدف هو بناء منظومة رقمية قابلة للتوسع من اليمن إلى الأسواق العالمية."
-data-en="The goal is to build a scalable digital ecosystem from Yemen to global markets.">
-الهدف هو بناء منظومة رقمية قابلة للتوسع من اليمن إلى الأسواق العالمية.
-</p>
-</div>
-
-
-<div class="news-card">
-<div class="news-icon">🏬</div>
-<h3 data-ar="تجارة إلكترونية" data-en="E-Commerce">
-تجارة إلكترونية
-</h3>
-<p
-data-ar="ربط البائعين والمتاجر والمشترين في منظومة واحدة."
-data-en="Connect sellers, stores and buyers in one ecosystem.">
-ربط البائعين والمتاجر والمشترين في منظومة واحدة.
-</p>
-</div>
-
-
-<div class="news-card">
-<div class="news-icon">🧠</div>
-<h3 data-ar="ذكاء اصطناعي" data-en="Artificial Intelligence">
-ذكاء اصطناعي
-</h3>
-<p
-data-ar="تطوير أدوات ذكاء اصطناعي تساعد المستخدمين على بناء منتجات رقمية."
-data-en="AI tools that help users build digital products.">
-تطوير أدوات ذكاء اصطناعي تساعد المستخدمين على بناء منتجات رقمية.
-</p>
-</div>
-
-</div>
+  </section>
 
 </main>
 
 
-<footer>
-
-<div class="footer-inner">
-
-<div class="footer-logo">BN ALI</div>
-
-<div
-class="footer-text"
-data-ar="منصة رقمية عربية طموحة تبدأ من اليمن وتتوسع نحو العالم."
-data-en="An ambitious Arab digital platform starting from Yemen and expanding globally.">
-منصة رقمية عربية طموحة تبدأ من اليمن وتتوسع نحو العالم.
-</div>
-
-<div class="footer-links">
-
-<button
-onclick="openModal('about')"
-data-ar="عن BN ALI"
-data-en="About BN ALI">
-عن BN ALI
-</button>
-
-<button
-onclick="openModal('contact')"
-data-ar="تواصل معنا"
-data-en="Contact Us">
-تواصل معنا
-</button>
-
-<button
-onclick="openModal('privacy')"
-data-ar="الخصوصية"
-data-en="Privacy">
-الخصوصية
-</button>
-
-</div>
-
-<div class="footer-text">
-© 2026 BN ALI
-</div>
-
-</div>
-
-</footer>
-
-
 <nav>
 
-<button class="active" onclick="goTop()">
-<span class="nav-icon">⌂</span>
-<span data-ar="الرئيسية" data-en="Home">الرئيسية</span>
-</button>
+  <a href="#">
+    <span>⌂</span>
+    الرئيسية
+  </a>
 
-<button onclick="openMarket()">
-<span class="nav-icon">🛒</span>
-<span data-ar="السوق" data-en="Market">السوق</span>
-</button>
+  <a href="#market">
+    <span>🛒</span>
+    السوق
+  </a>
 
-<button onclick="openModal('classifieds')">
-<span class="nav-icon">📢</span>
-<span data-ar="الإعلانات" data-en="Classifieds">الإعلانات</span>
-</button>
+  <a href="#">
+    <span>📢</span>
+    الإعلانات
+  </a>
 
-<button onclick="openModal('stores')">
-<span class="nav-icon">🏪</span>
-<span data-ar="المتاجر" data-en="Stores">المتاجر</span>
-</button>
+  <a href="#">
+    <span>🏪</span>
+    المتاجر
+  </a>
 
-<button onclick="openAccountModal()">
-<span class="nav-icon">👤</span>
-<span data-ar="حسابي" data-en="Account">حسابي</span>
-</button>
+  <a href="#" id="accountNav">
+    <span>👤</span>
+    حسابي
+  </a>
 
 </nav>
 
 
-<div
-class="modal"
-id="modal"
-onclick="closeModalOutside(event)">
+<!-- LOGIN MODAL -->
 
-<div class="modal-box">
+<div class="modal" id="authModal">
 
-<button class="modal-close" onclick="closeModal()">×</button>
+  <div class="modal-box">
 
-<div class="modal-icon" id="modalIcon">🚀</div>
+    <h2 id="authTitle">
+      تسجيل الدخول
+    </h2>
 
-<h2 id="modalTitle">BN ALI</h2>
+    <div class="auth-message" id="authMessage"></div>
 
-<p id="modalText"></p>
+    <div class="form-group">
 
-<div id="modalExtra"></div>
+      <label>
+        البريد الإلكتروني
+      </label>
+
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="example@email.com"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        كلمة المرور
+      </label>
+
+      <input
+        id="authPassword"
+        type="password"
+        placeholder="كلمة المرور"
+      >
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-dark"
+        id="authSubmit"
+      >
+        دخول
+      </button>
+
+      <button
+        class="btn close-btn"
+        id="authClose"
+      >
+        إغلاق
+      </button>
+
+    </div>
+
+
+    <button
+      class="btn"
+      id="switchAuth"
+      style="width:100%;margin-top:10px;background:#f1f1f1"
+    >
+      إنشاء حساب جديد
+    </button>
+
+  </div>
 
 </div>
 
+
+<!-- PRODUCT MODAL -->
+
+<div class="modal" id="productModal">
+
+  <div class="modal-box">
+
+    <h2 id="productModalTitle">
+      إضافة منتج
+    </h2>
+
+    <div class="auth-message" id="productMessage"></div>
+
+
+    <div class="form-group">
+
+      <label>
+        اسم المنتج
+      </label>
+
+      <input
+        id="productTitle"
+        type="text"
+        placeholder="مثال: هاتف ذكي"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        وصف المنتج
+      </label>
+
+      <textarea
+        id="productDescription"
+        placeholder="اكتب تفاصيل المنتج"
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        السعر
+      </label>
+
+      <input
+        id="productPrice"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="0"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        العملة
+      </label>
+
+      <select id="productCurrency">
+
+        <option value="YER">
+          ريال يمني YER
+        </option>
+
+        <option value="USD">
+          دولار USD
+        </option>
+
+        <option value="SAR">
+          ريال سعودي SAR
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        القسم
+      </label>
+
+      <select id="productCategory">
+
+        <option value="cars">سيارات</option>
+        <option value="realestate">عقارات</option>
+        <option value="electronics">إلكترونيات</option>
+        <option value="stores">متاجر</option>
+        <option value="jobs">وظائف</option>
+        <option value="services">خدمات</option>
+        <option value="clothes">ملابس</option>
+        <option value="other">أخرى</option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        الموقع
+      </label>
+
+      <input
+        id="productLocation"
+        type="text"
+        placeholder="مثال: صنعاء"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        رابط صورة المنتج
+      </label>
+
+      <input
+        id="productImage"
+        type="url"
+        placeholder="https://..."
+      >
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-green"
+        id="saveProductBtn"
+      >
+        حفظ المنتج
+      </button>
+
+      <button
+        class="btn close-btn"
+        id="productClose"
+      >
+        إغلاق
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase-config.js"></script>
+<div class="toast" id="toast"></div>
 
 
 <script>
 
-/* ==========================================
-   BN ALI SUPABASE
-========================================== */
+/* =====================================================
+   BN ALI - SUPABASE CONNECTION
+   ===================================================== */
 
-let bnaliSupabase = null;
+const SUPABASE_URL =
+  "https://hiexhsoacdrsvxnwdlzm.supabase.co";
 
-try{
+const SUPABASE_KEY =
+  "sb_publishable_mRfrZXc-hKI16qrGjk1GoQ_T8Gn-52c";
 
-if(
-typeof window.supabase !== "undefined" &&
-typeof SUPABASE_URL !== "undefined" &&
-typeof SUPABASE_KEY !== "undefined"
-){
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-bnaliSupabase =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
 
-console.log("BN ALI: Supabase connected");
+/* =====================================================
+   STATE
+   ===================================================== */
+
+let currentUser = null;
+let products = [];
+let selectedCategory = "all";
+let editingProductId = null;
+let isRegisterMode = false;
+let currentLanguage = "ar";
+
+
+/* =====================================================
+   ELEMENTS
+   ===================================================== */
+
+const productsContainer =
+  document.getElementById("productsContainer");
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const userInfo =
+  document.getElementById("userInfo");
+
+const userEmail =
+  document.getElementById("userEmail");
+
+const authModal =
+  document.getElementById("authModal");
+
+const productModal =
+  document.getElementById("productModal");
+
+const authMessage =
+  document.getElementById("authMessage");
+
+const productMessage =
+  document.getElementById("productMessage");
+
+
+/* =====================================================
+   TOAST
+   ===================================================== */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  },3000);
+}
+
+
+/* =====================================================
+   AUTH MESSAGE
+   ===================================================== */
+
+function showAuthMessage(message){
+
+  authMessage.textContent = message;
+  authMessage.style.display = "block";
 
 }
 
-}catch(error){
 
-console.error(
-"BN ALI Supabase error:",
-error
-);
+/* =====================================================
+   PRODUCT MESSAGE
+   ===================================================== */
+
+function showProductMessage(message){
+
+  productMessage.textContent = message;
+  productMessage.style.display = "block";
 
 }
 
 
-/* ==========================================
-   LANGUAGE
-========================================== */
+/* =====================================================
+   OPEN LOGIN
+   ===================================================== */
 
-let language =
-localStorage.getItem("bnali-language") || "ar";
+function openAuth(){
+
+  authModal.classList.add("show");
+
+  authMessage.style.display = "none";
+
+}
 
 
-function applyLanguage(){
+/* =====================================================
+   CLOSE LOGIN
+   ===================================================== */
 
-const english = language === "en";
+document
+.getElementById("authClose")
+.addEventListener("click",() => {
 
-document.documentElement.lang =
-english ? "en" : "ar";
+  authModal.classList.remove("show");
 
-document.documentElement.dir =
-english ? "ltr" : "rtl";
+});
+
+
+/* =====================================================
+   LOGIN / REGISTER
+   ===================================================== */
+
+loginBtn.addEventListener("click",openAuth);
 
 
 document
-.querySelectorAll("[data-ar][data-en]")
-.forEach(function(el){
+.getElementById("authSubmit")
+.addEventListener("click",async()=>{
 
-el.textContent =
-english
-? el.getAttribute("data-en")
-: el.getAttribute("data-ar");
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  if(!email || !password){
+
+    showAuthMessage(
+      currentLanguage === "ar"
+      ? "أدخل البريد وكلمة المرور"
+      : "Enter email and password"
+    );
+
+    return;
+  }
+
+
+  const button =
+    document.getElementById("authSubmit");
+
+  button.disabled = true;
+
+
+  try{
+
+    if(isRegisterMode){
+
+      const redirectUrl =
+        window.location.origin +
+        window.location.pathname;
+
+
+      const {data,error} =
+        await supabaseClient.auth.signUp({
+
+          email:email,
+
+          password:password,
+
+          options:{
+            emailRedirectTo:redirectUrl
+          }
+
+        });
+
+
+      if(error) throw error;
+
+
+      if(data.session){
+
+        showToast(
+          currentLanguage === "ar"
+          ? "تم إنشاء الحساب وتسجيل الدخول"
+          : "Account created"
+        );
+
+        authModal.classList.remove("show");
+
+      }else{
+
+        showAuthMessage(
+          currentLanguage === "ar"
+          ? "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيد الحساب."
+          : "Account created. Check your email to confirm."
+        );
+
+      }
+
+    }else{
+
+      const {error} =
+        await supabaseClient.auth.signInWithPassword({
+
+          email:email,
+
+          password:password
+
+        });
+
+
+      if(error) throw error;
+
+
+      showToast(
+        currentLanguage === "ar"
+        ? "تم تسجيل الدخول بنجاح"
+        : "Login successful"
+      );
+
+      authModal.classList.remove("show");
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showAuthMessage(
+      error.message ||
+      "حدث خطأ أثناء العملية"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+  }
 
 });
 
 
-const input =
-document.getElementById("mainSearch");
-
-if(input){
-
-input.placeholder =
-english
-? input.getAttribute("data-placeholder-en")
-: input.getAttribute("data-placeholder-ar");
-
-}
-
-
-const languageButton =
-document.getElementById("languageButton");
-
-if(languageButton){
-
-languageButton.textContent =
-english ? "العربية" : "English";
-
-}
-
-
-document.title =
-english
-? "BN ALI | Digital Platform"
-: "BN ALI | المنصة الرقمية";
-
-
-updateAccountButton();
-
-}
-
-
-function toggleLanguage(){
-
-language =
-language === "ar"
-? "en"
-: "ar";
-
-localStorage.setItem(
-"bnali-language",
-language
-);
-
-applyLanguage();
-
-}
-
-
-/* ==========================================
-   MARKET
-========================================== */
-
-function openMarket(){
-
-window.location.href =
-"marketplace.html";
-
-}
-
-
-/* ==========================================
-   SEARCH
-========================================== */
-
-function mainSearch(){
-
-const input =
-document.getElementById("mainSearch");
-
-const value =
-input.value.trim();
-
-if(!value){
-
-openMarket();
-
-return;
-
-}
-
-localStorage.setItem(
-"bnali-search",
-value
-);
-
-window.location.href =
-"marketplace.html";
-
-}
-
-
-/* ==========================================
-   HOME
-========================================== */
-
-function goTop(){
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-/* ==========================================
-   MODAL CONTENT
-========================================== */
-
-const content = {
-
-ar:{
-
-classifieds:{
-icon:"📢",
-title:"الإعلانات المبوبة",
-text:"قسم الإعلانات المبوبة في BN ALI مخصص للبيع والشراء والإعلانات والخدمات."
-},
-
-stores:{
-icon:"🏪",
-title:"متاجر BN ALI",
-text:"سيتمكن أصحاب الأعمال من إنشاء متاجرهم وإضافة المنتجات وإدارة الطلبات والعملاء."
-},
-
-services:{
-icon:"🔧",
-title:"الخدمات",
-text:"منظومة تجمع مقدمي الخدمات والعملاء في مكان واحد."
-},
-
-investment:{
-icon:"💰",
-title:"الاستثمار",
-text:"سيتم تطوير قسم الاستثمار ليضم المشاريع والفرص الاستثمارية مع مراعاة الأنظمة والقوانين."
-},
-
-trading:{
-icon:"📈",
-title:"التداول",
-text:"سيتم بناء نظام التداول كمنظومة مستقلة وآمنة، مع الالتزام بالمتطلبات التنظيمية والقانونية اللازمة قبل تشغيل أي تداول حقيقي."
-},
-
-ai:{
-icon:"🤖",
-title:"BN ALI AI",
-text:"هنا سيكون مركز الذكاء الاصطناعي الذي يساعد المستخدم على إنشاء الأفكار والمواقع والتطبيقات والمشاريع الرقمية.",
-extra:true
-},
-
-about:{
-icon:"🌍",
-title:"عن BN ALI",
-text:"BN ALI مشروع منصة رقمية عربية تبدأ من اليمن وتهدف إلى بناء منظومة عالمية للتجارة والخدمات والتقنية والذكاء الاصطناعي."
-},
-
-contact:{
-icon:"📩",
-title:"تواصل معنا",
-text:"سيتم إضافة نظام التواصل والدعم الفني في المرحلة القادمة."
-},
-
-privacy:{
-icon:"🔐",
-title:"الخصوصية",
-text:"سيتم إعداد سياسة الخصوصية وشروط الاستخدام قبل إطلاق الأنظمة التي تتعامل مع بيانات المستخدمين."
-}
-
-},
-
-en:{
-
-classifieds:{
-icon:"📢",
-title:"Classifieds",
-text:"The BN ALI classifieds section will support buying, selling, listings and services."
-},
-
-stores:{
-icon:"🏪",
-title:"BN ALI Stores",
-text:"Businesses will be able to create stores, add products, manage orders and customers."
-},
-
-services:{
-icon:"🔧",
-title:"Services",
-text:"A platform connecting service providers with customers."
-},
-
-investment:{
-icon:"💰",
-title:"Investment",
-text:"The investment section will be developed for projects and opportunities while complying with applicable laws and regulations."
-},
-
-trading:{
-icon:"📈",
-title:"Trading",
-text:"The trading system will be developed as a secure independent system and will require appropriate legal and regulatory compliance before real trading."
-},
-
-ai:{
-icon:"🤖",
-title:"BN ALI AI",
-text:"The AI center will help users create ideas, websites, applications and digital projects.",
-extra:true
-},
-
-about:{
-icon:"🌍",
-title:"About BN ALI",
-text:"BN ALI is an Arab digital platform project starting from Yemen with the goal of building a global ecosystem for commerce, services, technology and AI."
-},
-
-contact:{
-icon:"📩",
-title:"Contact Us",
-text:"A contact and support system will be added in the next stage."
-},
-
-privacy:{
-icon:"🔐",
-title:"Privacy",
-text:"Privacy policies and terms will be prepared before launching systems that handle user data."
-}
-
-}
-
-};
-
-
-/* ==========================================
-   GENERAL MODAL
-========================================== */
-
-function openModal(type){
-
-const data =
-content[language][type];
-
-if(!data) return;
-
-document.getElementById("modalIcon").textContent =
-data.icon;
-
-document.getElementById("modalTitle").textContent =
-data.title;
-
-document.getElementById("modalText").textContent =
-data.text;
-
-document.getElementById("modalExtra").innerHTML = "";
-
-if(data.extra){
-
-const input =
-document.createElement("input");
-
-input.className =
-"modal-input";
-
-input.placeholder =
-language === "ar"
-?
-"اكتب فكرة التطبيق الذي تريد إنشاءه..."
-:
-"Describe the app you want to create...";
-
-
-const button =
-document.createElement("button");
-
-button.className =
-"modal-primary";
-
-button.textContent =
-language === "ar"
-?
-"إنشاء بالذكاء الاصطناعي"
-:
-"Generate with AI";
-
-
-button.onclick =
-function(){
-
-alert(
-language === "ar"
-?
-"سيتم ربط BN ALI AI الحقيقي في مرحلة ربط خدمة الذكاء الاصطناعي."
-:
-"The real BN ALI AI service will be connected in the AI integration stage."
-);
-
-};
+/* =====================================================
+   SWITCH LOGIN / REGISTER
+   ===================================================== */
 
 document
-.getElementById("modalExtra")
-.appendChild(input);
-
-document
-.getElementById("modalExtra")
-.appendChild(button);
-
-}
-
-document
-.getElementById("modal")
-.classList.add("show");
-
-}
-
-
-/* ==========================================
-   ACCOUNT MODAL
-========================================== */
-
-async function openAccountModal(){
-
-const modal =
-document.getElementById("modal");
-
-const icon =
-document.getElementById("modalIcon");
-
-const title =
-document.getElementById("modalTitle");
-
-const text =
-document.getElementById("modalText");
-
-const extra =
-document.getElementById("modalExtra");
-
-
-icon.textContent = "👤";
-
-extra.innerHTML = "";
-
-
-let user = null;
-
-if(bnaliSupabase){
-
-try{
-
-const result =
-await bnaliSupabase.auth.getUser();
-
-user =
-result.data.user || null;
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-if(user){
-
-title.textContent =
-language === "ar"
-? "حسابي"
-: "My Account";
-
-
-text.textContent =
-language === "ar"
-? "أنت مسجل الدخول في BN ALI."
-: "You are signed in to BN ALI.";
-
-
-const status =
-document.createElement("div");
-
-status.className =
-"account-status";
-
-status.innerHTML =
-"<strong>" +
-(user.email || "") +
-"</strong>";
-
-
-const logout =
-document.createElement("button");
-
-logout.className =
-"modal-primary";
-
-logout.textContent =
-language === "ar"
-? "تسجيل الخروج"
-: "Sign Out";
-
-
-logout.onclick =
-logoutUser;
-
-
-extra.appendChild(status);
-
-extra.appendChild(logout);
-
-
-}else{
-
-title.textContent =
-language === "ar"
-? "حساب BN ALI"
-: "BN ALI Account";
-
-
-text.textContent =
-language === "ar"
-? "أنشئ حسابًا جديدًا أو سجل الدخول إلى حسابك."
-: "Create a new account or sign in.";
-
-
-const email =
-document.createElement("input");
-
-email.className =
-"modal-input";
-
-email.type =
-"email";
-
-email.id =
-"accountEmail";
-
-email.placeholder =
-language === "ar"
-? "البريد الإلكتروني"
-: "Email";
-
-
-const password =
-document.createElement("input");
-
-password.className =
-"modal-input";
-
-password.type =
-"password";
-
-password.id =
-"accountPassword";
-
-password.placeholder =
-language === "ar"
-? "كلمة المرور"
-: "Password";
-
-
-const name =
-document.createElement("input");
-
-name.className =
-"modal-input";
-
-name.type =
-"text";
-
-name.id =
-"accountName";
-
-name.placeholder =
-language === "ar"
-? "الاسم"
-: "Full name";
-
-
-const message =
-document.createElement("div");
-
-message.id =
-"accountMessage";
-
-message.className =
-"modal-message";
-
-
-const login =
-document.createElement("button");
-
-login.className =
-"modal-primary";
-
-login.textContent =
-language === "ar"
-? "تسجيل الدخول"
-: "Sign In";
-
-
-login.onclick =
-loginUser;
-
-
-const signup =
-document.createElement("button");
-
-signup.className =
-"modal-secondary";
-
-signup.textContent =
-language === "ar"
-? "إنشاء حساب جديد"
-: "Create Account";
-
-
-signup.onclick =
-signupUser;
-
-
-extra.appendChild(email);
-extra.appendChild(password);
-extra.appendChild(name);
-extra.appendChild(message);
-extra.appendChild(login);
-extra.appendChild(signup);
-
-}
-
-
-modal.classList.add("show");
-
-}
-
-
-/* ==========================================
-   SIGN UP
-========================================== */
-
-async function signupUser(){
-
-if(!bnaliSupabase){
-
-showAccountMessage(
-language === "ar"
-?
-"لم يتم الاتصال بقاعدة البيانات."
-:
-"Database connection is unavailable.",
-true
-);
-
-return;
-
-}
-
-
-const email =
-document.getElementById("accountEmail")
-.value.trim();
-
-const password =
-document.getElementById("accountPassword")
-.value;
-
-const fullName =
-document.getElementById("accountName")
-.value.trim();
-
-
-if(!email || !password){
-
-showAccountMessage(
-language === "ar"
-?
-"أدخل البريد الإلكتروني وكلمة المرور."
-:
-"Enter email and password.",
-true
-);
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-showAccountMessage(
-language === "ar"
-?
-"كلمة المرور يجب أن تكون 6 أحرف على الأقل."
-:
-"Password must be at least 6 characters.",
-true
-);
-
-return;
-
-}
-
-
-try{
-
-const result =
-await bnaliSupabase.auth.signUp({
-
-email:email,
-
-password:password,
-
-options:{
-data:{
-full_name:fullName
-}
-}
+.getElementById("switchAuth")
+.addEventListener("click",()=>{
+
+  isRegisterMode = !isRegisterMode;
+
+  document.getElementById("authTitle").textContent =
+    isRegisterMode
+    ? "إنشاء حساب جديد"
+    : "تسجيل الدخول";
+
+  document.getElementById("authSubmit").textContent =
+    isRegisterMode
+    ? "إنشاء الحساب"
+    : "دخول";
+
+  document.getElementById("switchAuth").textContent =
+    isRegisterMode
+    ? "لدي حساب بالفعل"
+    : "إنشاء حساب جديد";
+
+  authMessage.style.display = "none";
 
 });
 
 
-if(result.error){
-
-throw result.error;
-
-}
-
-
-const user =
-result.data.user;
-
-
-if(user){
-
-const profileResult =
-await bnaliSupabase
-.from("profiles")
-.upsert({
-
-id:user.id,
-
-full_name:
-fullName || null,
-
-username:
-email.split("@")[0],
-
-country:"Yemen"
-
-},{
-onConflict:"id"
-});
-
-
-if(profileResult.error){
-
-console.error(
-"Profile error:",
-profileResult.error
-);
-
-}
-
-}
-
-
-if(result.data.session){
-
-showAccountMessage(
-language === "ar"
-?
-"تم إنشاء الحساب وتسجيل الدخول بنجاح."
-:
-"Account created and signed in successfully.",
-false
-);
-
-setTimeout(
-function(){
-openAccountModal();
-},
-1000
-);
-
-}else{
-
-showAccountMessage(
-language === "ar"
-?
-"تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيد الحساب."
-:
-"Account created. Check your email to confirm your account.",
-false
-);
-
-}
-
-}catch(error){
-
-console.error(error);
-
-showAccountMessage(
-error.message ||
-(
-language === "ar"
-?
-"حدث خطأ أثناء إنشاء الحساب."
-:
-"An error occurred while creating the account."
-),
-true
-);
-
-}
-
-}
-
-
-/* ==========================================
-   LOGIN
-========================================== */
-
-async function loginUser(){
-
-if(!bnaliSupabase){
-
-showAccountMessage(
-language === "ar"
-?
-"لم يتم الاتصال بقاعدة البيانات."
-:
-"Database connection is unavailable.",
-true
-);
-
-return;
-
-}
-
-
-const email =
-document.getElementById("accountEmail")
-.value.trim();
-
-const password =
-document.getElementById("accountPassword")
-.value;
-
-
-if(!email || !password){
-
-showAccountMessage(
-language === "ar"
-?
-"أدخل البريد الإلكتروني وكلمة المرور."
-:
-"Enter email and password.",
-true
-);
-
-return;
-
-}
-
-
-try{
-
-const result =
-await bnaliSupabase.auth.signInWithPassword({
-
-email:email,
-
-password:password
-
-});
-
-
-if(result.error){
-
-throw result.error;
-
-}
-
-
-showAccountMessage(
-language === "ar"
-?
-"تم تسجيل الدخول بنجاح."
-:
-"Signed in successfully.",
-false
-);
-
-
-setTimeout(
-function(){
-
-openAccountModal();
-
-},
-800
-);
-
-
-}catch(error){
-
-console.error(error);
-
-showAccountMessage(
-error.message ||
-(
-language === "ar"
-?
-"البريد الإلكتروني أو كلمة المرور غير صحيحة."
-:
-"Invalid email or password."
-),
-true
-);
-
-}
-
-}
-
-
-/* ==========================================
+/* =====================================================
    LOGOUT
-========================================== */
+   ===================================================== */
 
-async function logoutUser(){
+logoutBtn.addEventListener("click",async()=>{
 
-if(!bnaliSupabase) return;
+  const {error} =
+    await supabaseClient.auth.signOut();
 
+  if(error){
 
-try{
+    showToast(error.message);
+    return;
 
-const result =
-await bnaliSupabase.auth.signOut();
+  }
 
-
-if(result.error){
-
-throw result.error;
-
-}
-
-
-closeModal();
-
-updateAccountButton();
-
-alert(
-language === "ar"
-?
-"تم تسجيل الخروج."
-:
-"You have been signed out."
-);
-
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-/* ==========================================
-   ACCOUNT MESSAGE
-========================================== */
-
-function showAccountMessage(message,isError){
-
-const box =
-document.getElementById("accountMessage");
-
-if(!box) return;
-
-box.textContent =
-message;
-
-box.className =
-"modal-message " +
-(isError ? "error" : "success");
-
-}
-
-
-/* ==========================================
-   ACCOUNT BUTTON
-========================================== */
-
-async function updateAccountButton(){
-
-const button =
-document.getElementById("accountButton");
-
-if(!button) return;
-
-
-let user = null;
-
-
-if(bnaliSupabase){
-
-try{
-
-const result =
-await bnaliSupabase.auth.getUser();
-
-user =
-result.data.user || null;
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-if(user){
-
-button.textContent =
-language === "ar"
-?
-"حسابي"
-:
-"My Account";
-
-}else{
-
-button.textContent =
-language === "ar"
-?
-"دخول"
-:
-"Login";
-
-}
-
-}
-
-
-/* ==========================================
-   AI
-========================================== */
-
-function openAI(){
-
-openModal("ai");
-
-}
-
-
-/* ==========================================
-   CLOSE MODAL
-========================================== */
-
-function closeModal(){
-
-document
-.getElementById("modal")
-.classList.remove("show");
-
-}
-
-
-function closeModalOutside(event){
-
-if(event.target.id === "modal"){
-
-closeModal();
-
-}
-
-}
-
-
-/* ==========================================
-   SUPABASE AUTH LISTENER
-========================================== */
-
-if(bnaliSupabase){
-
-bnaliSupabase.auth.onAuthStateChange(
-function(event,session){
-
-console.log(
-"BN ALI Auth:",
-event
-);
-
-updateAccountButton();
-
-}
-);
-
-}
-
-
-/* ==========================================
-   INITIALIZE
-========================================== */
-
-applyLanguage();
-
-updateAccountButton();
-
-
-document.addEventListener(
-"keydown",
-function(event){
-
-if(event.key === "Escape"){
-
-closeModal();
-
-}
+  showToast(
+    currentLanguage === "ar"
+    ? "تم تسجيل الخروج"
+    : "Signed out"
+  );
 
 });
+
+
+/* =====================================================
+   AUTH STATE
+   ===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+  (event,session)=>{
+
+    currentUser =
+      session?.user || null;
+
+    updateAuthUI();
+
+  }
+);
+
+
+async function checkSession(){
+
+  const {
+    data
+  } =
+  await supabaseClient.auth.getSession();
+
+  currentUser =
+    data.session?.user || null;
+
+  updateAuthUI();
+
+}
+
+
+/* =====================================================
+   UPDATE AUTH UI
+   ===================================================== */
+
+function updateAuthUI(){
+
+  if(currentUser){
+
+    loginBtn.style.display = "none";
+
+    userInfo.style.display = "flex";
+
+    userEmail.textContent =
+      currentUser.email || "";
+
+  }else{
+
+    loginBtn.style.display = "block";
+
+    userInfo.style.display = "none";
+
+  }
+
+}
+
+
+/* =====================================================
+   LOAD PRODUCTS
+   ===================================================== */
+
+async function loadProducts(){
+
+  productsContainer.innerHTML =
+    '<div class="loading">جاري تحميل المنتجات...</div>';
+
+
+  try{
+
+    const {data,error} =
+      await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("status","active")
+      .order("created_at",{ascending:false});
+
+
+    if(error) throw error;
+
+
+    products = data || [];
+
+    renderProducts();
+
+  }catch(error){
+
+    console.error(error);
+
+    productsContainer.innerHTML = `
+      <div class="empty">
+        <h3>تعذر تحميل المنتجات</h3>
+        <p style="margin-top:8px">
+          ${escapeHtml(error.message)}
+        </p>
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+   ===================================================== */
+
+function escapeHtml(value){
+
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   CATEGORY NAME
+   ===================================================== */
+
+function categoryName(category){
+
+  const names = {
+
+    cars:"سيارات",
+    realestate:"عقارات",
+    electronics:"إلكترونيات",
+    stores:"متاجر",
+    jobs:"وظائف",
+    services:"خدمات",
+    clothes:"ملابس",
+    other:"أخرى"
+
+  };
+
+  return names[category] || "أخرى";
+
+}
+
+
+/* =====================================================
+   RENDER PRODUCTS
+   ===================================================== */
+
+function renderProducts(){
+
+  const search =
+    document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+  let filtered =
+    products.filter(product=>{
+
+      const matchesCategory =
+        selectedCategory === "all" ||
+        product.category === selectedCategory;
+
+
+      const text =
+        (
+          product.title +
+          " " +
+          (product.description || "") +
+          " " +
+          (product.location || "")
+        ).toLowerCase();
+
+
+      const matchesSearch =
+        !search ||
+        text.includes(search);
+
+
+      return matchesCategory &&
+             matchesSearch;
+
+    });
+
+
+  const sort =
+    document.getElementById("sortSelect").value;
+
+
+  if(sort === "low"){
+
+    filtered.sort(
+      (a,b)=>
+      Number(a.price || 0) -
+      Number(b.price || 0)
+    );
+
+  }
+
+
+  if(sort === "high"){
+
+    filtered.sort(
+      (a,b)=>
+      Number(b.price || 0) -
+      Number(a.price || 0)
+    );
+
+  }
+
+
+  document.getElementById("productCount").textContent =
+    `${filtered.length} منتج`;
+
+
+  if(!filtered.length){
+
+    productsContainer.innerHTML = `
+      <div class="empty">
+
+        <div style="font-size:45px">
+          🛒
+        </div>
+
+        <h3 style="margin-top:10px">
+          لا توجد منتجات حاليًا
+        </h3>
+
+        <p style="margin-top:8px">
+          كن أول من يضيف منتجًا إلى سوق BN ALI
+        </p>
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  productsContainer.innerHTML =
+    filtered
+    .map(product => productCard(product))
+    .join("");
+
+}
+
+
+/* =====================================================
+   PRODUCT CARD
+   ===================================================== */
+
+function productCard(product){
+
+  const isOwner =
+    currentUser &&
+    currentUser.id === product.seller_id;
+
+
+  const image =
+    product.image_url
+    ? `
+      <img
+        src="${escapeHtml(product.image_url)}"
+        alt="${escapeHtml(product.title)}"
+        onerror="this.style.display='none';this.parentElement.innerHTML='📦'"
+      >
+    `
+    : "📦";
+
+
+  return `
+
+    <div class="card">
+
+      <div class="product-image">
+        ${image}
+      </div>
+
+      <div class="card-content">
+
+        <h3>
+          ${escapeHtml(product.title)}
+        </h3>
+
+        ${
+          product.description
+          ?
+          `
+          <div class="description">
+            ${escapeHtml(product.description)}
+          </div>
+          `
+          :
+          ""
+        }
+
+        <div class="price">
+
+          ${Number(product.price || 0).toLocaleString()}
+
+          ${escapeHtml(product.currency || "YER")}
+
+        </div>
+
+
+        ${
+          product.location
+          ?
+          `
+          <div class="location">
+            📍 ${escapeHtml(product.location)}
+          </div>
+          `
+          :
+          ""
+        }
+
+
+        <span class="category-label">
+          ${categoryName(product.category)}
+        </span>
+
+
+        ${
+          isOwner
+          ?
+          `
+          <div class="owner-actions">
+
+            <button
+              class="edit-btn"
+              onclick="editProduct('${product.id}')"
+            >
+              ✏️ تعديل
+            </button>
+
+            <button
+              class="delete-btn"
+              onclick="deleteProduct('${product.id}')"
+            >
+              🗑️ حذف
+            </button>
+
+          </div>
+          `
+          :
+          ""
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+document
+.getElementById("searchInput")
+.addEventListener("input",renderProducts);
+
+
+document
+.getElementById("searchBtn")
+.addEventListener("click",renderProducts);
+
+
+document
+.getElementById("sortSelect")
+.addEventListener("change",renderProducts);
+
+
+/* =====================================================
+   CATEGORY FILTER
+   ===================================================== */
+
+document
+.querySelectorAll(".category")
+.forEach(category=>{
+
+  category.addEventListener("click",()=>{
+
+    document
+    .querySelectorAll(".category")
+    .forEach(item =>
+      item.classList.remove("active")
+    );
+
+    category.classList.add("active");
+
+    selectedCategory =
+      category.dataset.category;
+
+    renderProducts();
+
+  });
+
+});
+
+
+/* =====================================================
+   ADD PRODUCT
+   ===================================================== */
+
+document
+.getElementById("addProductBtn")
+.addEventListener("click",()=>{
+
+  if(!currentUser){
+
+    showToast(
+      currentLanguage === "ar"
+      ? "يجب تسجيل الدخول أولًا"
+      : "Please login first"
+    );
+
+    openAuth();
+
+    return;
+
+  }
+
+  editingProductId = null;
+
+  clearProductForm();
+
+  document.getElementById(
+    "productModalTitle"
+  ).textContent = "إضافة منتج";
+
+  productMessage.style.display = "none";
+
+  productModal.classList.add("show");
+
+});
+
+
+/* =====================================================
+   CLOSE PRODUCT MODAL
+   ===================================================== */
+
+document
+.getElementById("productClose")
+.addEventListener("click",()=>{
+
+  productModal.classList.remove("show");
+
+});
+
+
+/* =====================================================
+   CLEAR FORM
+   ===================================================== */
+
+function clearProductForm(){
+
+  document.getElementById("productTitle").value = "";
+
+  document.getElementById("productDescription").value = "";
+
+  document.getElementById("productPrice").value = "";
+
+  document.getElementById("productCurrency").value = "YER";
+
+  document.getElementById("productCategory").value = "other";
+
+  document.getElementById("productLocation").value = "";
+
+  document.getElementById("productImage").value = "";
+
+}
+
+
+/* =====================================================
+   SAVE PRODUCT
+   ===================================================== */
+
+document
+.getElementById("saveProductBtn")
+.addEventListener("click",async()=>{
+
+  if(!currentUser){
+
+    showProductMessage(
+      "يجب تسجيل الدخول أولًا"
+    );
+
+    return;
+
+  }
+
+
+  const title =
+    document.getElementById("productTitle").value.trim();
+
+  const description =
+    document
+    .getElementById("productDescription")
+    .value
+    .trim();
+
+  const price =
+    Number(
+      document.getElementById("productPrice").value
+    );
+
+  const currency =
+    document.getElementById("productCurrency").value;
+
+  const category =
+    document.getElementById("productCategory").value;
+
+  const location =
+    document
+    .getElementById("productLocation")
+    .value
+    .trim();
+
+  const image_url =
+    document
+    .getElementById("productImage")
+    .value
+    .trim();
+
+
+  if(!title){
+
+    showProductMessage(
+      "اكتب اسم المنتج"
+    );
+
+    return;
+
+  }
+
+
+  if(Number.isNaN(price) || price < 0){
+
+    showProductMessage(
+      "أدخل سعرًا صحيحًا"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById("saveProductBtn");
+
+  button.disabled = true;
+
+
+  try{
+
+    const productData = {
+
+      title,
+
+      description,
+
+      price,
+
+      currency,
+
+      category,
+
+      location,
+
+      image_url,
+
+      status:"active",
+
+      seller_id:currentUser.id
+
+    };
+
+
+    let result;
+
+
+    if(editingProductId){
+
+      result =
+        await supabaseClient
+        .from("products")
+        .update(productData)
+        .eq("id",editingProductId)
+        .eq("seller_id",currentUser.id);
+
+    }else{
+
+      result =
+        await supabaseClient
+        .from("products")
+        .insert(productData);
+
+    }
+
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    productModal.classList.remove("show");
+
+    showToast(
+      editingProductId
+      ? "تم تعديل المنتج بنجاح"
+      : "تم إضافة المنتج بنجاح"
+    );
+
+
+    editingProductId = null;
+
+    await loadProducts();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showProductMessage(
+      error.message ||
+      "حدث خطأ أثناء حفظ المنتج"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+  }
+
+});
+
+
+/* =====================================================
+   EDIT PRODUCT
+   ===================================================== */
+
+window.editProduct = async function(id){
+
+  if(!currentUser){
+
+    openAuth();
+    return;
+
+  }
+
+
+  const product =
+    products.find(
+      item => item.id === id
+    );
+
+
+  if(!product){
+
+    showToast("المنتج غير موجود");
+    return;
+
+  }
+
+
+  if(product.seller_id !== currentUser.id){
+
+    showToast("لا يمكنك تعديل هذا المنتج");
+    return;
+
+  }
+
+
+  editingProductId = id;
+
+
+  document.getElementById("productModalTitle")
+  .textContent = "تعديل المنتج";
+
+
+  document.getElementById("productTitle")
+  .value = product.title || "";
+
+
+  document.getElementById("productDescription")
+  .value = product.description || "";
+
+
+  document.getElementById("productPrice")
+  .value = product.price || 0;
+
+
+  document.getElementById("productCurrency")
+  .value = product.currency || "YER";
+
+
+  document.getElementById("productCategory")
+  .value = product.category || "other";
+
+
+  document.getElementById("productLocation")
+  .value = product.location || "";
+
+
+  document.getElementById("productImage")
+  .value = product.image_url || "";
+
+
+  productMessage.style.display = "none";
+
+  productModal.classList.add("show");
+
+};
+
+
+/* =====================================================
+   DELETE PRODUCT
+   ===================================================== */
+
+window.deleteProduct = async function(id){
+
+  if(!currentUser){
+
+    openAuth();
+    return;
+
+  }
+
+
+  const product =
+    products.find(
+      item => item.id === id
+    );
+
+
+  if(!product){
+
+    showToast("المنتج غير موجود");
+    return;
+
+  }
+
+
+  if(product.seller_id !== currentUser.id){
+
+    showToast("لا يمكنك حذف هذا المنتج");
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل أنت متأكد من حذف هذا المنتج؟"
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    const {error} =
+      await supabaseClient
+      .from("products")
+      .delete()
+      .eq("id",id)
+      .eq("seller_id",currentUser.id);
+
+
+    if(error) throw error;
+
+
+    showToast("تم حذف المنتج");
+
+    await loadProducts();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      error.message ||
+      "تعذر حذف المنتج"
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   ACCOUNT NAV
+   ===================================================== */
+
+document
+.getElementById("accountNav")
+.addEventListener("click",(event)=>{
+
+  event.preventDefault();
+
+  if(currentUser){
+
+    showToast(
+      "الحساب: " +
+      currentUser.email
+    );
+
+  }else{
+
+    openAuth();
+
+  }
+
+});
+
+
+/* =====================================================
+   AI BUTTON
+   ===================================================== */
+
+document
+.getElementById("aiBtn")
+.addEventListener("click",()=>{
+
+  showToast(
+    currentLanguage === "ar"
+    ? "نظام BN ALI AI سيتم تفعيله في المرحلة القادمة"
+    : "BN ALI AI will be activated in the next stage"
+  );
+
+});
+
+
+/* =====================================================
+   LANGUAGE
+   ===================================================== */
+
+document
+.getElementById("languageBtn")
+.addEventListener("click",()=>{
+
+  currentLanguage =
+    currentLanguage === "ar"
+    ? "en"
+    : "ar";
+
+
+  if(currentLanguage === "en"){
+
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+
+    document.getElementById("languageBtn")
+      .textContent = "العربية";
+
+    document.getElementById("heroTitle")
+      .textContent = "Welcome to BN ALI";
+
+    document.getElementById("heroDescription")
+      .textContent =
+      "Your digital platform for commerce, services and AI";
+
+    document.getElementById("searchInput")
+      .placeholder =
+      "What are you looking for?";
+
+    document.getElementById("searchBtn")
+      .textContent = "Search";
+
+    document.getElementById("categoriesTitle")
+      .textContent = "Main Categories";
+
+    document.getElementById("marketTitle")
+      .textContent = "BN ALI Market";
+
+    document.getElementById("addProductBtn")
+      .textContent = "+ Add Product";
+
+    document.getElementById("aiText")
+      .textContent =
+      "Build your digital app and project using AI";
+
+    loginBtn.textContent = "Login";
+
+  }else{
+
+    document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
+
+    document.getElementById("languageBtn")
+      .textContent = "English";
+
+    document.getElementById("heroTitle")
+      .textContent = "مرحبًا بك في BN ALI";
+
+    document.getElementById("heroDescription")
+      .textContent =
+      "منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي";
+
+    document.getElementById("searchInput")
+      .placeholder =
+      "ماذا تبحث عنه؟";
+
+    document.getElementById("searchBtn")
+      .textContent = "بحث";
+
+    document.getElementById("categoriesTitle")
+      .textContent = "الأقسام الرئيسية";
+
+    document.getElementById("marketTitle")
+      .textContent = "سوق BN ALI";
+
+    document.getElementById("addProductBtn")
+      .textContent = "+ إضافة منتج";
+
+    document.getElementById("aiText")
+      .textContent =
+      "أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي";
+
+    loginBtn.textContent = "تسجيل الدخول";
+
+  }
+
+});
+
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
+
+async function initialize(){
+
+  await checkSession();
+
+  await loadProducts();
+
+}
+
+
+/* START */
+
+initialize();
 
 </script>
 
