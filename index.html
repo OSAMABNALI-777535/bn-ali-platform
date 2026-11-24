@@ -1,438 +1,240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BN ALI | المنصة الرقمية</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>BN ALI | السوق الرقمي</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f5f6f8;color:#171717;min-height:100vh}
-button,input,textarea,select{font-family:inherit}button{cursor:pointer}
-header{background:#111;color:#fff;padding:15px;position:sticky;top:0;z-index:100}
-.header{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:25px;font-weight:bold;letter-spacing:1px}
-.header-actions{display:flex;align-items:center;gap:7px}
-.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:bold}
-.btn-dark{background:#111;color:#fff}.btn-light{background:#fff;color:#111}
-.btn-danger{background:#dc2626;color:#fff}.btn-green{background:#16a34a;color:#fff}
-.lang-btn{border:1px solid #555;background:transparent;color:#fff;border-radius:9px;padding:8px 11px}
-.hero{background:linear-gradient(135deg,#111,#292929);color:#fff;padding:42px 18px;text-align:center}
-.hero h1{font-size:32px;margin-bottom:10px}.hero p{color:#ccc;margin-bottom:25px}
-.search{max-width:700px;margin:auto;display:flex;background:#fff;border-radius:14px;padding:6px}
-.search input{flex:1;border:none;outline:none;padding:14px;font-size:15px;min-width:0}
-.search button{border:none;background:#111;color:#fff;border-radius:10px;padding:0 20px}
-main{max-width:1100px;margin:auto;padding:20px 15px 100px}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 15px}
-.section-title h2{font-size:21px}.section-title span{color:#777;font-size:13px}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.category{background:#fff;border-radius:14px;padding:18px 8px;text-align:center;box-shadow:0 2px 10px #0000000b;border:2px solid transparent;transition:.2s}
-.category:hover,.category.active{border-color:#111;transform:translateY(-2px)}
-.category .icon{font-size:28px;margin-bottom:8px}.category p{font-size:13px}
-.market-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
-.market-tools select{border:1px solid #ddd;background:#fff;border-radius:10px;padding:11px;outline:none}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0000000b}
-.product-image{height:170px;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:55px;overflow:hidden}
-.product-image img{width:100%;height:100%;object-fit:cover}
-.card-content{padding:14px}.card-content h3{font-size:16px;margin-bottom:8px}
-.description{color:#666;font-size:13px;line-height:1.6;margin-bottom:10px}
-.price{font-weight:bold;margin-bottom:6px;font-size:17px}.location{color:#888;font-size:12px}
-.category-label{display:inline-block;background:#f0f0f0;padding:5px 8px;border-radius:7px;font-size:11px;margin-top:8px}
-.owner-actions{display:flex;gap:7px;margin-top:12px}.owner-actions button{flex:1;padding:9px;border:none;border-radius:8px}
-.edit-btn{background:#eee}.delete-btn{background:#fee2e2;color:#b91c1c}
-.ai{margin-top:30px;background:linear-gradient(135deg,#151515,#333);color:#fff;border-radius:20px;padding:28px 20px;text-align:center}
-.ai h2{font-size:24px;margin-bottom:10px}.ai p{color:#ccc;margin-bottom:20px}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px;z-index:500}
-.modal.show{display:flex}.modal-box{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:#fff;border-radius:18px;padding:22px}
-.modal-box h2{margin-bottom:18px}.form-group{margin-bottom:13px}
-.form-group label{display:block;margin-bottom:6px;font-size:13px;font-weight:bold}
-.form-group input,.form-group textarea,.form-group select{width:100%;border:1px solid #ddd;border-radius:10px;padding:12px;outline:none;background:#fff}
-.form-group textarea{min-height:90px;resize:vertical}
-.form-actions{display:flex;gap:8px;margin-top:18px}.form-actions button{flex:1}
-.close-btn{background:#eee;color:#111}
-.auth-message{background:#fef3c7;color:#92400e;padding:10px;border-radius:9px;font-size:13px;margin-bottom:12px;display:none;line-height:1.6}
-.user-info{display:none;align-items:center;gap:7px}.user-email{font-size:12px;color:#ddd;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.empty{background:#fff;border-radius:15px;padding:35px 15px;text-align:center;color:#777;grid-column:1/-1}
-.loading{text-align:center;padding:30px;color:#777}
-.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:10px;display:none;z-index:1000;max-width:90%;text-align:center}
-nav{position:fixed;bottom:0;right:0;left:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 4px;z-index:200}
-nav a{color:#555;text-decoration:none;text-align:center;font-size:11px}nav span{display:block;font-size:20px;margin-bottom:3px}
-.text-link{display:block;width:100%;border:0;background:transparent;color:#2563eb;text-decoration:underline;padding:12px 5px;font-size:14px}
-@media(min-width:700px){.cards{grid-template-columns:repeat(4,1fr)}.categories{grid-template-columns:repeat(8,1fr)}}
-@media(max-width:500px){.logo{font-size:21px}.hero h1{font-size:27px}.user-email{display:none}.header-actions .btn{padding:8px 10px;font-size:12px}}
+:root{--ink:#141414;--muted:#707070;--bg:#f4f5f7;--line:#e5e7eb;--white:#fff;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Tahoma,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.6;cursor:wait}
+header{position:sticky;top:0;z-index:20;background:#111;color:#fff;padding:13px 16px}.header,.wrap{max-width:1120px;margin:auto}.header{display:flex;align-items:center;justify-content:space-between;gap:12px}.logo{font-size:24px;font-weight:900;letter-spacing:1px}.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700}.dark{background:#111;color:#fff}.light{background:#fff;color:#111}.green{background:var(--green);color:#fff}.danger{background:var(--red);color:#fff}.subtle{background:#f1f2f4;color:#222}.lang{background:transparent;border:1px solid #555;color:#fff;border-radius:9px;padding:8px 11px}.user{display:none;align-items:center;gap:8px}.user-email{font-size:12px;color:#ddd;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hero{background:linear-gradient(135deg,#101010,#303030);color:#fff;text-align:center;padding:42px 16px 35px}.hero h1{font-size:clamp(26px,4vw,38px);margin:0 0 10px}.hero p{color:#ccc;margin:0 0 23px;line-height:1.7}.search{display:flex;max-width:720px;margin:auto;background:#fff;border-radius:13px;padding:5px}.search input{flex:1;min-width:0;border:0;outline:0;padding:13px;color:#111}.search button{border:0;border-radius:9px;background:#111;color:#fff;padding:0 20px}
+main{padding:20px 15px 100px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:24px 0 14px}.section-head h2{font-size:21px;margin:0}.section-head small{color:var(--muted)}.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.category{border:2px solid transparent;background:#fff;border-radius:13px;padding:14px 5px;text-align:center;box-shadow:0 2px 10px #00000008}.category.active,.category:hover{border-color:#111}.category .icon{font-size:26px;margin-bottom:6px}.category p{font-size:12px;margin:0}
+.tools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}.tools select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 12px #0000000b;cursor:pointer;min-width:0}.product-image{height:160px;background:#e9eaed;display:flex;align-items:center;justify-content:center;font-size:52px;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover}.card-body{padding:13px}.card h3{font-size:16px;margin:0 0 8px;overflow-wrap:anywhere}.desc{color:#666;font-size:13px;line-height:1.6;margin-bottom:9px}.price{font-size:18px;font-weight:800;margin:7px 0}.location{color:#888;font-size:12px}.tag{display:inline-block;background:#f1f2f4;padding:5px 8px;border-radius:7px;font-size:11px;margin-top:8px}.owner-actions{display:flex;gap:7px;margin-top:11px}.owner-actions button{flex:1;border:0;border-radius:8px;padding:9px}.empty{background:#fff;border-radius:15px;padding:35px 14px;text-align:center;color:#777;grid-column:1/-1}.loading{text-align:center;padding:30px;color:#777}
+.ai{margin-top:30px;background:linear-gradient(135deg,#151515,#333);color:#fff;border-radius:18px;padding:25px;text-align:center}.ai p{color:#ccc;line-height:1.6}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:14px;z-index:100}.modal.show{display:flex}.modal-box{width:100%;max-width:540px;max-height:92vh;overflow:auto;background:#fff;border-radius:17px;padding:21px}.modal-box h2{margin:0 0 16px;font-size:22px}.field{margin-bottom:12px}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid #ddd;border-radius:10px;padding:12px;outline:none;background:#fff}.field textarea{min-height:90px;resize:vertical}.row-buttons{display:flex;gap:8px;margin-top:16px}.row-buttons button{flex:1}.message{display:none;background:#fff3cd;color:#795400;padding:10px;border-radius:9px;font-size:13px;margin-bottom:12px;line-height:1.6;overflow-wrap:anywhere}.text-link{display:block;width:100%;border:0;background:transparent;color:#2563eb;text-decoration:underline;padding:12px 5px}.details-image{width:100%;max-height:300px;object-fit:contain;background:#f1f2f4;border-radius:12px}.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:10px;display:none;z-index:300;max-width:92%;text-align:center;line-height:1.5}
+nav{position:fixed;bottom:0;right:0;left:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 3px;z-index:30}nav a{color:#555;text-decoration:none;text-align:center;font-size:11px}nav span{display:block;font-size:20px;margin-bottom:3px}
+footer{text-align:center;color:#888;font-size:12px;padding:20px}
+@media(min-width:680px){.cards{grid-template-columns:repeat(4,minmax(0,1fr))}.categories{grid-template-columns:repeat(8,1fr)}}
+@media(max-width:500px){.logo{font-size:20px}.header{align-items:flex-start}.actions .btn{padding:8px 10px;font-size:12px}.user-email{display:none}.hero{padding-top:32px}.product-image{height:135px}.card-body{padding:11px}}
 </style>
 </head>
 <body>
 <header><div class="header">
 <div class="logo">BN ALI</div>
-<div class="header-actions">
-<button class="lang-btn" id="languageBtn">English</button>
-<div class="user-info" id="userInfo"><span class="user-email" id="userEmail"></span><button class="btn btn-light" id="logoutBtn">تسجيل الخروج</button></div>
-<button class="btn btn-light" id="loginBtn">تسجيل الدخول</button>
+<div class="actions">
+<button class="lang" id="langBtn">English</button>
+<div class="user" id="userBox"><span class="user-email" id="userEmail"></span><button class="btn light" id="logoutBtn">تسجيل الخروج</button></div>
+<button class="btn light" id="loginBtn">تسجيل الدخول</button>
 </div></div></header>
-
 <section class="hero">
 <h1 id="heroTitle">مرحبًا بك في BN ALI</h1>
-<p id="heroDescription">منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي</p>
-<div class="search"><input id="searchInput" type="text" placeholder="ماذا تبحث عنه؟"><button id="searchBtn">بحث</button></div>
+<p id="heroSub">سوقك الرقمي للمنتجات والخدمات</p>
+<div class="search"><input id="searchInput" placeholder="ماذا تبحث عنه؟"><button id="searchBtn">بحث</button></div>
 </section>
-
-<main>
-<div class="section-title"><h2 id="categoriesTitle">الأقسام الرئيسية</h2><button class="btn btn-green" id="addProductBtn">+ إضافة منتج</button></div>
-<div class="categories">
-<div class="category active" data-category="all"><div class="icon">🌐</div><p>الكل</p></div>
-<div class="category" data-category="cars"><div class="icon">🚗</div><p>سيارات</p></div>
-<div class="category" data-category="realestate"><div class="icon">🏠</div><p>عقارات</p></div>
-<div class="category" data-category="electronics"><div class="icon">📱</div><p>إلكترونيات</p></div>
-<div class="category" data-category="stores"><div class="icon">🛍️</div><p>متاجر</p></div>
-<div class="category" data-category="jobs"><div class="icon">💼</div><p>وظائف</p></div>
-<div class="category" data-category="services"><div class="icon">🔧</div><p>خدمات</p></div>
-<div class="category" data-category="clothes"><div class="icon">👕</div><p>ملابس</p></div>
+<main class="wrap">
+<div class="section-head"><h2 id="catTitle">الأقسام</h2><button class="btn green" id="addBtn">+ إضافة منتج</button></div>
+<div class="categories" id="categories">
+<div class="category active" data-cat="all"><div class="icon">🌐</div><p>الكل</p></div>
+<div class="category" data-cat="cars"><div class="icon">🚗</div><p>سيارات</p></div>
+<div class="category" data-cat="realestate"><div class="icon">🏠</div><p>عقارات</p></div>
+<div class="category" data-cat="electronics"><div class="icon">📱</div><p>إلكترونيات</p></div>
+<div class="category" data-cat="stores"><div class="icon">🛍️</div><p>متاجر</p></div>
+<div class="category" data-cat="jobs"><div class="icon">💼</div><p>وظائف</p></div>
+<div class="category" data-cat="services"><div class="icon">🔧</div><p>خدمات</p></div>
+<div class="category" data-cat="clothes"><div class="icon">👕</div><p>ملابس</p></div>
 </div>
-<div class="section-title"><h2><span id="marketTitle">سوق BN ALI</span></h2><span id="productCount">المنتجات</span></div>
-<div class="market-tools"><select id="sortSelect"><option value="newest">الأحدث</option><option value="low">السعر: من الأقل</option><option value="high">السعر: من الأعلى</option></select></div>
-<div class="cards" id="productsContainer"><div class="loading">جاري تحميل المنتجات...</div></div>
-<section class="ai"><h2>🤖 BN ALI AI</h2><p id="aiText">أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي</p><button class="btn btn-light" id="aiBtn">ابدأ الآن</button></section>
+<div class="section-head"><h2 id="marketTitle">سوق BN ALI</h2><small id="count">0 منتج</small></div>
+<div class="tools"><select id="sort"><option value="newest">الأحدث</option><option value="low">السعر: الأقل</option><option value="high">السعر: الأعلى</option></select></div>
+<div class="cards" id="products"><div class="loading">جاري تحميل المنتجات...</div></div>
+<section class="ai"><h2>🤖 BN ALI AI</h2><p>خدمات الذكاء الاصطناعي ستكون مرحلة تطوير لاحقة.</p><button class="btn light" id="aiBtn">معرفة المزيد</button></section>
 </main>
+<footer>BN ALI · سوق رقمي مستقل</footer>
+<nav><a href="#"><span>⌂</span>الرئيسية</a><a href="#marketTitle"><span>🛒</span>السوق</a><a href="#" id="accountLink"><span>👤</span>حسابي</a></nav>
 
-<nav>
-<a href="#"><span>⌂</span>الرئيسية</a><a href="#market"><span>🛒</span>السوق</a><a href="#"><span>📢</span>الإعلانات</a><a href="#"><span>🏪</span>المتاجر</a><a href="#" id="accountNav"><span>👤</span>حسابي</a>
-</nav>
-
-<!-- LOGIN MODAL -->
+<!-- Auth -->
 <div class="modal" id="authModal"><div class="modal-box">
-<h2 id="authTitle">تسجيل الدخول</h2><div class="auth-message" id="authMessage"></div>
-<div class="form-group"><label>البريد الإلكتروني</label><input id="authEmail" type="email" placeholder="example@email.com" autocomplete="email"></div>
-<div class="form-group"><label>كلمة المرور</label><input id="authPassword" type="password" placeholder="كلمة المرور" autocomplete="current-password"></div>
-<div class="form-actions"><button class="btn btn-dark" id="authSubmit">دخول</button><button class="btn close-btn" id="authClose">إغلاق</button></div>
-<button class="btn" id="switchAuth" style="width:100%;margin-top:10px;background:#f1f1f1">إنشاء حساب جديد</button>
-<button class="text-link" type="button" id="forgotPasswordBtn">نسيت كلمة المرور؟</button>
+<h2 id="authTitle">تسجيل الدخول</h2><div class="message" id="authMsg"></div>
+<div class="field"><label>البريد الإلكتروني</label><input id="authEmail" type="email" autocomplete="email" placeholder="example@email.com"></div>
+<div class="field"><label>كلمة المرور</label><input id="authPassword" type="password" autocomplete="current-password"></div>
+<div class="row-buttons"><button class="btn dark" id="authSubmit">دخول</button><button class="btn subtle" id="authClose">إغلاق</button></div>
+<button class="btn subtle" style="width:100%;margin-top:9px" id="switchAuth">إنشاء حساب جديد</button>
+<button class="text-link" id="forgotBtn">نسيت كلمة المرور؟</button>
 </div></div>
-
-<!-- PASSWORD RECOVERY MODAL -->
-<div class="modal" id="recoveryModal"><div class="modal-box">
-<h2>تعيين كلمة مرور جديدة</h2><div class="auth-message" id="recoveryMessage"></div>
-<div class="form-group"><label for="newPassword">كلمة المرور الجديدة</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8" placeholder="8 أحرف على الأقل"></div>
-<div class="form-group"><label for="confirmNewPassword">تأكيد كلمة المرور</label><input id="confirmNewPassword" type="password" autocomplete="new-password" minlength="8" placeholder="أعد كتابة كلمة المرور"></div>
-<div class="form-actions"><button class="btn btn-green" id="saveNewPasswordBtn">حفظ كلمة المرور</button><button class="btn close-btn" id="recoveryCloseBtn">إغلاق</button></div>
+<!-- Password recovery -->
+<div class="modal" id="recoverModal"><div class="modal-box">
+<h2>تعيين كلمة مرور جديدة</h2><div class="message" id="recoverMsg"></div>
+<div class="field"><label>كلمة المرور الجديدة</label><input id="newPass" type="password" minlength="8" autocomplete="new-password"></div>
+<div class="field"><label>تأكيد كلمة المرور</label><input id="confirmPass" type="password" minlength="8" autocomplete="new-password"></div>
+<div class="row-buttons"><button class="btn green" id="savePass">حفظ كلمة المرور</button><button class="btn subtle" id="recoverClose">إغلاق</button></div>
 </div></div>
-
-<!-- PRODUCT MODAL -->
+<!-- Product add/edit -->
 <div class="modal" id="productModal"><div class="modal-box">
-<h2 id="productModalTitle">إضافة منتج</h2><div class="auth-message" id="productMessage"></div>
-<div class="form-group"><label>اسم المنتج</label><input id="productTitle" type="text" placeholder="مثال: هاتف ذكي"></div>
-<div class="form-group"><label>وصف المنتج</label><textarea id="productDescription" placeholder="اكتب تفاصيل المنتج"></textarea></div>
-<div class="form-group"><label>السعر</label><input id="productPrice" type="number" min="0" step="0.01" placeholder="0"></div>
-<div class="form-group"><label>العملة</label><select id="productCurrency"><option value="YER">ريال يمني YER</option><option value="USD">دولار USD</option><option value="SAR">ريال سعودي SAR</option></select></div>
-<div class="form-group"><label>القسم</label><select id="productCategory"><option value="cars">سيارات</option><option value="realestate">عقارات</option><option value="electronics">إلكترونيات</option><option value="stores">متاجر</option><option value="jobs">وظائف</option><option value="services">خدمات</option><option value="clothes">ملابس</option><option value="other">أخرى</option></select></div>
-<div class="form-group"><label>الموقع</label><input id="productLocation" type="text" placeholder="مثال: صنعاء"></div>
-<div class="form-group"><label>رابط صورة المنتج</label><input id="productImage" type="url" placeholder="https://..."></div>
-<div class="form-actions"><button class="btn btn-green" id="saveProductBtn">حفظ المنتج</button><button class="btn close-btn" id="productClose">إغلاق</button></div>
+<h2 id="productHeading">إضافة منتج</h2><div class="message" id="productMsg"></div>
+<div class="field"><label>اسم المنتج</label><input id="pTitle" maxlength="180" placeholder="مثال: هاتف ذكي"></div>
+<div class="field"><label>الوصف</label><textarea id="pDesc" maxlength="5000" placeholder="تفاصيل المنتج"></textarea></div>
+<div class="field"><label>السعر</label><input id="pPrice" type="number" min="0" step="0.01"></div>
+<div class="field"><label>العملة</label><select id="pCurrency"><option value="YER">ريال يمني YER</option><option value="USD">دولار USD</option><option value="SAR">ريال سعودي SAR</option></select></div>
+<div class="field"><label>القسم</label><select id="pCategory"><option value="cars">سيارات</option><option value="realestate">عقارات</option><option value="electronics">إلكترونيات</option><option value="stores">متاجر</option><option value="jobs">وظائف</option><option value="services">خدمات</option><option value="clothes">ملابس</option><option value="other">أخرى</option></select></div>
+<div class="field"><label>الموقع</label><input id="pLocation" maxlength="180" placeholder="مثال: صنعاء"></div>
+<div class="field"><label>صورة المنتج (رابط أو رفع ملف)</label><input id="pImageUrl" type="url" placeholder="https://..."></div>
+<div class="field"><label>أو اختر صورة من جهازك</label><input id="pImageFile" type="file" accept="image/jpeg,image/png,image/webp"></div>
+<div class="row-buttons"><button class="btn green" id="saveProduct">حفظ المنتج</button><button class="btn subtle" id="productClose">إغلاق</button></div>
+</div></div>
+<!-- Details -->
+<div class="modal" id="detailsModal"><div class="modal-box">
+<h2>تفاصيل المنتج</h2><div id="detailsContent"></div>
+<div class="row-buttons"><button class="btn subtle" id="detailsClose">إغلاق</button></div>
 </div></div>
 <div class="toast" id="toast"></div>
-
 <script>
-/* SUPABASE */
-const SUPABASE_URL = "https://hiexhsoacdrsvxnwdlzm.supabase.co";
-const SUPABASE_KEY = "sb_publishable_mRfrZXc-hKI16qrGjk1GoQ_T8Gn-52c";
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-/* STATE */
-let currentUser = null, products = [], selectedCategory = "all";
-let editingProductId = null, isRegisterMode = false, currentLanguage = "ar";
-let recoverySessionActive = false;
-
-const productsContainer = document.getElementById("productsContainer");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const userInfo = document.getElementById("userInfo");
-const userEmail = document.getElementById("userEmail");
-const authModal = document.getElementById("authModal");
-const productModal = document.getElementById("productModal");
-const recoveryModal = document.getElementById("recoveryModal");
-const authMessage = document.getElementById("authMessage");
-const productMessage = document.getElementById("productMessage");
-const recoveryMessage = document.getElementById("recoveryMessage");
-
-function showToast(message){
-  const toast=document.getElementById("toast");
-  toast.textContent=message;toast.style.display="block";
-  setTimeout(()=>toast.style.display="none",3500);
-}
-function showAuthMessage(message){authMessage.textContent=message;authMessage.style.display="block";}
-function showProductMessage(message){productMessage.textContent=message;productMessage.style.display="block";}
-function showRecoveryMessage(message){recoveryMessage.textContent=message;recoveryMessage.style.display="block";}
-function openAuth(){authModal.classList.add("show");authMessage.style.display="none";}
-function closeModal(modal){modal.classList.remove("show");}
-
-document.getElementById("authClose").addEventListener("click",()=>closeModal(authModal));
-document.getElementById("recoveryCloseBtn").addEventListener("click",()=>closeModal(recoveryModal));
-document.getElementById("productClose").addEventListener("click",()=>closeModal(productModal));
-loginBtn.addEventListener("click",openAuth);
-
-/* LOGIN / SIGNUP */
-document.getElementById("authSubmit").addEventListener("click",async()=>{
-  const email=document.getElementById("authEmail").value.trim();
-  const password=document.getElementById("authPassword").value;
-  if(!email||!password){showAuthMessage(currentLanguage==="ar"?"أدخل البريد وكلمة المرور":"Enter email and password");return;}
-  const button=document.getElementById("authSubmit");button.disabled=true;
+"use strict";
+const SUPABASE_URL="https://hiexhsoacdrsvxnwdlzm.supabase.co";
+const SUPABASE_KEY="sb_publishable_mRfrZXc-hKI16qrGjk1GoQ_T8Gn-52c";
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+let currentUser=null,products=[],selectedCategory="all",editingId=null,registerMode=false,language="ar";
+const categories={cars:"سيارات",realestate:"عقارات",electronics:"إلكترونيات",stores:"متاجر",jobs:"وظائف",services:"خدمات",clothes:"ملابس",other:"أخرى"};
+const translations={
+  en:{login:"Login",logout:"Logout",add:"+ Add product",search:"Search",searchPlaceholder:"What are you looking for?",hero:"Welcome to BN ALI",sub:"Your digital marketplace for products and services",categories:"Categories",market:"BN ALI Market",all:"All",empty:"No products yet",emptySub:"Be the first to list a product",count:"products",newest:"Newest",low:"Price: low to high",high:"Price: high to low",product:"Product",price:"Price",location:"Location",description:"Description",details:"Product details",close:"Close",save:"Save",category:"Category",ai:"AI services will be introduced in a future development phase."},
+  ar:{login:"تسجيل الدخول",logout:"تسجيل الخروج",add:"+ إضافة منتج",search:"بحث",searchPlaceholder:"ماذا تبحث عنه؟",hero:"مرحبًا بك في BN ALI",sub:"سوقك الرقمي للمنتجات والخدمات",categories:"الأقسام",market:"سوق BN ALI",all:"الكل",empty:"لا توجد منتجات حاليًا",emptySub:"كن أول من يضيف منتجًا",count:"منتج",newest:"الأحدث",low:"السعر: الأقل",high:"السعر: الأعلى",product:"المنتج",price:"السعر",location:"الموقع",description:"الوصف",details:"تفاصيل المنتج",close:"إغلاق",save:"حفظ",category:"القسم",ai:"خدمات الذكاء الاصطناعي ستكون مرحلة تطوير لاحقة."}
+};
+function tr(k){return translations[language][k]||k}
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",3600)}
+function msg(id,text){$(id).textContent=text;$(id).style.display="block"}
+function hideMsg(id){$(id).style.display="none"}
+function openModal(id){$(id).classList.add("show")}
+function closeModal(id){$(id).classList.remove("show")}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function catName(c){return categories[c]||categories.other}
+function updateAuthUI(){if(currentUser){$("loginBtn").style.display="none";$("userBox").style.display="flex";$("userEmail").textContent=currentUser.email||""}else{$("loginBtn").style.display="block";$("userBox").style.display="none"}}
+async function syncSession(){const {data,error}=await supabaseClient.auth.getSession();if(error)console.error(error);currentUser=data.session?.user||null;updateAuthUI()}
+$("loginBtn").onclick=()=>{hideMsg("authMsg");openModal("authModal")};
+$("authClose").onclick=()=>closeModal("authModal");
+$("productClose").onclick=()=>closeModal("productModal");
+$("detailsClose").onclick=()=>closeModal("detailsModal");
+$("recoverClose").onclick=()=>closeModal("recoverModal");
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
+$("switchAuth").onclick=()=>{registerMode=!registerMode;$("authTitle").textContent=registerMode?"إنشاء حساب جديد":"تسجيل الدخول";$("authSubmit").textContent=registerMode?"إنشاء الحساب":"دخول";$("switchAuth").textContent=registerMode?"لدي حساب بالفعل":"إنشاء حساب جديد";$("authPassword").autocomplete=registerMode?"new-password":"current-password";hideMsg("authMsg")};
+$("authSubmit").onclick=async()=>{
+  const email=$("authEmail").value.trim(),password=$("authPassword").value,btn=$("authSubmit");
+  if(!email||!password){msg("authMsg","أدخل البريد الإلكتروني وكلمة المرور.");return}
+  btn.disabled=true;
   try{
-    if(isRegisterMode){
-      const redirectUrl=window.location.origin+window.location.pathname;
-      const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:redirectUrl}});
+    if(registerMode){
+      const redirect=location.origin+location.pathname;
+      const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:redirect}});
       if(error)throw error;
-      if(data.session){showToast("تم إنشاء الحساب وتسجيل الدخول");closeModal(authModal);}
-      else showAuthMessage("تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيد الحساب.");
+      if(data.session){toast("تم إنشاء الحساب وتسجيل الدخول");closeModal("authModal")}else msg("authMsg","تم إنشاء الحساب. افحص بريدك لتأكيد الحساب.");
     }else{
-      const {error}=await supabaseClient.auth.signInWithPassword({email,password});
-      if(error)throw error;
-      showToast(currentLanguage==="ar"?"تم تسجيل الدخول بنجاح":"Login successful");
-      closeModal(authModal);
+      const {error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;
+      toast("تم تسجيل الدخول بنجاح");closeModal("authModal");
     }
-  }catch(error){console.error(error);showAuthMessage(error.message||"حدث خطأ أثناء العملية");}
-  finally{button.disabled=false;}
-});
-
-document.getElementById("switchAuth").addEventListener("click",()=>{
-  isRegisterMode=!isRegisterMode;
-  document.getElementById("authTitle").textContent=isRegisterMode?"إنشاء حساب جديد":"تسجيل الدخول";
-  document.getElementById("authSubmit").textContent=isRegisterMode?"إنشاء الحساب":"دخول";
-  document.getElementById("switchAuth").textContent=isRegisterMode?"لدي حساب بالفعل":"إنشاء حساب جديد";
-  document.getElementById("authPassword").autocomplete=isRegisterMode?"new-password":"current-password";
-  authMessage.style.display="none";
-});
-
-/* FORGOT PASSWORD: send recovery email */
-document.getElementById("forgotPasswordBtn").addEventListener("click",async()=>{
-  const email=document.getElementById("authEmail").value.trim();
-  if(!email){showAuthMessage("اكتب بريدك الإلكتروني أولًا ثم اضغط «نسيت كلمة المرور؟».");return;}
-  const button=document.getElementById("forgotPasswordBtn");
-  button.disabled=true;button.textContent="جارٍ إرسال رابط الاستعادة...";
-  try{
-    const redirectUrl=window.location.origin+window.location.pathname;
-    const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:redirectUrl});
-    if(error)throw error;
-    showAuthMessage("إذا كان البريد مرتبطًا بحساب، فسيصلك رابط استعادة كلمة المرور. افحص البريد الوارد والرسائل غير المرغوب فيها.");
-  }catch(error){console.error(error);showAuthMessage("تعذر إرسال رابط الاستعادة: "+(error.message||"حدث خطأ"));}
-  finally{button.disabled=false;button.textContent="نسيت كلمة المرور؟";}
-});
-
-/* PASSWORD RECOVERY EVENT: show form after user opens email link */
+  }catch(e){console.error(e);msg("authMsg",e.message||"تعذر تنفيذ العملية")}
+  finally{btn.disabled=false}
+};
+$("forgotBtn").onclick=async()=>{
+  const email=$("authEmail").value.trim();if(!email){msg("authMsg","اكتب بريدك الإلكتروني أولًا.");return}
+  const btn=$("forgotBtn");btn.disabled=true;
+  try{const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;msg("authMsg","إذا كان البريد مسجلًا فسيصلك رابط الاستعادة. افحص البريد والرسائل غير المرغوب فيها.")}
+  catch(e){msg("authMsg","تعذر إرسال الرابط: "+e.message)}finally{btn.disabled=false}
+};
 supabaseClient.auth.onAuthStateChange((event,session)=>{
-  if(event==="PASSWORD_RECOVERY"){
-    recoverySessionActive=true;
-    setTimeout(()=>{
-      recoveryMessage.style.display="none";
-      document.getElementById("newPassword").value="";
-      document.getElementById("confirmNewPassword").value="";
-      recoveryModal.classList.add("show");
-    },0);
-  }
-  if(event==="SIGNED_OUT"){currentUser=null;updateAuthUI();}
-  else if(session?.user){currentUser=session.user;updateAuthUI();}
+  currentUser=session?.user||null;updateAuthUI();
+  if(event==="PASSWORD_RECOVERY"){setTimeout(()=>{hideMsg("recoverMsg");$("newPass").value="";$("confirmPass").value="";openModal("recoverModal")},0)}
 });
-
-document.getElementById("saveNewPasswordBtn").addEventListener("click",async()=>{
-  const password=document.getElementById("newPassword").value;
-  const confirmPassword=document.getElementById("confirmNewPassword").value;
-  if(password.length<8){showRecoveryMessage("كلمة المرور يجب أن تكون 8 أحرف على الأقل.");return;}
-  if(password!==confirmPassword){showRecoveryMessage("كلمتا المرور غير متطابقتين.");return;}
-  const button=document.getElementById("saveNewPasswordBtn");button.disabled=true;
-  try{
-    const {error}=await supabaseClient.auth.updateUser({password});
-    if(error)throw error;
-    recoverySessionActive=false;
-    showToast("تم تغيير كلمة المرور بنجاح. يمكنك تسجيل الدخول الآن.");
-    closeModal(recoveryModal);
-    await supabaseClient.auth.signOut();
-    openAuth();
-    document.getElementById("authPassword").value="";
-  }catch(error){console.error(error);showRecoveryMessage("تعذر تغيير كلمة المرور: "+(error.message||"حدث خطأ"));}
-  finally{button.disabled=false;}
-});
-
-/* LOGOUT */
-logoutBtn.addEventListener("click",async()=>{
-  const {error}=await supabaseClient.auth.signOut();
-  if(error){showToast(error.message);return;}
-  showToast(currentLanguage==="ar"?"تم تسجيل الخروج":"Signed out");
-});
-
-/* SESSION */
-async function checkSession(){
-  const {data,error}=await supabaseClient.auth.getSession();
-  if(error)console.error(error);
-  currentUser=data.session?.user||null;updateAuthUI();
-}
-function updateAuthUI(){
-  if(currentUser){loginBtn.style.display="none";userInfo.style.display="flex";userEmail.textContent=currentUser.email||"";}
-  else{loginBtn.style.display="block";userInfo.style.display="none";}
-}
-
-/* PRODUCTS */
+$("savePass").onclick=async()=>{
+  const p=$("newPass").value,c=$("confirmPass").value;if(p.length<8){msg("recoverMsg","كلمة المرور يجب أن تكون 8 أحرف على الأقل.");return}if(p!==c){msg("recoverMsg","كلمتا المرور غير متطابقتين.");return}
+  const b=$("savePass");b.disabled=true;try{const {error}=await supabaseClient.auth.updateUser({password:p});if(error)throw error;toast("تم تحديث كلمة المرور");closeModal("recoverModal");await supabaseClient.auth.signOut();openModal("authModal")}catch(e){msg("recoverMsg",e.message)}finally{b.disabled=false}
+};
+$("logoutBtn").onclick=async()=>{const {error}=await supabaseClient.auth.signOut();if(error)toast(error.message);else toast("تم تسجيل الخروج")};
 async function loadProducts(){
-  productsContainer.innerHTML='<div class="loading">جاري تحميل المنتجات...</div>';
-  try{
-    const {data,error}=await supabaseClient.from("products").select("*").eq("status","active").order("created_at",{ascending:false});
-    if(error)throw error;products=data||[];renderProducts();
-  }catch(error){
-    console.error(error);
-    productsContainer.innerHTML='<div class="empty"><h3>تعذر تحميل المنتجات</h3><p style="margin-top:8px">'+escapeHtml(error.message)+'</p></div>';
-  }
-}
-function escapeHtml(value){
-  if(value===null||value===undefined)return "";
-  return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
-function categoryName(category){
-  const names={cars:"سيارات",realestate:"عقارات",electronics:"إلكترونيات",stores:"متاجر",jobs:"وظائف",services:"خدمات",clothes:"ملابس",other:"أخرى"};
-  return names[category]||"أخرى";
+  $("products").innerHTML='<div class="loading">جاري تحميل المنتجات...</div>';
+  try{const {data,error}=await supabaseClient.from("products").select("*").eq("status","active").order("created_at",{ascending:false});if(error)throw error;products=data||[];renderProducts()}
+  catch(e){console.error(e);$("products").innerHTML='<div class="empty"><h3>تعذر تحميل المنتجات</h3><p>'+esc(e.message)+'</p></div>'}
 }
 function renderProducts(){
-  const search=document.getElementById("searchInput").value.trim().toLowerCase();
-  let filtered=products.filter(product=>{
-    const matchesCategory=selectedCategory==="all"||product.category===selectedCategory;
-    const text=(product.title+" "+(product.description||"")+" "+(product.location||"")).toLowerCase();
-    return matchesCategory&&(!search||text.includes(search));
-  });
-  const sort=document.getElementById("sortSelect").value;
-  if(sort==="low")filtered.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
-  if(sort==="high")filtered.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
-  document.getElementById("productCount").textContent=`${filtered.length} منتج`;
-  if(!filtered.length){
-    productsContainer.innerHTML='<div class="empty"><div style="font-size:45px">🛒</div><h3 style="margin-top:10px">لا توجد منتجات حاليًا</h3><p style="margin-top:8px">كن أول من يضيف منتجًا إلى سوق BN ALI</p></div>';return;
-  }
-  productsContainer.innerHTML=filtered.map(product=>productCard(product)).join("");
+  const q=$("searchInput").value.trim().toLowerCase(),sort=$("sort").value;
+  let list=products.filter(p=>(selectedCategory==="all"||p.category===selectedCategory)&&((p.title||"")+" "+(p.title_ar||"")+" "+(p.description||"")+" "+(p.location||"")).toLowerCase().includes(q));
+  if(sort==="low")list.sort((a,b)=>Number(a.price)-Number(b.price));if(sort==="high")list.sort((a,b)=>Number(b.price)-Number(a.price));
+  $("count").textContent=list.length+" "+tr("count");
+  if(!list.length){$("products").innerHTML='<div class="empty"><div style="font-size:44px">🛒</div><h3>'+tr("empty")+'</h3><p>'+tr("emptySub")+'</p></div>';return}
+  $("products").innerHTML=list.map(cardHTML).join("");
 }
-function productCard(product){
-  const isOwner=currentUser&&currentUser.id===product.seller_id;
-  const image=product.image_url?'<img src="'+escapeHtml(product.image_url)+'" alt="'+escapeHtml(product.title)+'" onerror="this.style.display=\'none\';this.parentElement.textContent=\'📦\'">':"📦";
-  return '<div class="card"><div class="product-image">'+image+'</div><div class="card-content"><h3>'+escapeHtml(product.title)+'</h3>'+
-    (product.description?'<div class="description">'+escapeHtml(product.description)+'</div>':'')+
-    '<div class="price">'+Number(product.price||0).toLocaleString()+' '+escapeHtml(product.currency||"YER")+'</div>'+
-    (product.location?'<div class="location">📍 '+escapeHtml(product.location)+'</div>':'')+
-    '<span class="category-label">'+categoryName(product.category)+'</span>'+
-    (isOwner?'<div class="owner-actions"><button class="edit-btn" onclick="editProduct(\''+escapeHtml(product.id)+'\')">✏️ تعديل</button><button class="delete-btn" onclick="deleteProduct(\''+escapeHtml(product.id)+'\')">🗑️ حذف</button></div>':'')+
-    '</div></div>';
+function cardHTML(p){
+  const owner=currentUser&&currentUser.id===p.seller_id;
+  const image=p.image_url?'<img src="'+esc(p.image_url)+'" alt="'+esc(p.title)+'" loading="lazy" onerror="this.style.display=\'none\'">':"📦";
+  return '<article class="card" data-id="'+esc(p.id)+'"><div class="product-image">'+image+'</div><div class="card-body"><h3>'+esc(p.title_ar||p.title)+'</h3>'+
+  (p.description?'<div class="desc">'+esc(p.description.slice(0,120))+(p.description.length>120?"…":"")+'</div>':'')+
+  '<div class="price">'+Number(p.price||0).toLocaleString()+' '+esc(p.currency||"YER")+'</div>'+
+  (p.location?'<div class="location">📍 '+esc(p.location)+'</div>':'')+'<span class="tag">'+esc(catName(p.category))+'</span>'+
+  (owner?'<div class="owner-actions"><button class="subtle edit" data-action="edit">✏️ تعديل</button><button class="danger delete" data-action="delete">🗑️ حذف</button></div>':'')+'</div></article>';
 }
-document.getElementById("searchInput").addEventListener("input",renderProducts);
-document.getElementById("searchBtn").addEventListener("click",renderProducts);
-document.getElementById("sortSelect").addEventListener("change",renderProducts);
-document.querySelectorAll(".category").forEach(category=>{
-  category.addEventListener("click",()=>{
-    document.querySelectorAll(".category").forEach(item=>item.classList.remove("active"));
-    category.classList.add("active");selectedCategory=category.dataset.category;renderProducts();
-  });
+$("products").addEventListener("click",e=>{
+  const action=e.target.closest("[data-action]");const card=e.target.closest(".card");if(!card)return;
+  if(action){e.stopPropagation();const id=card.dataset.id;if(action.dataset.action==="edit")editProduct(id);else deleteProduct(id);return}
+  showDetails(card.dataset.id);
 });
-
-/* ADD PRODUCT */
-document.getElementById("addProductBtn").addEventListener("click",()=>{
-  if(!currentUser){showToast("يجب تسجيل الدخول أولًا");openAuth();return;}
-  editingProductId=null;clearProductForm();
-  document.getElementById("productModalTitle").textContent="إضافة منتج";
-  productMessage.style.display="none";productModal.classList.add("show");
-});
-function clearProductForm(){
-  document.getElementById("productTitle").value="";
-  document.getElementById("productDescription").value="";
-  document.getElementById("productPrice").value="";
-  document.getElementById("productCurrency").value="YER";
-  document.getElementById("productCategory").value="other";
-  document.getElementById("productLocation").value="";
-  document.getElementById("productImage").value="";
+function showDetails(id){
+  const p=products.find(x=>String(x.id)===String(id));if(!p)return;
+  const image=p.image_url?'<img class="details-image" src="'+esc(p.image_url)+'" alt="'+esc(p.title)+'">':'<div style="font-size:65px;text-align:center;padding:25px">📦</div>';
+  $("detailsContent").innerHTML=image+'<h2 style="margin-top:14px">'+esc(p.title_ar||p.title)+'</h2><div class="price">'+Number(p.price||0).toLocaleString()+' '+esc(p.currency||"YER")+'</div>'+
+  '<p style="white-space:pre-wrap;line-height:1.8;margin-top:12px">'+esc(p.description||"لا يوجد وصف")+'</p>'+
+  '<p style="margin-top:10px;color:#666">'+tr("category")+": "+esc(catName(p.category))+'</p>'+
+  (p.location?'<p style="margin-top:8px;color:#666">📍 '+esc(p.location)+'</p>':'')+
+  '<p style="font-size:12px;color:#999;margin-top:12px">BN ALI</p>';
+  openModal("detailsModal");
 }
-document.getElementById("saveProductBtn").addEventListener("click",async()=>{
-  if(!currentUser){showProductMessage("يجب تسجيل الدخول أولًا");return;}
-  const title=document.getElementById("productTitle").value.trim();
-  const description=document.getElementById("productDescription").value.trim();
-  const price=Number(document.getElementById("productPrice").value);
-  const currency=document.getElementById("productCurrency").value;
-  const category=document.getElementById("productCategory").value;
-  const location=document.getElementById("productLocation").value.trim();
-  const image_url=document.getElementById("productImage").value.trim();
-  if(!title){showProductMessage("اكتب اسم المنتج");return;}
-  if(Number.isNaN(price)||price<0){showProductMessage("أدخل سعرًا صحيحًا");return;}
-  const button=document.getElementById("saveProductBtn");button.disabled=true;
+function clearProductForm(){["pTitle","pDesc","pPrice","pLocation","pImageUrl"].forEach(id=>$(id).value="");$("pCurrency").value="YER";$("pCategory").value="other";$("pImageFile").value=""}
+$("addBtn").onclick=()=>{if(!currentUser){toast("سجّل الدخول أولًا");openModal("authModal");return}editingId=null;clearProductForm();$("productHeading").textContent="إضافة منتج";hideMsg("productMsg");openModal("productModal")};
+async function uploadImage(file){
+  if(!file)return $("pImageUrl").value.trim()||null;
+  if(!currentUser)throw new Error("يجب تسجيل الدخول لرفع الصورة");
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type))throw new Error("صيغة الصورة غير مدعومة؛ استخدم JPG أو PNG أو WebP");
+  if(file.size>5*1024*1024)throw new Error("حجم الصورة يجب ألا يتجاوز 5 ميغابايت");
+  const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";
+  const path=currentUser.id+"/"+Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
+  const {error}=await supabaseClient.storage.from("product-images").upload(path,file,{contentType:file.type,upsert:false});if(error)throw error;
+  const {data}=supabaseClient.storage.from("product-images").getPublicUrl(path);return data.publicUrl;
+}
+$("saveProduct").onclick=async()=>{
+  if(!currentUser){msg("productMsg","يجب تسجيل الدخول أولًا.");return}
+  const title=$("pTitle").value.trim(),description=$("pDesc").value.trim(),price=Number($("pPrice").value),currency=$("pCurrency").value,category=$("pCategory").value,locationText=$("pLocation").value.trim();
+  if(!title){msg("productMsg","اكتب اسم المنتج.");return}if($("pPrice").value===""||!Number.isFinite(price)||price<0){msg("productMsg","أدخل سعرًا صحيحًا.");return}
+  const b=$("saveProduct");b.disabled=true;
   try{
-    const productData={title,description,price,currency,category,location,image_url,status:"active",seller_id:currentUser.id};
-    let result;
-    if(editingProductId)result=await supabaseClient.from("products").update(productData).eq("id",editingProductId).eq("seller_id",currentUser.id);
-    else result=await supabaseClient.from("products").insert(productData);
+    const image_url=await uploadImage($("pImageFile").files[0]);
+    const data={title,title_ar:title,description,price,currency,category,location:locationText,image_url,status:"active",seller_id:currentUser.id};
+    let result=editingId?await supabaseClient.from("products").update(data).eq("id",editingId).eq("seller_id",currentUser.id):await supabaseClient.from("products").insert(data);
     if(result.error)throw result.error;
-    closeModal(productModal);showToast(editingProductId?"تم تعديل المنتج بنجاح":"تم إضافة المنتج بنجاح");
-    editingProductId=null;await loadProducts();
-  }catch(error){console.error(error);showProductMessage(error.message||"حدث خطأ أثناء حفظ المنتج");}
-  finally{button.disabled=false;}
-});
-window.editProduct=function(id){
-  if(!currentUser){openAuth();return;}
-  const product=products.find(item=>item.id===id);
-  if(!product){showToast("المنتج غير موجود");return;}
-  if(product.seller_id!==currentUser.id){showToast("لا يمكنك تعديل هذا المنتج");return;}
-  editingProductId=id;document.getElementById("productModalTitle").textContent="تعديل المنتج";
-  document.getElementById("productTitle").value=product.title||"";
-  document.getElementById("productDescription").value=product.description||"";
-  document.getElementById("productPrice").value=product.price||0;
-  document.getElementById("productCurrency").value=product.currency||"YER";
-  document.getElementById("productCategory").value=product.category||"other";
-  document.getElementById("productLocation").value=product.location||"";
-  document.getElementById("productImage").value=product.image_url||"";
-  productMessage.style.display="none";productModal.classList.add("show");
+    closeModal("productModal");toast(editingId?"تم تعديل المنتج":"تمت إضافة المنتج");editingId=null;await loadProducts();
+  }catch(e){console.error(e);msg("productMsg",e.message||"تعذر حفظ المنتج")}
+  finally{b.disabled=false}
 };
-window.deleteProduct=async function(id){
-  if(!currentUser){openAuth();return;}
-  const product=products.find(item=>item.id===id);
-  if(!product){showToast("المنتج غير موجود");return;}
-  if(product.seller_id!==currentUser.id){showToast("لا يمكنك حذف هذا المنتج");return;}
-  if(!confirm("هل أنت متأكد من حذف هذا المنتج؟"))return;
-  try{
-    const {error}=await supabaseClient.from("products").delete().eq("id",id).eq("seller_id",currentUser.id);
-    if(error)throw error;showToast("تم حذف المنتج");await loadProducts();
-  }catch(error){console.error(error);showToast(error.message||"تعذر حذف المنتج");}
-};
-
-/* ACCOUNT / AI */
-document.getElementById("accountNav").addEventListener("click",event=>{
-  event.preventDefault();if(currentUser)showToast("الحساب: "+currentUser.email);else openAuth();
-});
-document.getElementById("aiBtn").addEventListener("click",()=>{
-  showToast(currentLanguage==="ar"?"نظام BN ALI AI سيتم تفعيله في المرحلة القادمة":"BN ALI AI will be activated in the next stage");
-});
-
-/* LANGUAGE */
-document.getElementById("languageBtn").addEventListener("click",()=>{
-  currentLanguage=currentLanguage==="ar"?"en":"ar";
-  if(currentLanguage==="en"){
-    document.documentElement.lang="en";document.documentElement.dir="ltr";
-    document.getElementById("languageBtn").textContent="العربية";
-    document.getElementById("heroTitle").textContent="Welcome to BN ALI";
-    document.getElementById("heroDescription").textContent="Your digital platform for commerce, services and AI";
-    document.getElementById("searchInput").placeholder="What are you looking for?";
-    document.getElementById("searchBtn").textContent="Search";
-    document.getElementById("categoriesTitle").textContent="Main Categories";
-    document.getElementById("marketTitle").textContent="BN ALI Market";
-    document.getElementById("addProductBtn").textContent="+ Add Product";
-    document.getElementById("aiText").textContent="Build your digital app and project using AI";
-    loginBtn.textContent="Login";
-  }else{
-    document.documentElement.lang="ar";document.documentElement.dir="rtl";
-    document.getElementById("languageBtn").textContent="English";
-    document.getElementById("heroTitle").textContent="مرحبًا بك في BN ALI";
-    document.getElementById("heroDescription").textContent="منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي";
-    document.getElementById("searchInput").placeholder="ماذا تبحث عنه؟";
-    document.getElementById("searchBtn").textContent="بحث";
-    document.getElementById("categoriesTitle").textContent="الأقسام الرئيسية";
-    document.getElementById("marketTitle").textContent="سوق BN ALI";
-    document.getElementById("addProductBtn").textContent="+ إضافة منتج";
-    document.getElementById("aiText").textContent="أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي";
-    loginBtn.textContent="تسجيل الدخول";
-  }
-});
-
-/* INIT */
-async function initialize(){await checkSession();await loadProducts();}
-initialize();
+function editProduct(id){
+  if(!currentUser){openModal("authModal");return}const p=products.find(x=>String(x.id)===String(id));if(!p||p.seller_id!==currentUser.id){toast("لا يمكنك تعديل هذا المنتج");return}
+  editingId=p.id;$("productHeading").textContent="تعديل المنتج";$("pTitle").value=p.title||"";$("pDesc").value=p.description||"";$("pPrice").value=p.price??"";$("pCurrency").value=p.currency||"YER";$("pCategory").value=p.category||"other";$("pLocation").value=p.location||"";$("pImageUrl").value=p.image_url||"";$("pImageFile").value="";hideMsg("productMsg");openModal("productModal");
+}
+async function deleteProduct(id){
+  const p=products.find(x=>String(x.id)===String(id));if(!currentUser||!p||p.seller_id!==currentUser.id){toast("لا يمكنك حذف هذا المنتج");return}if(!confirm("هل تريد حذف المنتج؟"))return;
+  try{const {error}=await supabaseClient.from("products").delete().eq("id",id).eq("seller_id",currentUser.id);if(error)throw error;toast("تم حذف المنتج");await loadProducts()}catch(e){toast(e.message)}
+}
+$("searchInput").addEventListener("input",renderProducts);$("searchBtn").onclick=renderProducts;$("sort").onchange=renderProducts;
+document.querySelectorAll(".category").forEach(el=>el.onclick=()=>{document.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));el.classList.add("active");selectedCategory=el.dataset.cat;renderProducts()});
+$("accountLink").onclick=e=>{e.preventDefault();if(currentUser)toast("الحساب: "+currentUser.email);else openModal("authModal")};
+$("aiBtn").onclick=()=>toast(tr("ai"));
+function setLanguage(){
+  document.documentElement.lang=language;document.documentElement.dir=language==="ar"?"rtl":"ltr";$("langBtn").textContent=language==="ar"?"English":"العربية";
+  $("loginBtn").textContent=tr("login");$("logoutBtn").textContent=tr("logout");$("addBtn").textContent=tr("add");$("searchBtn").textContent=tr("search");$("searchInput").placeholder=tr("searchPlaceholder");$("heroTitle").textContent=tr("hero");$("heroSub").textContent=tr("sub");$("catTitle").textContent=tr("categories");$("marketTitle").textContent=tr("market");$("aiBtn").textContent=language==="ar"?"معرفة المزيد":"Learn more";
+  const catLabels=language==="ar"?["الكل","سيارات","عقارات","إلكترونيات","متاجر","وظائف","خدمات","ملابس"]:["All","Cars","Real estate","Electronics","Stores","Jobs","Services","Clothing"];
+  document.querySelectorAll(".category p").forEach((p,i)=>p.textContent=catLabels[i]||"Other");
+  const options=$("sort").options;options[0].text=tr("newest");options[1].text=tr("low");options[2].text=tr("high");renderProducts();
+}
+$("langBtn").onclick=()=>{language=language==="ar"?"en":"ar";setLanguage()};
+async function init(){await syncSession();await loadProducts();setLanguage()}
+init();
 </script>
 </body>
 </html>
