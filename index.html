@@ -3,2218 +3,436 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BN ALI | المنصة الرقمية</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:Arial,sans-serif;
-  background:#f5f6f8;
-  color:#171717;
-  min-height:100vh;
-}
-
-button,input,textarea,select{
-  font-family:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-header{
-  background:#111;
-  color:#fff;
-  padding:15px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-
-.header{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.logo{
-  font-size:25px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.btn{
-  border:none;
-  border-radius:10px;
-  padding:10px 14px;
-  font-weight:bold;
-}
-
-.btn-dark{
-  background:#111;
-  color:#fff;
-}
-
-.btn-light{
-  background:#fff;
-  color:#111;
-}
-
-.btn-danger{
-  background:#dc2626;
-  color:#fff;
-}
-
-.btn-green{
-  background:#16a34a;
-  color:#fff;
-}
-
-.lang-btn{
-  border:1px solid #555;
-  background:transparent;
-  color:#fff;
-  border-radius:9px;
-  padding:8px 11px;
-}
-
-.hero{
-  background:linear-gradient(135deg,#111,#292929);
-  color:#fff;
-  padding:42px 18px;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.hero p{
-  color:#ccc;
-  margin-bottom:25px;
-}
-
-.search{
-  max-width:700px;
-  margin:auto;
-  display:flex;
-  background:#fff;
-  border-radius:14px;
-  padding:6px;
-}
-
-.search input{
-  flex:1;
-  border:none;
-  outline:none;
-  padding:14px;
-  font-size:15px;
-  min-width:0;
-}
-
-.search button{
-  border:none;
-  background:#111;
-  color:#fff;
-  border-radius:10px;
-  padding:0 20px;
-}
-
-main{
-  max-width:1100px;
-  margin:auto;
-  padding:20px 15px 100px;
-}
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:25px 0 15px;
-}
-
-.section-title h2{
-  font-size:21px;
-}
-
-.section-title span{
-  color:#777;
-  font-size:13px;
-}
-
-.categories{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.category{
-  background:#fff;
-  border-radius:14px;
-  padding:18px 8px;
-  text-align:center;
-  box-shadow:0 2px 10px #0000000b;
-  border:2px solid transparent;
-  transition:.2s;
-}
-
-.category:hover,
-.category.active{
-  border-color:#111;
-  transform:translateY(-2px);
-}
-
-.category .icon{
-  font-size:28px;
-  margin-bottom:8px;
-}
-
-.category p{
-  font-size:13px;
-}
-
-.market-tools{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
-}
-
-.market-tools select{
-  border:1px solid #ddd;
-  background:#fff;
-  border-radius:10px;
-  padding:11px;
-  outline:none;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.card{
-  background:#fff;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 2px 10px #0000000b;
-}
-
-.product-image{
-  height:170px;
-  background:#e5e7eb;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:55px;
-  overflow:hidden;
-}
-
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.card-content{
-  padding:14px;
-}
-
-.card-content h3{
-  font-size:16px;
-  margin-bottom:8px;
-}
-
-.description{
-  color:#666;
-  font-size:13px;
-  line-height:1.6;
-  margin-bottom:10px;
-}
-
-.price{
-  font-weight:bold;
-  margin-bottom:6px;
-  font-size:17px;
-}
-
-.location{
-  color:#888;
-  font-size:12px;
-}
-
-.category-label{
-  display:inline-block;
-  background:#f0f0f0;
-  padding:5px 8px;
-  border-radius:7px;
-  font-size:11px;
-  margin-top:8px;
-}
-
-.owner-actions{
-  display:flex;
-  gap:7px;
-  margin-top:12px;
-}
-
-.owner-actions button{
-  flex:1;
-  padding:9px;
-  border:none;
-  border-radius:8px;
-}
-
-.edit-btn{
-  background:#eee;
-}
-
-.delete-btn{
-  background:#fee2e2;
-  color:#b91c1c;
-}
-
-.ai{
-  margin-top:30px;
-  background:linear-gradient(135deg,#151515,#333);
-  color:#fff;
-  border-radius:20px;
-  padding:28px 20px;
-  text-align:center;
-}
-
-.ai h2{
-  font-size:24px;
-  margin-bottom:10px;
-}
-
-.ai p{
-  color:#ccc;
-  margin-bottom:20px;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:#0008;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  z-index:500;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:100%;
-  max-width:520px;
-  max-height:90vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:18px;
-  padding:22px;
-}
-
-.modal-box h2{
-  margin-bottom:18px;
-}
-
-.form-group{
-  margin-bottom:13px;
-}
-
-.form-group label{
-  display:block;
-  margin-bottom:6px;
-  font-size:13px;
-  font-weight:bold;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  border:1px solid #ddd;
-  border-radius:10px;
-  padding:12px;
-  outline:none;
-  background:#fff;
-}
-
-.form-group textarea{
-  min-height:90px;
-  resize:vertical;
-}
-
-.form-actions{
-  display:flex;
-  gap:8px;
-  margin-top:18px;
-}
-
-.form-actions button{
-  flex:1;
-}
-
-.close-btn{
-  background:#eee;
-  color:#111;
-}
-
-.auth-message{
-  background:#fef3c7;
-  color:#92400e;
-  padding:10px;
-  border-radius:9px;
-  font-size:13px;
-  margin-bottom:12px;
-  display:none;
-}
-
-.user-info{
-  display:none;
-  align-items:center;
-  gap:7px;
-}
-
-.user-email{
-  font-size:12px;
-  color:#ddd;
-  max-width:140px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.empty{
-  background:#fff;
-  border-radius:15px;
-  padding:35px 15px;
-  text-align:center;
-  color:#777;
-  grid-column:1/-1;
-}
-
-.loading{
-  text-align:center;
-  padding:30px;
-  color:#777;
-}
-
-.toast{
-  position:fixed;
-  bottom:75px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#111;
-  color:#fff;
-  padding:12px 18px;
-  border-radius:10px;
-  display:none;
-  z-index:1000;
-  max-width:90%;
-  text-align:center;
-}
-
-nav{
-  position:fixed;
-  bottom:0;
-  right:0;
-  left:0;
-  background:#fff;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  padding:8px 4px;
-  z-index:200;
-}
-
-nav a{
-  color:#555;
-  text-decoration:none;
-  text-align:center;
-  font-size:11px;
-}
-
-nav span{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-@media(min-width:700px){
-  .cards{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .categories{
-    grid-template-columns:repeat(8,1fr);
-  }
-}
-
-@media(max-width:500px){
-  .logo{
-    font-size:21px;
-  }
-
-  .hero h1{
-    font-size:27px;
-  }
-
-  .user-email{
-    display:none;
-  }
-
-  .header-actions .btn{
-    padding:8px 10px;
-    font-size:12px;
-  }
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f6f8;color:#171717;min-height:100vh}
+button,input,textarea,select{font-family:inherit}button{cursor:pointer}
+header{background:#111;color:#fff;padding:15px;position:sticky;top:0;z-index:100}
+.header{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:25px;font-weight:bold;letter-spacing:1px}
+.header-actions{display:flex;align-items:center;gap:7px}
+.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:bold}
+.btn-dark{background:#111;color:#fff}.btn-light{background:#fff;color:#111}
+.btn-danger{background:#dc2626;color:#fff}.btn-green{background:#16a34a;color:#fff}
+.lang-btn{border:1px solid #555;background:transparent;color:#fff;border-radius:9px;padding:8px 11px}
+.hero{background:linear-gradient(135deg,#111,#292929);color:#fff;padding:42px 18px;text-align:center}
+.hero h1{font-size:32px;margin-bottom:10px}.hero p{color:#ccc;margin-bottom:25px}
+.search{max-width:700px;margin:auto;display:flex;background:#fff;border-radius:14px;padding:6px}
+.search input{flex:1;border:none;outline:none;padding:14px;font-size:15px;min-width:0}
+.search button{border:none;background:#111;color:#fff;border-radius:10px;padding:0 20px}
+main{max-width:1100px;margin:auto;padding:20px 15px 100px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 15px}
+.section-title h2{font-size:21px}.section-title span{color:#777;font-size:13px}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.category{background:#fff;border-radius:14px;padding:18px 8px;text-align:center;box-shadow:0 2px 10px #0000000b;border:2px solid transparent;transition:.2s}
+.category:hover,.category.active{border-color:#111;transform:translateY(-2px)}
+.category .icon{font-size:28px;margin-bottom:8px}.category p{font-size:13px}
+.market-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+.market-tools select{border:1px solid #ddd;background:#fff;border-radius:10px;padding:11px;outline:none}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0000000b}
+.product-image{height:170px;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:55px;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover}
+.card-content{padding:14px}.card-content h3{font-size:16px;margin-bottom:8px}
+.description{color:#666;font-size:13px;line-height:1.6;margin-bottom:10px}
+.price{font-weight:bold;margin-bottom:6px;font-size:17px}.location{color:#888;font-size:12px}
+.category-label{display:inline-block;background:#f0f0f0;padding:5px 8px;border-radius:7px;font-size:11px;margin-top:8px}
+.owner-actions{display:flex;gap:7px;margin-top:12px}.owner-actions button{flex:1;padding:9px;border:none;border-radius:8px}
+.edit-btn{background:#eee}.delete-btn{background:#fee2e2;color:#b91c1c}
+.ai{margin-top:30px;background:linear-gradient(135deg,#151515,#333);color:#fff;border-radius:20px;padding:28px 20px;text-align:center}
+.ai h2{font-size:24px;margin-bottom:10px}.ai p{color:#ccc;margin-bottom:20px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px;z-index:500}
+.modal.show{display:flex}.modal-box{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:#fff;border-radius:18px;padding:22px}
+.modal-box h2{margin-bottom:18px}.form-group{margin-bottom:13px}
+.form-group label{display:block;margin-bottom:6px;font-size:13px;font-weight:bold}
+.form-group input,.form-group textarea,.form-group select{width:100%;border:1px solid #ddd;border-radius:10px;padding:12px;outline:none;background:#fff}
+.form-group textarea{min-height:90px;resize:vertical}
+.form-actions{display:flex;gap:8px;margin-top:18px}.form-actions button{flex:1}
+.close-btn{background:#eee;color:#111}
+.auth-message{background:#fef3c7;color:#92400e;padding:10px;border-radius:9px;font-size:13px;margin-bottom:12px;display:none;line-height:1.6}
+.user-info{display:none;align-items:center;gap:7px}.user-email{font-size:12px;color:#ddd;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{background:#fff;border-radius:15px;padding:35px 15px;text-align:center;color:#777;grid-column:1/-1}
+.loading{text-align:center;padding:30px;color:#777}
+.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 18px;border-radius:10px;display:none;z-index:1000;max-width:90%;text-align:center}
+nav{position:fixed;bottom:0;right:0;left:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 4px;z-index:200}
+nav a{color:#555;text-decoration:none;text-align:center;font-size:11px}nav span{display:block;font-size:20px;margin-bottom:3px}
+.text-link{display:block;width:100%;border:0;background:transparent;color:#2563eb;text-decoration:underline;padding:12px 5px;font-size:14px}
+@media(min-width:700px){.cards{grid-template-columns:repeat(4,1fr)}.categories{grid-template-columns:repeat(8,1fr)}}
+@media(max-width:500px){.logo{font-size:21px}.hero h1{font-size:27px}.user-email{display:none}.header-actions .btn{padding:8px 10px;font-size:12px}}
 </style>
 </head>
-
 <body>
-
-<header>
-  <div class="header">
-
-    <div class="logo">BN ALI</div>
-
-    <div class="header-actions">
-
-      <button class="lang-btn" id="languageBtn">
-        English
-      </button>
-
-      <div class="user-info" id="userInfo">
-        <span class="user-email" id="userEmail"></span>
-        <button class="btn btn-light" id="logoutBtn">
-          تسجيل الخروج
-        </button>
-      </div>
-
-      <button class="btn btn-light" id="loginBtn">
-        تسجيل الدخول
-      </button>
-
-    </div>
-
-  </div>
-</header>
-
+<header><div class="header">
+<div class="logo">BN ALI</div>
+<div class="header-actions">
+<button class="lang-btn" id="languageBtn">English</button>
+<div class="user-info" id="userInfo"><span class="user-email" id="userEmail"></span><button class="btn btn-light" id="logoutBtn">تسجيل الخروج</button></div>
+<button class="btn btn-light" id="loginBtn">تسجيل الدخول</button>
+</div></div></header>
 
 <section class="hero">
-
-  <h1 id="heroTitle">
-    مرحبًا بك في BN ALI
-  </h1>
-
-  <p id="heroDescription">
-    منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي
-  </p>
-
-  <div class="search">
-
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="ماذا تبحث عنه؟"
-    >
-
-    <button id="searchBtn">
-      بحث
-    </button>
-
-  </div>
-
+<h1 id="heroTitle">مرحبًا بك في BN ALI</h1>
+<p id="heroDescription">منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي</p>
+<div class="search"><input id="searchInput" type="text" placeholder="ماذا تبحث عنه؟"><button id="searchBtn">بحث</button></div>
 </section>
 
-
 <main>
-
-  <div class="section-title">
-
-    <h2 id="categoriesTitle">
-      الأقسام الرئيسية
-    </h2>
-
-    <button
-      class="btn btn-green"
-      id="addProductBtn"
-    >
-      + إضافة منتج
-    </button>
-
-  </div>
-
-
-  <div class="categories">
-
-    <div class="category active" data-category="all">
-      <div class="icon">🌐</div>
-      <p>الكل</p>
-    </div>
-
-    <div class="category" data-category="cars">
-      <div class="icon">🚗</div>
-      <p>سيارات</p>
-    </div>
-
-    <div class="category" data-category="realestate">
-      <div class="icon">🏠</div>
-      <p>عقارات</p>
-    </div>
-
-    <div class="category" data-category="electronics">
-      <div class="icon">📱</div>
-      <p>إلكترونيات</p>
-    </div>
-
-    <div class="category" data-category="stores">
-      <div class="icon">🛍️</div>
-      <p>متاجر</p>
-    </div>
-
-    <div class="category" data-category="jobs">
-      <div class="icon">💼</div>
-      <p>وظائف</p>
-    </div>
-
-    <div class="category" data-category="services">
-      <div class="icon">🔧</div>
-      <p>خدمات</p>
-    </div>
-
-    <div class="category" data-category="clothes">
-      <div class="icon">👕</div>
-      <p>ملابس</p>
-    </div>
-
-  </div>
-
-
-  <div class="section-title">
-
-    <h2>
-      <span id="marketTitle">
-        سوق BN ALI
-      </span>
-    </h2>
-
-    <span id="productCount">
-      المنتجات
-    </span>
-
-  </div>
-
-
-  <div class="market-tools">
-
-    <select id="sortSelect">
-
-      <option value="newest">
-        الأحدث
-      </option>
-
-      <option value="low">
-        السعر: من الأقل
-      </option>
-
-      <option value="high">
-        السعر: من الأعلى
-      </option>
-
-    </select>
-
-  </div>
-
-
-  <div class="cards" id="productsContainer">
-
-    <div class="loading">
-      جاري تحميل المنتجات...
-    </div>
-
-  </div>
-
-
-  <section class="ai">
-
-    <h2>
-      🤖 BN ALI AI
-    </h2>
-
-    <p id="aiText">
-      أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي
-    </p>
-
-    <button class="btn btn-light" id="aiBtn">
-      ابدأ الآن
-    </button>
-
-  </section>
-
+<div class="section-title"><h2 id="categoriesTitle">الأقسام الرئيسية</h2><button class="btn btn-green" id="addProductBtn">+ إضافة منتج</button></div>
+<div class="categories">
+<div class="category active" data-category="all"><div class="icon">🌐</div><p>الكل</p></div>
+<div class="category" data-category="cars"><div class="icon">🚗</div><p>سيارات</p></div>
+<div class="category" data-category="realestate"><div class="icon">🏠</div><p>عقارات</p></div>
+<div class="category" data-category="electronics"><div class="icon">📱</div><p>إلكترونيات</p></div>
+<div class="category" data-category="stores"><div class="icon">🛍️</div><p>متاجر</p></div>
+<div class="category" data-category="jobs"><div class="icon">💼</div><p>وظائف</p></div>
+<div class="category" data-category="services"><div class="icon">🔧</div><p>خدمات</p></div>
+<div class="category" data-category="clothes"><div class="icon">👕</div><p>ملابس</p></div>
+</div>
+<div class="section-title"><h2><span id="marketTitle">سوق BN ALI</span></h2><span id="productCount">المنتجات</span></div>
+<div class="market-tools"><select id="sortSelect"><option value="newest">الأحدث</option><option value="low">السعر: من الأقل</option><option value="high">السعر: من الأعلى</option></select></div>
+<div class="cards" id="productsContainer"><div class="loading">جاري تحميل المنتجات...</div></div>
+<section class="ai"><h2>🤖 BN ALI AI</h2><p id="aiText">أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي</p><button class="btn btn-light" id="aiBtn">ابدأ الآن</button></section>
 </main>
 
-
 <nav>
-
-  <a href="#">
-    <span>⌂</span>
-    الرئيسية
-  </a>
-
-  <a href="#market">
-    <span>🛒</span>
-    السوق
-  </a>
-
-  <a href="#">
-    <span>📢</span>
-    الإعلانات
-  </a>
-
-  <a href="#">
-    <span>🏪</span>
-    المتاجر
-  </a>
-
-  <a href="#" id="accountNav">
-    <span>👤</span>
-    حسابي
-  </a>
-
+<a href="#"><span>⌂</span>الرئيسية</a><a href="#market"><span>🛒</span>السوق</a><a href="#"><span>📢</span>الإعلانات</a><a href="#"><span>🏪</span>المتاجر</a><a href="#" id="accountNav"><span>👤</span>حسابي</a>
 </nav>
 
-
 <!-- LOGIN MODAL -->
+<div class="modal" id="authModal"><div class="modal-box">
+<h2 id="authTitle">تسجيل الدخول</h2><div class="auth-message" id="authMessage"></div>
+<div class="form-group"><label>البريد الإلكتروني</label><input id="authEmail" type="email" placeholder="example@email.com" autocomplete="email"></div>
+<div class="form-group"><label>كلمة المرور</label><input id="authPassword" type="password" placeholder="كلمة المرور" autocomplete="current-password"></div>
+<div class="form-actions"><button class="btn btn-dark" id="authSubmit">دخول</button><button class="btn close-btn" id="authClose">إغلاق</button></div>
+<button class="btn" id="switchAuth" style="width:100%;margin-top:10px;background:#f1f1f1">إنشاء حساب جديد</button>
+<button class="text-link" type="button" id="forgotPasswordBtn">نسيت كلمة المرور؟</button>
+</div></div>
 
-<div class="modal" id="authModal">
-
-  <div class="modal-box">
-
-    <h2 id="authTitle">
-      تسجيل الدخول
-    </h2>
-
-    <div class="auth-message" id="authMessage"></div>
-
-    <div class="form-group">
-
-      <label>
-        البريد الإلكتروني
-      </label>
-
-      <input
-        id="authEmail"
-        type="email"
-        placeholder="example@email.com"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        كلمة المرور
-      </label>
-
-      <input
-        id="authPassword"
-        type="password"
-        placeholder="كلمة المرور"
-      >
-
-    </div>
-
-
-    <div class="form-actions">
-
-      <button
-        class="btn btn-dark"
-        id="authSubmit"
-      >
-        دخول
-      </button>
-
-      <button
-        class="btn close-btn"
-        id="authClose"
-      >
-        إغلاق
-      </button>
-
-    </div>
-
-
-    <button
-      class="btn"
-      id="switchAuth"
-      style="width:100%;margin-top:10px;background:#f1f1f1"
-    >
-      إنشاء حساب جديد
-    </button>
-
-  </div>
-
-</div>
-
+<!-- PASSWORD RECOVERY MODAL -->
+<div class="modal" id="recoveryModal"><div class="modal-box">
+<h2>تعيين كلمة مرور جديدة</h2><div class="auth-message" id="recoveryMessage"></div>
+<div class="form-group"><label for="newPassword">كلمة المرور الجديدة</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8" placeholder="8 أحرف على الأقل"></div>
+<div class="form-group"><label for="confirmNewPassword">تأكيد كلمة المرور</label><input id="confirmNewPassword" type="password" autocomplete="new-password" minlength="8" placeholder="أعد كتابة كلمة المرور"></div>
+<div class="form-actions"><button class="btn btn-green" id="saveNewPasswordBtn">حفظ كلمة المرور</button><button class="btn close-btn" id="recoveryCloseBtn">إغلاق</button></div>
+</div></div>
 
 <!-- PRODUCT MODAL -->
-
-<div class="modal" id="productModal">
-
-  <div class="modal-box">
-
-    <h2 id="productModalTitle">
-      إضافة منتج
-    </h2>
-
-    <div class="auth-message" id="productMessage"></div>
-
-
-    <div class="form-group">
-
-      <label>
-        اسم المنتج
-      </label>
-
-      <input
-        id="productTitle"
-        type="text"
-        placeholder="مثال: هاتف ذكي"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        وصف المنتج
-      </label>
-
-      <textarea
-        id="productDescription"
-        placeholder="اكتب تفاصيل المنتج"
-      ></textarea>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        السعر
-      </label>
-
-      <input
-        id="productPrice"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="0"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        العملة
-      </label>
-
-      <select id="productCurrency">
-
-        <option value="YER">
-          ريال يمني YER
-        </option>
-
-        <option value="USD">
-          دولار USD
-        </option>
-
-        <option value="SAR">
-          ريال سعودي SAR
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        القسم
-      </label>
-
-      <select id="productCategory">
-
-        <option value="cars">سيارات</option>
-        <option value="realestate">عقارات</option>
-        <option value="electronics">إلكترونيات</option>
-        <option value="stores">متاجر</option>
-        <option value="jobs">وظائف</option>
-        <option value="services">خدمات</option>
-        <option value="clothes">ملابس</option>
-        <option value="other">أخرى</option>
-
-      </select>
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        الموقع
-      </label>
-
-      <input
-        id="productLocation"
-        type="text"
-        placeholder="مثال: صنعاء"
-      >
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        رابط صورة المنتج
-      </label>
-
-      <input
-        id="productImage"
-        type="url"
-        placeholder="https://..."
-      >
-
-    </div>
-
-
-    <div class="form-actions">
-
-      <button
-        class="btn btn-green"
-        id="saveProductBtn"
-      >
-        حفظ المنتج
-      </button>
-
-      <button
-        class="btn close-btn"
-        id="productClose"
-      >
-        إغلاق
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
+<div class="modal" id="productModal"><div class="modal-box">
+<h2 id="productModalTitle">إضافة منتج</h2><div class="auth-message" id="productMessage"></div>
+<div class="form-group"><label>اسم المنتج</label><input id="productTitle" type="text" placeholder="مثال: هاتف ذكي"></div>
+<div class="form-group"><label>وصف المنتج</label><textarea id="productDescription" placeholder="اكتب تفاصيل المنتج"></textarea></div>
+<div class="form-group"><label>السعر</label><input id="productPrice" type="number" min="0" step="0.01" placeholder="0"></div>
+<div class="form-group"><label>العملة</label><select id="productCurrency"><option value="YER">ريال يمني YER</option><option value="USD">دولار USD</option><option value="SAR">ريال سعودي SAR</option></select></div>
+<div class="form-group"><label>القسم</label><select id="productCategory"><option value="cars">سيارات</option><option value="realestate">عقارات</option><option value="electronics">إلكترونيات</option><option value="stores">متاجر</option><option value="jobs">وظائف</option><option value="services">خدمات</option><option value="clothes">ملابس</option><option value="other">أخرى</option></select></div>
+<div class="form-group"><label>الموقع</label><input id="productLocation" type="text" placeholder="مثال: صنعاء"></div>
+<div class="form-group"><label>رابط صورة المنتج</label><input id="productImage" type="url" placeholder="https://..."></div>
+<div class="form-actions"><button class="btn btn-green" id="saveProductBtn">حفظ المنتج</button><button class="btn close-btn" id="productClose">إغلاق</button></div>
+</div></div>
 <div class="toast" id="toast"></div>
 
-
 <script>
+/* SUPABASE */
+const SUPABASE_URL = "https://hiexhsoacdrsvxnwdlzm.supabase.co";
+const SUPABASE_KEY = "sb_publishable_mRfrZXc-hKI16qrGjk1GoQ_T8Gn-52c";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* =====================================================
-   BN ALI - SUPABASE CONNECTION
-   ===================================================== */
+/* STATE */
+let currentUser = null, products = [], selectedCategory = "all";
+let editingProductId = null, isRegisterMode = false, currentLanguage = "ar";
+let recoverySessionActive = false;
 
-const SUPABASE_URL =
-  "https://hiexhsoacdrsvxnwdlzm.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_mRfrZXc-hKI16qrGjk1GoQ_T8Gn-52c";
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-/* =====================================================
-   STATE
-   ===================================================== */
-
-let currentUser = null;
-let products = [];
-let selectedCategory = "all";
-let editingProductId = null;
-let isRegisterMode = false;
-let currentLanguage = "ar";
-
-
-/* =====================================================
-   ELEMENTS
-   ===================================================== */
-
-const productsContainer =
-  document.getElementById("productsContainer");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const userInfo =
-  document.getElementById("userInfo");
-
-const userEmail =
-  document.getElementById("userEmail");
-
-const authModal =
-  document.getElementById("authModal");
-
-const productModal =
-  document.getElementById("productModal");
-
-const authMessage =
-  document.getElementById("authMessage");
-
-const productMessage =
-  document.getElementById("productMessage");
-
-
-/* =====================================================
-   TOAST
-   ===================================================== */
+const productsContainer = document.getElementById("productsContainer");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const userInfo = document.getElementById("userInfo");
+const userEmail = document.getElementById("userEmail");
+const authModal = document.getElementById("authModal");
+const productModal = document.getElementById("productModal");
+const recoveryModal = document.getElementById("recoveryModal");
+const authMessage = document.getElementById("authMessage");
+const productMessage = document.getElementById("productMessage");
+const recoveryMessage = document.getElementById("recoveryMessage");
 
 function showToast(message){
-
-  const toast =
-    document.getElementById("toast");
-
-  toast.textContent = message;
-  toast.style.display = "block";
-
-  setTimeout(() => {
-    toast.style.display = "none";
-  },3000);
+  const toast=document.getElementById("toast");
+  toast.textContent=message;toast.style.display="block";
+  setTimeout(()=>toast.style.display="none",3500);
 }
+function showAuthMessage(message){authMessage.textContent=message;authMessage.style.display="block";}
+function showProductMessage(message){productMessage.textContent=message;productMessage.style.display="block";}
+function showRecoveryMessage(message){recoveryMessage.textContent=message;recoveryMessage.style.display="block";}
+function openAuth(){authModal.classList.add("show");authMessage.style.display="none";}
+function closeModal(modal){modal.classList.remove("show");}
 
-
-/* =====================================================
-   AUTH MESSAGE
-   ===================================================== */
-
-function showAuthMessage(message){
-
-  authMessage.textContent = message;
-  authMessage.style.display = "block";
-
-}
-
-
-/* =====================================================
-   PRODUCT MESSAGE
-   ===================================================== */
-
-function showProductMessage(message){
-
-  productMessage.textContent = message;
-  productMessage.style.display = "block";
-
-}
-
-
-/* =====================================================
-   OPEN LOGIN
-   ===================================================== */
-
-function openAuth(){
-
-  authModal.classList.add("show");
-
-  authMessage.style.display = "none";
-
-}
-
-
-/* =====================================================
-   CLOSE LOGIN
-   ===================================================== */
-
-document
-.getElementById("authClose")
-.addEventListener("click",() => {
-
-  authModal.classList.remove("show");
-
-});
-
-
-/* =====================================================
-   LOGIN / REGISTER
-   ===================================================== */
-
+document.getElementById("authClose").addEventListener("click",()=>closeModal(authModal));
+document.getElementById("recoveryCloseBtn").addEventListener("click",()=>closeModal(recoveryModal));
+document.getElementById("productClose").addEventListener("click",()=>closeModal(productModal));
 loginBtn.addEventListener("click",openAuth);
 
-
-document
-.getElementById("authSubmit")
-.addEventListener("click",async()=>{
-
-  const email =
-    document.getElementById("authEmail").value.trim();
-
-  const password =
-    document.getElementById("authPassword").value;
-
-  if(!email || !password){
-
-    showAuthMessage(
-      currentLanguage === "ar"
-      ? "أدخل البريد وكلمة المرور"
-      : "Enter email and password"
-    );
-
-    return;
-  }
-
-
-  const button =
-    document.getElementById("authSubmit");
-
-  button.disabled = true;
-
-
+/* LOGIN / SIGNUP */
+document.getElementById("authSubmit").addEventListener("click",async()=>{
+  const email=document.getElementById("authEmail").value.trim();
+  const password=document.getElementById("authPassword").value;
+  if(!email||!password){showAuthMessage(currentLanguage==="ar"?"أدخل البريد وكلمة المرور":"Enter email and password");return;}
+  const button=document.getElementById("authSubmit");button.disabled=true;
   try{
-
     if(isRegisterMode){
-
-      const redirectUrl =
-        window.location.origin +
-        window.location.pathname;
-
-
-      const {data,error} =
-        await supabaseClient.auth.signUp({
-
-          email:email,
-
-          password:password,
-
-          options:{
-            emailRedirectTo:redirectUrl
-          }
-
-        });
-
-
-      if(error) throw error;
-
-
-      if(data.session){
-
-        showToast(
-          currentLanguage === "ar"
-          ? "تم إنشاء الحساب وتسجيل الدخول"
-          : "Account created"
-        );
-
-        authModal.classList.remove("show");
-
-      }else{
-
-        showAuthMessage(
-          currentLanguage === "ar"
-          ? "تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيد الحساب."
-          : "Account created. Check your email to confirm."
-        );
-
-      }
-
+      const redirectUrl=window.location.origin+window.location.pathname;
+      const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:redirectUrl}});
+      if(error)throw error;
+      if(data.session){showToast("تم إنشاء الحساب وتسجيل الدخول");closeModal(authModal);}
+      else showAuthMessage("تم إنشاء الحساب. تحقق من بريدك الإلكتروني لتأكيد الحساب.");
     }else{
-
-      const {error} =
-        await supabaseClient.auth.signInWithPassword({
-
-          email:email,
-
-          password:password
-
-        });
-
-
-      if(error) throw error;
-
-
-      showToast(
-        currentLanguage === "ar"
-        ? "تم تسجيل الدخول بنجاح"
-        : "Login successful"
-      );
-
-      authModal.classList.remove("show");
-
+      const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+      if(error)throw error;
+      showToast(currentLanguage==="ar"?"تم تسجيل الدخول بنجاح":"Login successful");
+      closeModal(authModal);
     }
+  }catch(error){console.error(error);showAuthMessage(error.message||"حدث خطأ أثناء العملية");}
+  finally{button.disabled=false;}
+});
 
-  }catch(error){
+document.getElementById("switchAuth").addEventListener("click",()=>{
+  isRegisterMode=!isRegisterMode;
+  document.getElementById("authTitle").textContent=isRegisterMode?"إنشاء حساب جديد":"تسجيل الدخول";
+  document.getElementById("authSubmit").textContent=isRegisterMode?"إنشاء الحساب":"دخول";
+  document.getElementById("switchAuth").textContent=isRegisterMode?"لدي حساب بالفعل":"إنشاء حساب جديد";
+  document.getElementById("authPassword").autocomplete=isRegisterMode?"new-password":"current-password";
+  authMessage.style.display="none";
+});
 
-    console.error(error);
+/* FORGOT PASSWORD: send recovery email */
+document.getElementById("forgotPasswordBtn").addEventListener("click",async()=>{
+  const email=document.getElementById("authEmail").value.trim();
+  if(!email){showAuthMessage("اكتب بريدك الإلكتروني أولًا ثم اضغط «نسيت كلمة المرور؟».");return;}
+  const button=document.getElementById("forgotPasswordBtn");
+  button.disabled=true;button.textContent="جارٍ إرسال رابط الاستعادة...";
+  try{
+    const redirectUrl=window.location.origin+window.location.pathname;
+    const {error}=await supabaseClient.auth.resetPasswordForEmail(email,{redirectTo:redirectUrl});
+    if(error)throw error;
+    showAuthMessage("إذا كان البريد مرتبطًا بحساب، فسيصلك رابط استعادة كلمة المرور. افحص البريد الوارد والرسائل غير المرغوب فيها.");
+  }catch(error){console.error(error);showAuthMessage("تعذر إرسال رابط الاستعادة: "+(error.message||"حدث خطأ"));}
+  finally{button.disabled=false;button.textContent="نسيت كلمة المرور؟";}
+});
 
-    showAuthMessage(
-      error.message ||
-      "حدث خطأ أثناء العملية"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
+/* PASSWORD RECOVERY EVENT: show form after user opens email link */
+supabaseClient.auth.onAuthStateChange((event,session)=>{
+  if(event==="PASSWORD_RECOVERY"){
+    recoverySessionActive=true;
+    setTimeout(()=>{
+      recoveryMessage.style.display="none";
+      document.getElementById("newPassword").value="";
+      document.getElementById("confirmNewPassword").value="";
+      recoveryModal.classList.add("show");
+    },0);
   }
-
+  if(event==="SIGNED_OUT"){currentUser=null;updateAuthUI();}
+  else if(session?.user){currentUser=session.user;updateAuthUI();}
 });
 
-
-/* =====================================================
-   SWITCH LOGIN / REGISTER
-   ===================================================== */
-
-document
-.getElementById("switchAuth")
-.addEventListener("click",()=>{
-
-  isRegisterMode = !isRegisterMode;
-
-  document.getElementById("authTitle").textContent =
-    isRegisterMode
-    ? "إنشاء حساب جديد"
-    : "تسجيل الدخول";
-
-  document.getElementById("authSubmit").textContent =
-    isRegisterMode
-    ? "إنشاء الحساب"
-    : "دخول";
-
-  document.getElementById("switchAuth").textContent =
-    isRegisterMode
-    ? "لدي حساب بالفعل"
-    : "إنشاء حساب جديد";
-
-  authMessage.style.display = "none";
-
-});
-
-
-/* =====================================================
-   LOGOUT
-   ===================================================== */
-
-logoutBtn.addEventListener("click",async()=>{
-
-  const {error} =
+document.getElementById("saveNewPasswordBtn").addEventListener("click",async()=>{
+  const password=document.getElementById("newPassword").value;
+  const confirmPassword=document.getElementById("confirmNewPassword").value;
+  if(password.length<8){showRecoveryMessage("كلمة المرور يجب أن تكون 8 أحرف على الأقل.");return;}
+  if(password!==confirmPassword){showRecoveryMessage("كلمتا المرور غير متطابقتين.");return;}
+  const button=document.getElementById("saveNewPasswordBtn");button.disabled=true;
+  try{
+    const {error}=await supabaseClient.auth.updateUser({password});
+    if(error)throw error;
+    recoverySessionActive=false;
+    showToast("تم تغيير كلمة المرور بنجاح. يمكنك تسجيل الدخول الآن.");
+    closeModal(recoveryModal);
     await supabaseClient.auth.signOut();
-
-  if(error){
-
-    showToast(error.message);
-    return;
-
-  }
-
-  showToast(
-    currentLanguage === "ar"
-    ? "تم تسجيل الخروج"
-    : "Signed out"
-  );
-
+    openAuth();
+    document.getElementById("authPassword").value="";
+  }catch(error){console.error(error);showRecoveryMessage("تعذر تغيير كلمة المرور: "+(error.message||"حدث خطأ"));}
+  finally{button.disabled=false;}
 });
 
+/* LOGOUT */
+logoutBtn.addEventListener("click",async()=>{
+  const {error}=await supabaseClient.auth.signOut();
+  if(error){showToast(error.message);return;}
+  showToast(currentLanguage==="ar"?"تم تسجيل الخروج":"Signed out");
+});
 
-/* =====================================================
-   AUTH STATE
-   ===================================================== */
-
-supabaseClient.auth.onAuthStateChange(
-  (event,session)=>{
-
-    currentUser =
-      session?.user || null;
-
-    updateAuthUI();
-
-  }
-);
-
-
+/* SESSION */
 async function checkSession(){
-
-  const {
-    data
-  } =
-  await supabaseClient.auth.getSession();
-
-  currentUser =
-    data.session?.user || null;
-
-  updateAuthUI();
-
+  const {data,error}=await supabaseClient.auth.getSession();
+  if(error)console.error(error);
+  currentUser=data.session?.user||null;updateAuthUI();
 }
-
-
-/* =====================================================
-   UPDATE AUTH UI
-   ===================================================== */
-
 function updateAuthUI(){
-
-  if(currentUser){
-
-    loginBtn.style.display = "none";
-
-    userInfo.style.display = "flex";
-
-    userEmail.textContent =
-      currentUser.email || "";
-
-  }else{
-
-    loginBtn.style.display = "block";
-
-    userInfo.style.display = "none";
-
-  }
-
+  if(currentUser){loginBtn.style.display="none";userInfo.style.display="flex";userEmail.textContent=currentUser.email||"";}
+  else{loginBtn.style.display="block";userInfo.style.display="none";}
 }
 
-
-/* =====================================================
-   LOAD PRODUCTS
-   ===================================================== */
-
+/* PRODUCTS */
 async function loadProducts(){
-
-  productsContainer.innerHTML =
-    '<div class="loading">جاري تحميل المنتجات...</div>';
-
-
+  productsContainer.innerHTML='<div class="loading">جاري تحميل المنتجات...</div>';
   try{
-
-    const {data,error} =
-      await supabaseClient
-      .from("products")
-      .select("*")
-      .eq("status","active")
-      .order("created_at",{ascending:false});
-
-
-    if(error) throw error;
-
-
-    products = data || [];
-
-    renderProducts();
-
+    const {data,error}=await supabaseClient.from("products").select("*").eq("status","active").order("created_at",{ascending:false});
+    if(error)throw error;products=data||[];renderProducts();
   }catch(error){
-
     console.error(error);
-
-    productsContainer.innerHTML = `
-      <div class="empty">
-        <h3>تعذر تحميل المنتجات</h3>
-        <p style="margin-top:8px">
-          ${escapeHtml(error.message)}
-        </p>
-      </div>
-    `;
-
+    productsContainer.innerHTML='<div class="empty"><h3>تعذر تحميل المنتجات</h3><p style="margin-top:8px">'+escapeHtml(error.message)+'</p></div>';
   }
-
 }
-
-
-/* =====================================================
-   ESCAPE HTML
-   ===================================================== */
-
 function escapeHtml(value){
-
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
+  if(value===null||value===undefined)return "";
+  return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
-
-
-/* =====================================================
-   CATEGORY NAME
-   ===================================================== */
-
 function categoryName(category){
-
-  const names = {
-
-    cars:"سيارات",
-    realestate:"عقارات",
-    electronics:"إلكترونيات",
-    stores:"متاجر",
-    jobs:"وظائف",
-    services:"خدمات",
-    clothes:"ملابس",
-    other:"أخرى"
-
-  };
-
-  return names[category] || "أخرى";
-
+  const names={cars:"سيارات",realestate:"عقارات",electronics:"إلكترونيات",stores:"متاجر",jobs:"وظائف",services:"خدمات",clothes:"ملابس",other:"أخرى"};
+  return names[category]||"أخرى";
 }
-
-
-/* =====================================================
-   RENDER PRODUCTS
-   ===================================================== */
-
 function renderProducts(){
-
-  const search =
-    document
-    .getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
-
-
-  let filtered =
-    products.filter(product=>{
-
-      const matchesCategory =
-        selectedCategory === "all" ||
-        product.category === selectedCategory;
-
-
-      const text =
-        (
-          product.title +
-          " " +
-          (product.description || "") +
-          " " +
-          (product.location || "")
-        ).toLowerCase();
-
-
-      const matchesSearch =
-        !search ||
-        text.includes(search);
-
-
-      return matchesCategory &&
-             matchesSearch;
-
-    });
-
-
-  const sort =
-    document.getElementById("sortSelect").value;
-
-
-  if(sort === "low"){
-
-    filtered.sort(
-      (a,b)=>
-      Number(a.price || 0) -
-      Number(b.price || 0)
-    );
-
-  }
-
-
-  if(sort === "high"){
-
-    filtered.sort(
-      (a,b)=>
-      Number(b.price || 0) -
-      Number(a.price || 0)
-    );
-
-  }
-
-
-  document.getElementById("productCount").textContent =
-    `${filtered.length} منتج`;
-
-
-  if(!filtered.length){
-
-    productsContainer.innerHTML = `
-      <div class="empty">
-
-        <div style="font-size:45px">
-          🛒
-        </div>
-
-        <h3 style="margin-top:10px">
-          لا توجد منتجات حاليًا
-        </h3>
-
-        <p style="margin-top:8px">
-          كن أول من يضيف منتجًا إلى سوق BN ALI
-        </p>
-
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  productsContainer.innerHTML =
-    filtered
-    .map(product => productCard(product))
-    .join("");
-
-}
-
-
-/* =====================================================
-   PRODUCT CARD
-   ===================================================== */
-
-function productCard(product){
-
-  const isOwner =
-    currentUser &&
-    currentUser.id === product.seller_id;
-
-
-  const image =
-    product.image_url
-    ? `
-      <img
-        src="${escapeHtml(product.image_url)}"
-        alt="${escapeHtml(product.title)}"
-        onerror="this.style.display='none';this.parentElement.innerHTML='📦'"
-      >
-    `
-    : "📦";
-
-
-  return `
-
-    <div class="card">
-
-      <div class="product-image">
-        ${image}
-      </div>
-
-      <div class="card-content">
-
-        <h3>
-          ${escapeHtml(product.title)}
-        </h3>
-
-        ${
-          product.description
-          ?
-          `
-          <div class="description">
-            ${escapeHtml(product.description)}
-          </div>
-          `
-          :
-          ""
-        }
-
-        <div class="price">
-
-          ${Number(product.price || 0).toLocaleString()}
-
-          ${escapeHtml(product.currency || "YER")}
-
-        </div>
-
-
-        ${
-          product.location
-          ?
-          `
-          <div class="location">
-            📍 ${escapeHtml(product.location)}
-          </div>
-          `
-          :
-          ""
-        }
-
-
-        <span class="category-label">
-          ${categoryName(product.category)}
-        </span>
-
-
-        ${
-          isOwner
-          ?
-          `
-          <div class="owner-actions">
-
-            <button
-              class="edit-btn"
-              onclick="editProduct('${product.id}')"
-            >
-              ✏️ تعديل
-            </button>
-
-            <button
-              class="delete-btn"
-              onclick="deleteProduct('${product.id}')"
-            >
-              🗑️ حذف
-            </button>
-
-          </div>
-          `
-          :
-          ""
-        }
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =====================================================
-   SEARCH
-   ===================================================== */
-
-document
-.getElementById("searchInput")
-.addEventListener("input",renderProducts);
-
-
-document
-.getElementById("searchBtn")
-.addEventListener("click",renderProducts);
-
-
-document
-.getElementById("sortSelect")
-.addEventListener("change",renderProducts);
-
-
-/* =====================================================
-   CATEGORY FILTER
-   ===================================================== */
-
-document
-.querySelectorAll(".category")
-.forEach(category=>{
-
-  category.addEventListener("click",()=>{
-
-    document
-    .querySelectorAll(".category")
-    .forEach(item =>
-      item.classList.remove("active")
-    );
-
-    category.classList.add("active");
-
-    selectedCategory =
-      category.dataset.category;
-
-    renderProducts();
-
+  const search=document.getElementById("searchInput").value.trim().toLowerCase();
+  let filtered=products.filter(product=>{
+    const matchesCategory=selectedCategory==="all"||product.category===selectedCategory;
+    const text=(product.title+" "+(product.description||"")+" "+(product.location||"")).toLowerCase();
+    return matchesCategory&&(!search||text.includes(search));
   });
-
-});
-
-
-/* =====================================================
-   ADD PRODUCT
-   ===================================================== */
-
-document
-.getElementById("addProductBtn")
-.addEventListener("click",()=>{
-
-  if(!currentUser){
-
-    showToast(
-      currentLanguage === "ar"
-      ? "يجب تسجيل الدخول أولًا"
-      : "Please login first"
-    );
-
-    openAuth();
-
-    return;
-
+  const sort=document.getElementById("sortSelect").value;
+  if(sort==="low")filtered.sort((a,b)=>Number(a.price||0)-Number(b.price||0));
+  if(sort==="high")filtered.sort((a,b)=>Number(b.price||0)-Number(a.price||0));
+  document.getElementById("productCount").textContent=`${filtered.length} منتج`;
+  if(!filtered.length){
+    productsContainer.innerHTML='<div class="empty"><div style="font-size:45px">🛒</div><h3 style="margin-top:10px">لا توجد منتجات حاليًا</h3><p style="margin-top:8px">كن أول من يضيف منتجًا إلى سوق BN ALI</p></div>';return;
   }
-
-  editingProductId = null;
-
-  clearProductForm();
-
-  document.getElementById(
-    "productModalTitle"
-  ).textContent = "إضافة منتج";
-
-  productMessage.style.display = "none";
-
-  productModal.classList.add("show");
-
+  productsContainer.innerHTML=filtered.map(product=>productCard(product)).join("");
+}
+function productCard(product){
+  const isOwner=currentUser&&currentUser.id===product.seller_id;
+  const image=product.image_url?'<img src="'+escapeHtml(product.image_url)+'" alt="'+escapeHtml(product.title)+'" onerror="this.style.display=\'none\';this.parentElement.textContent=\'📦\'">':"📦";
+  return '<div class="card"><div class="product-image">'+image+'</div><div class="card-content"><h3>'+escapeHtml(product.title)+'</h3>'+
+    (product.description?'<div class="description">'+escapeHtml(product.description)+'</div>':'')+
+    '<div class="price">'+Number(product.price||0).toLocaleString()+' '+escapeHtml(product.currency||"YER")+'</div>'+
+    (product.location?'<div class="location">📍 '+escapeHtml(product.location)+'</div>':'')+
+    '<span class="category-label">'+categoryName(product.category)+'</span>'+
+    (isOwner?'<div class="owner-actions"><button class="edit-btn" onclick="editProduct(\''+escapeHtml(product.id)+'\')">✏️ تعديل</button><button class="delete-btn" onclick="deleteProduct(\''+escapeHtml(product.id)+'\')">🗑️ حذف</button></div>':'')+
+    '</div></div>';
+}
+document.getElementById("searchInput").addEventListener("input",renderProducts);
+document.getElementById("searchBtn").addEventListener("click",renderProducts);
+document.getElementById("sortSelect").addEventListener("change",renderProducts);
+document.querySelectorAll(".category").forEach(category=>{
+  category.addEventListener("click",()=>{
+    document.querySelectorAll(".category").forEach(item=>item.classList.remove("active"));
+    category.classList.add("active");selectedCategory=category.dataset.category;renderProducts();
+  });
 });
 
-
-/* =====================================================
-   CLOSE PRODUCT MODAL
-   ===================================================== */
-
-document
-.getElementById("productClose")
-.addEventListener("click",()=>{
-
-  productModal.classList.remove("show");
-
+/* ADD PRODUCT */
+document.getElementById("addProductBtn").addEventListener("click",()=>{
+  if(!currentUser){showToast("يجب تسجيل الدخول أولًا");openAuth();return;}
+  editingProductId=null;clearProductForm();
+  document.getElementById("productModalTitle").textContent="إضافة منتج";
+  productMessage.style.display="none";productModal.classList.add("show");
 });
-
-
-/* =====================================================
-   CLEAR FORM
-   ===================================================== */
-
 function clearProductForm(){
-
-  document.getElementById("productTitle").value = "";
-
-  document.getElementById("productDescription").value = "";
-
-  document.getElementById("productPrice").value = "";
-
-  document.getElementById("productCurrency").value = "YER";
-
-  document.getElementById("productCategory").value = "other";
-
-  document.getElementById("productLocation").value = "";
-
-  document.getElementById("productImage").value = "";
-
+  document.getElementById("productTitle").value="";
+  document.getElementById("productDescription").value="";
+  document.getElementById("productPrice").value="";
+  document.getElementById("productCurrency").value="YER";
+  document.getElementById("productCategory").value="other";
+  document.getElementById("productLocation").value="";
+  document.getElementById("productImage").value="";
 }
-
-
-/* =====================================================
-   SAVE PRODUCT
-   ===================================================== */
-
-document
-.getElementById("saveProductBtn")
-.addEventListener("click",async()=>{
-
-  if(!currentUser){
-
-    showProductMessage(
-      "يجب تسجيل الدخول أولًا"
-    );
-
-    return;
-
-  }
-
-
-  const title =
-    document.getElementById("productTitle").value.trim();
-
-  const description =
-    document
-    .getElementById("productDescription")
-    .value
-    .trim();
-
-  const price =
-    Number(
-      document.getElementById("productPrice").value
-    );
-
-  const currency =
-    document.getElementById("productCurrency").value;
-
-  const category =
-    document.getElementById("productCategory").value;
-
-  const location =
-    document
-    .getElementById("productLocation")
-    .value
-    .trim();
-
-  const image_url =
-    document
-    .getElementById("productImage")
-    .value
-    .trim();
-
-
-  if(!title){
-
-    showProductMessage(
-      "اكتب اسم المنتج"
-    );
-
-    return;
-
-  }
-
-
-  if(Number.isNaN(price) || price < 0){
-
-    showProductMessage(
-      "أدخل سعرًا صحيحًا"
-    );
-
-    return;
-
-  }
-
-
-  const button =
-    document.getElementById("saveProductBtn");
-
-  button.disabled = true;
-
-
+document.getElementById("saveProductBtn").addEventListener("click",async()=>{
+  if(!currentUser){showProductMessage("يجب تسجيل الدخول أولًا");return;}
+  const title=document.getElementById("productTitle").value.trim();
+  const description=document.getElementById("productDescription").value.trim();
+  const price=Number(document.getElementById("productPrice").value);
+  const currency=document.getElementById("productCurrency").value;
+  const category=document.getElementById("productCategory").value;
+  const location=document.getElementById("productLocation").value.trim();
+  const image_url=document.getElementById("productImage").value.trim();
+  if(!title){showProductMessage("اكتب اسم المنتج");return;}
+  if(Number.isNaN(price)||price<0){showProductMessage("أدخل سعرًا صحيحًا");return;}
+  const button=document.getElementById("saveProductBtn");button.disabled=true;
   try{
-
-    const productData = {
-
-      title,
-
-      description,
-
-      price,
-
-      currency,
-
-      category,
-
-      location,
-
-      image_url,
-
-      status:"active",
-
-      seller_id:currentUser.id
-
-    };
-
-
+    const productData={title,description,price,currency,category,location,image_url,status:"active",seller_id:currentUser.id};
     let result;
-
-
-    if(editingProductId){
-
-      result =
-        await supabaseClient
-        .from("products")
-        .update(productData)
-        .eq("id",editingProductId)
-        .eq("seller_id",currentUser.id);
-
-    }else{
-
-      result =
-        await supabaseClient
-        .from("products")
-        .insert(productData);
-
-    }
-
-
-    if(result.error){
-
-      throw result.error;
-
-    }
-
-
-    productModal.classList.remove("show");
-
-    showToast(
-      editingProductId
-      ? "تم تعديل المنتج بنجاح"
-      : "تم إضافة المنتج بنجاح"
-    );
-
-
-    editingProductId = null;
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showProductMessage(
-      error.message ||
-      "حدث خطأ أثناء حفظ المنتج"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
-  }
-
+    if(editingProductId)result=await supabaseClient.from("products").update(productData).eq("id",editingProductId).eq("seller_id",currentUser.id);
+    else result=await supabaseClient.from("products").insert(productData);
+    if(result.error)throw result.error;
+    closeModal(productModal);showToast(editingProductId?"تم تعديل المنتج بنجاح":"تم إضافة المنتج بنجاح");
+    editingProductId=null;await loadProducts();
+  }catch(error){console.error(error);showProductMessage(error.message||"حدث خطأ أثناء حفظ المنتج");}
+  finally{button.disabled=false;}
 });
-
-
-/* =====================================================
-   EDIT PRODUCT
-   ===================================================== */
-
-window.editProduct = async function(id){
-
-  if(!currentUser){
-
-    openAuth();
-    return;
-
-  }
-
-
-  const product =
-    products.find(
-      item => item.id === id
-    );
-
-
-  if(!product){
-
-    showToast("المنتج غير موجود");
-    return;
-
-  }
-
-
-  if(product.seller_id !== currentUser.id){
-
-    showToast("لا يمكنك تعديل هذا المنتج");
-    return;
-
-  }
-
-
-  editingProductId = id;
-
-
-  document.getElementById("productModalTitle")
-  .textContent = "تعديل المنتج";
-
-
-  document.getElementById("productTitle")
-  .value = product.title || "";
-
-
-  document.getElementById("productDescription")
-  .value = product.description || "";
-
-
-  document.getElementById("productPrice")
-  .value = product.price || 0;
-
-
-  document.getElementById("productCurrency")
-  .value = product.currency || "YER";
-
-
-  document.getElementById("productCategory")
-  .value = product.category || "other";
-
-
-  document.getElementById("productLocation")
-  .value = product.location || "";
-
-
-  document.getElementById("productImage")
-  .value = product.image_url || "";
-
-
-  productMessage.style.display = "none";
-
-  productModal.classList.add("show");
-
+window.editProduct=function(id){
+  if(!currentUser){openAuth();return;}
+  const product=products.find(item=>item.id===id);
+  if(!product){showToast("المنتج غير موجود");return;}
+  if(product.seller_id!==currentUser.id){showToast("لا يمكنك تعديل هذا المنتج");return;}
+  editingProductId=id;document.getElementById("productModalTitle").textContent="تعديل المنتج";
+  document.getElementById("productTitle").value=product.title||"";
+  document.getElementById("productDescription").value=product.description||"";
+  document.getElementById("productPrice").value=product.price||0;
+  document.getElementById("productCurrency").value=product.currency||"YER";
+  document.getElementById("productCategory").value=product.category||"other";
+  document.getElementById("productLocation").value=product.location||"";
+  document.getElementById("productImage").value=product.image_url||"";
+  productMessage.style.display="none";productModal.classList.add("show");
 };
-
-
-/* =====================================================
-   DELETE PRODUCT
-   ===================================================== */
-
-window.deleteProduct = async function(id){
-
-  if(!currentUser){
-
-    openAuth();
-    return;
-
-  }
-
-
-  const product =
-    products.find(
-      item => item.id === id
-    );
-
-
-  if(!product){
-
-    showToast("المنتج غير موجود");
-    return;
-
-  }
-
-
-  if(product.seller_id !== currentUser.id){
-
-    showToast("لا يمكنك حذف هذا المنتج");
-    return;
-
-  }
-
-
-  const confirmed =
-    confirm(
-      "هل أنت متأكد من حذف هذا المنتج؟"
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
+window.deleteProduct=async function(id){
+  if(!currentUser){openAuth();return;}
+  const product=products.find(item=>item.id===id);
+  if(!product){showToast("المنتج غير موجود");return;}
+  if(product.seller_id!==currentUser.id){showToast("لا يمكنك حذف هذا المنتج");return;}
+  if(!confirm("هل أنت متأكد من حذف هذا المنتج؟"))return;
   try{
-
-    const {error} =
-      await supabaseClient
-      .from("products")
-      .delete()
-      .eq("id",id)
-      .eq("seller_id",currentUser.id);
-
-
-    if(error) throw error;
-
-
-    showToast("تم حذف المنتج");
-
-    await loadProducts();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      error.message ||
-      "تعذر حذف المنتج"
-    );
-
-  }
-
+    const {error}=await supabaseClient.from("products").delete().eq("id",id).eq("seller_id",currentUser.id);
+    if(error)throw error;showToast("تم حذف المنتج");await loadProducts();
+  }catch(error){console.error(error);showToast(error.message||"تعذر حذف المنتج");}
 };
 
+/* ACCOUNT / AI */
+document.getElementById("accountNav").addEventListener("click",event=>{
+  event.preventDefault();if(currentUser)showToast("الحساب: "+currentUser.email);else openAuth();
+});
+document.getElementById("aiBtn").addEventListener("click",()=>{
+  showToast(currentLanguage==="ar"?"نظام BN ALI AI سيتم تفعيله في المرحلة القادمة":"BN ALI AI will be activated in the next stage");
+});
 
-/* =====================================================
-   ACCOUNT NAV
-   ===================================================== */
-
-document
-.getElementById("accountNav")
-.addEventListener("click",(event)=>{
-
-  event.preventDefault();
-
-  if(currentUser){
-
-    showToast(
-      "الحساب: " +
-      currentUser.email
-    );
-
+/* LANGUAGE */
+document.getElementById("languageBtn").addEventListener("click",()=>{
+  currentLanguage=currentLanguage==="ar"?"en":"ar";
+  if(currentLanguage==="en"){
+    document.documentElement.lang="en";document.documentElement.dir="ltr";
+    document.getElementById("languageBtn").textContent="العربية";
+    document.getElementById("heroTitle").textContent="Welcome to BN ALI";
+    document.getElementById("heroDescription").textContent="Your digital platform for commerce, services and AI";
+    document.getElementById("searchInput").placeholder="What are you looking for?";
+    document.getElementById("searchBtn").textContent="Search";
+    document.getElementById("categoriesTitle").textContent="Main Categories";
+    document.getElementById("marketTitle").textContent="BN ALI Market";
+    document.getElementById("addProductBtn").textContent="+ Add Product";
+    document.getElementById("aiText").textContent="Build your digital app and project using AI";
+    loginBtn.textContent="Login";
   }else{
-
-    openAuth();
-
+    document.documentElement.lang="ar";document.documentElement.dir="rtl";
+    document.getElementById("languageBtn").textContent="English";
+    document.getElementById("heroTitle").textContent="مرحبًا بك في BN ALI";
+    document.getElementById("heroDescription").textContent="منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي";
+    document.getElementById("searchInput").placeholder="ماذا تبحث عنه؟";
+    document.getElementById("searchBtn").textContent="بحث";
+    document.getElementById("categoriesTitle").textContent="الأقسام الرئيسية";
+    document.getElementById("marketTitle").textContent="سوق BN ALI";
+    document.getElementById("addProductBtn").textContent="+ إضافة منتج";
+    document.getElementById("aiText").textContent="أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي";
+    loginBtn.textContent="تسجيل الدخول";
   }
-
 });
 
-
-/* =====================================================
-   AI BUTTON
-   ===================================================== */
-
-document
-.getElementById("aiBtn")
-.addEventListener("click",()=>{
-
-  showToast(
-    currentLanguage === "ar"
-    ? "نظام BN ALI AI سيتم تفعيله في المرحلة القادمة"
-    : "BN ALI AI will be activated in the next stage"
-  );
-
-});
-
-
-/* =====================================================
-   LANGUAGE
-   ===================================================== */
-
-document
-.getElementById("languageBtn")
-.addEventListener("click",()=>{
-
-  currentLanguage =
-    currentLanguage === "ar"
-    ? "en"
-    : "ar";
-
-
-  if(currentLanguage === "en"){
-
-    document.documentElement.lang = "en";
-    document.documentElement.dir = "ltr";
-
-    document.getElementById("languageBtn")
-      .textContent = "العربية";
-
-    document.getElementById("heroTitle")
-      .textContent = "Welcome to BN ALI";
-
-    document.getElementById("heroDescription")
-      .textContent =
-      "Your digital platform for commerce, services and AI";
-
-    document.getElementById("searchInput")
-      .placeholder =
-      "What are you looking for?";
-
-    document.getElementById("searchBtn")
-      .textContent = "Search";
-
-    document.getElementById("categoriesTitle")
-      .textContent = "Main Categories";
-
-    document.getElementById("marketTitle")
-      .textContent = "BN ALI Market";
-
-    document.getElementById("addProductBtn")
-      .textContent = "+ Add Product";
-
-    document.getElementById("aiText")
-      .textContent =
-      "Build your digital app and project using AI";
-
-    loginBtn.textContent = "Login";
-
-  }else{
-
-    document.documentElement.lang = "ar";
-    document.documentElement.dir = "rtl";
-
-    document.getElementById("languageBtn")
-      .textContent = "English";
-
-    document.getElementById("heroTitle")
-      .textContent = "مرحبًا بك في BN ALI";
-
-    document.getElementById("heroDescription")
-      .textContent =
-      "منصتك الرقمية الشاملة للتجارة والخدمات والذكاء الاصطناعي";
-
-    document.getElementById("searchInput")
-      .placeholder =
-      "ماذا تبحث عنه؟";
-
-    document.getElementById("searchBtn")
-      .textContent = "بحث";
-
-    document.getElementById("categoriesTitle")
-      .textContent = "الأقسام الرئيسية";
-
-    document.getElementById("marketTitle")
-      .textContent = "سوق BN ALI";
-
-    document.getElementById("addProductBtn")
-      .textContent = "+ إضافة منتج";
-
-    document.getElementById("aiText")
-      .textContent =
-      "أنشئ تطبيقك ومشروعك الرقمي باستخدام الذكاء الاصطناعي";
-
-    loginBtn.textContent = "تسجيل الدخول";
-
-  }
-
-});
-
-
-/* =====================================================
-   INITIALIZE
-   ===================================================== */
-
-async function initialize(){
-
-  await checkSession();
-
-  await loadProducts();
-
-}
-
-
-/* START */
-
+/* INIT */
+async function initialize(){await checkSession();await loadProducts();}
 initialize();
-
 </script>
-
 </body>
 </html>
